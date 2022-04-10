@@ -5,7 +5,7 @@ import { Name } from './Name';
 function App() {
   return (
     <div className="App">
-      <Name name='Davide'/>
+      <Name name='Davide' surname='Botti'/>
     </div>
   );
 }
