@@ -1,15 +1,15 @@
-import React, { FC } from "react";
+import React from "react";
 
 interface Props {
     name: string;
     surname: string;
 }
   
-export const Name: React.FC<Props> = (props) => {
+export const Name: React.FC<Props> = ({name, surname}) => {
   return (
     <div>
       <p>
-        {props.name} {props.surname}
+          {name} {surname}
       </p>
     </div>
   )
