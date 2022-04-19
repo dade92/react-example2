@@ -14,3 +14,12 @@ export const Name: React.FC<Props> = (props: Props) => {
     </div>
   )
 }
+export const Name2 = (props: Props) => {
+    return (
+        <div>
+            <p>
+                {props.name} - {props.surname}
+            </p>
+        </div>
+    )
+}
