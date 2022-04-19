@@ -5,11 +5,11 @@ interface Props {
     surname: string;
 }
   
-export const Name: React.FC<Props> = ({name, surname}) => {
+export const Name: React.FC<Props> = (props: Props) => {
   return (
     <div>
       <p>
-          {name} {surname}
+          Name: {props.name}  Surname: {props.surname}
       </p>
     </div>
   )
