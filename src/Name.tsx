@@ -23,3 +23,11 @@ export const Name2 = (props: Props) => {
         </div>
     )
 }
+
+export const Name3: React.FC<Props> = ({name, surname}) => {
+  return (
+      <div>
+          <p>{name} / {surname}</p>
+      </div>
+  )
+}
