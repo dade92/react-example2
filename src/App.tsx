@@ -10,7 +10,7 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
-function App() {
+const App = () => {
   return (
     <div className="App">
         <Title>Title</Title>

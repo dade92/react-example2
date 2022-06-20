@@ -5,7 +5,7 @@ interface Props {
     surname: string;
 }
   
-export const Name: React.FC<Props> = (props: Props) => {
+export const Name: React.FC<Props> = (props) => {
   return (
     <div>
       <p>
