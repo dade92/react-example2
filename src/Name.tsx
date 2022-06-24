@@ -3,6 +3,7 @@ import React from "react";
 interface Props {
     name: string;
     surname: string;
+    onClick: () => void;
 }
   
 export const Name: React.FC<Props> = (props) => {
@@ -24,10 +25,10 @@ export const Name2 = (props: Props) => {
     )
 }
 
-export const Name3: React.FC<Props> = ({name, surname}) => {
+export const Name3: React.FC<Props> = ({name, surname, onClick}) => {
   return (
       <div>
-          <p>{name} / {surname}</p>
+          <p onClick={onClick}>{name} / {surname}</p>
       </div>
   )
 }

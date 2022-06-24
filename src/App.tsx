@@ -14,9 +14,9 @@ const App = () => {
   return (
     <div className="App">
         <Title>Title</Title>
-      <Name name='Davide' surname='Botti'/>
-      <Name2 name='Davide' surname='Botti'/>
-      <Name3 name='Davide' surname='Botti'/>
+      <Name name='Davide' surname='Botti' onClick={() => {console.log('clicked!')}}/>
+      <Name2 name='Davide' surname='Botti' onClick={() => {console.log('clicked!')}}/>
+      <Name3 name='Davide' surname='Botti' onClick={() => {console.log('clicked!')}}/>
     </div>
   );
 }
