@@ -2,17 +2,14 @@ import React, { ReactNode } from "react";
 
 export interface User {
     name: string;
+    surname: string;
 }
 
 interface Props {
     children: ReactNode
 }
 
-const defaultUser = {
-    name: ""
-}
-
-const UserContext = React.createContext<User>(defaultUser);
+const UserContext = React.createContext<User>({name: "", surname: ""});
 
 export const UserConfiguration: React.FC<Props> = ({children}) => {
     const user = retrieveUser();
@@ -26,7 +23,8 @@ export const UserConfiguration: React.FC<Props> = ({children}) => {
 
 const retrieveUser = () => {
     return {
-        name: "Davide"
+        name: "Davide",
+        surname: "Botti"
     } 
 }
 

@@ -10,14 +10,14 @@ const Title = styled.h1`
 `;
 
 export const ShowCustomerData: React.FC = () => {
-    const {name} = useUserConfiguration()
+    const { name, surname } = useUserConfiguration()
 
     return (
         <>
             <Title>Title</Title>
-            <Name name={name} surname='Botti' onClick={() => {console.log('clicked!')}}/>
-            <Name2 name={name} surname='Botti' onClick={() => {console.log('clicked!')}}/>
-            <Name3 name={name} surname='Botti' onClick={() => {console.log('clicked!')}}/>
+            <Name name={name} surname={surname} onClick={() => {console.log('clicked!')}}/>
+            <Name2 name={name} surname={surname} onClick={() => {console.log('clicked!')}}/>
+            <Name3 name={name} surname={surname} onClick={() => {console.log('clicked!')}}/>
         </>
     )
 }
