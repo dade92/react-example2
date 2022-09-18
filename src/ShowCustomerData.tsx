@@ -14,7 +14,7 @@ export const ShowCustomerData: React.FC = () => {
 
     return (
         <>
-            <Title>Title</Title>
+            <Title data-testid="title">Title</Title>
             <Name name={name} surname={surname} onClick={() => {console.log('clicked!')}}/>
             <Name2 name={name} surname={surname} onClick={() => {console.log('clicked!')}}/>
             <Name3 name={name} surname={surname} onClick={() => {console.log('clicked!')}}/>
