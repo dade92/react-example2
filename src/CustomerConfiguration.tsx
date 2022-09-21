@@ -4,14 +4,9 @@ export interface User {
     name: string;
     surname: string;
 }
-
-interface Props {
-    children: ReactNode
-}
-
 const UserContext = React.createContext<User>({name: "", surname: ""});
 
-export const UserConfiguration: React.FC<Props> = ({children}) => {
+export const UserConfiguration: React.FC<{children: ReactNode}> = ({children}) => {
     const user = retrieveUser();
 
     return (
@@ -21,11 +16,11 @@ export const UserConfiguration: React.FC<Props> = ({children}) => {
     )
 }
 
-const retrieveUser = () => {
+const retrieveUser = (): User => {
     return {
         name: "Davide",
         surname: "Botti"
-    } 
+    }
 }
 
-export const useUserConfiguration = () => React.useContext(UserContext); 
+export const useUserConfiguration = () => React.useContext(UserContext);
