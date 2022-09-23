@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { UserConfiguration } from './CustomerConfiguration';
 import { ShowCustomerData } from './ShowCustomerData';
 
