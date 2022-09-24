@@ -1,5 +1,5 @@
 import React from "react";
-import { Name, Name2, Name3 } from './Name';
+import Name from './Name';
 import styled from "styled-components";
 import { useUserConfiguration } from "./CustomerConfiguration";
 
@@ -16,8 +16,6 @@ export const ShowCustomerData: React.FC = () => {
         <>
             <Title data-testid="title">Title</Title>
             <Name name={name} surname={surname} onClick={() => {console.log('clicked!')}}/>
-            <Name2 name={name} surname={surname} onClick={() => {console.log('clicked!')}}/>
-            <Name3 name={name} surname={surname} onClick={() => {console.log('clicked!')}}/>
         </>
     )
 }

@@ -5,30 +5,13 @@ interface Props {
     surname: string;
     onClick: () => void;
 }
-  
-export const Name: React.FC<Props> = (props) => {
-  return (
-    <div>
-      <p data-testid="name" onClick={props.onClick}>
-          Name: {props.name}  Surname: {props.surname}
-      </p>
-    </div>
-  )
-}
-export const Name2 = (props: Props) => {
-    return (
-        <div>
-            <p>
-                {props.name} - {props.surname}
-            </p>
-        </div>
-    )
-}
 
-export const Name3: React.FC<Props> = ({name, surname, onClick}) => {
+const Name: React.FC<Props> = ({name, surname, onClick}) => {
   return (
       <div>
-          <p onClick={onClick}>{name} / {surname}</p>
+          <p data-testid="name" onClick={onClick}>{name} / {surname}</p>
       </div>
   )
 }
+
+export default Name;
