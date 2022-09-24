@@ -9,7 +9,7 @@ interface Props {
 export const Name: React.FC<Props> = (props) => {
   return (
     <div>
-      <p onClick={props.onClick}>
+      <p data-testid="name" onClick={props.onClick}>
           Name: {props.name}  Surname: {props.surname}
       </p>
     </div>
