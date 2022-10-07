@@ -7,9 +7,9 @@ const App = () => {
   return (
     <div className="App">
        <UserConfiguration>
-            <ShowCustomerData onClick={(name:string)=>console.log(name)}/>
+            <ShowCustomerData onClick={(name:string, checked: boolean)=>console.log(name+checked)}/>
       </UserConfiguration>
-      <ShowGithubUsers/>
+      {/* <ShowGithubUsers/> */}
     </div>
   );
 }
