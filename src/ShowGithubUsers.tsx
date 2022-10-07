@@ -6,7 +6,7 @@ interface GithubUser {
     login: string;
 }
 
-export const ShowGithubUsers = () => {
+export const ShowGithubUsers: React.FC = () => {
     const [users, setUsers] = useState<GithubUser[]>([]);
 
     useEffect(() => {
