@@ -6,9 +6,9 @@ import { ShowGithubUsers } from "/Users/davide/Documents/programming/react-examp
 const App = () => {
   return (
     <div className="App">
-      {/* <UserConfiguration>
-        <ShowCustomerData/>
-      </UserConfiguration> */}
+       <UserConfiguration>
+            <ShowCustomerData onClick={(name:string)=>console.log(name)}/>
+      </UserConfiguration>
       <ShowGithubUsers/>
     </div>
   );

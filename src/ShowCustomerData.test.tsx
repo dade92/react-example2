@@ -9,11 +9,11 @@ describe('ShowCustomerData', () => {
     })
     
     it('renders without crashing', () => {
-        render(<ShowCustomerData/>);
+        render(<ShowCustomerData onClick={jest.fn}/>);
     })
     
     it('renders correctly', () => {
-        const {getByTestId} = render(<ShowCustomerData/>);
+        const {getByTestId} = render(<ShowCustomerData onClick={jest.fn}/>);
         expect(getByTestId('title')).toHaveTextContent("Title");
     })
 })

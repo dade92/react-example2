@@ -9,13 +9,17 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
-export const ShowCustomerData: React.FC = () => {
+interface Props {
+    onClick: (name: string)=>void;
+}
+
+export const ShowCustomerData: React.FC<Props> = ({onClick}) => {
     const { name, surname } = useUserConfiguration()
 
     return (
         <>
             <Title data-testid="title">Title</Title>
-            <Name name={name} surname={surname} onClick={() => {console.log('clicked!')}}/>
+            <Name name={name} surname={surname} onClick={()=>onClick(name)}/>
         </>
     )
 }
