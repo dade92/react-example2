@@ -19,15 +19,15 @@ interface Props {
 export const ShowCustomerData: React.FC<Props> = ({onClick}) => {
     const { name, surname } = useUserConfiguration()
     const [text, setText] = useState('')
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(true);
 
     return (
         <>
             <Title data-testid="title">Title</Title>
             <Name name={name} surname={surname} onClick={()=>console.log('clicked')}/>
 
-            <TextField id="filled-basic" label="Name" variant="filled" onChange={(e)=>setText(e.target.value)}/>
-            <FormControlLabel control={<Checkbox onChange={(e)=>setChecked(e.target.checked)}/>} label="Want this?" />
+            <TextField id="filled-basic" label="Name" variant="outlined" onChange={(e)=>setText(e.target.value)}/>
+            <FormControlLabel control={<Checkbox checked={checked} onChange={(e)=>setChecked(e.target.checked)}/>} label="Want this?" />
             <Button variant="contained" color="success" onClick={()=>onClick(text, checked)}>SUBMIT</Button>
 
             <IconButton color="primary" aria-label="upload picture" component="label">
