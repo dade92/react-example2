@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import MyApp from './App';
 import reportWebVitals from './reportWebVitals';
+import { server } from './server';
+
+if (process.env.NODE_ENV === 'development') {
+  server();
+}
 
 ReactDOM.render(
   <React.StrictMode>

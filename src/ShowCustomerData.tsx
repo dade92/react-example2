@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Name from './Name';
 import styled from "styled-components";
 import { useUserConfiguration } from "./CustomerConfiguration";
@@ -17,6 +17,14 @@ interface Props {
 }
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
+    useEffect(()=> {
+        const fetchData = async () => {
+            const data = await fetch('/init');
+            console.log(data);
+          }
+          fetchData();
+    }, [])
+
     const { name, surname } = useUserConfiguration()
     const [text, setText] = useState<string>('');
     const [checked, setChecked] = useState(true);
