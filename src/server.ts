@@ -1,7 +1,7 @@
 import { createServer, Server, Response } from 'miragejs';
 
 const initResponse = {
-    name: 'Davide',
+    name: 'Sergio',
     surname: 'Botti'
 };
 
