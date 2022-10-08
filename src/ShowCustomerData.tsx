@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Name from './Name';
 import styled from "styled-components";
 import { useUserConfiguration } from "./CustomerConfiguration";
@@ -22,7 +22,7 @@ interface Props {
 }
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         const data = await fetch('/init');
         const response = await data.json();
         console.log(response);
@@ -30,9 +30,19 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             name: response.name,
             surname: response.surname
         })
-      }
+      },[]);
 
-    useEffect(()=> { fetchData() }, [])
+    const submit = (text:string, checked:boolean) => {
+        setValidInput(true);
+        if(text.length >= 0 && text.length < 3) {
+            setValidInput(false);
+        } else {
+            setSuccess(true);
+            onSubmit(text, checked);
+        }
+    }
+
+    useEffect(()=> { fetchData() }, [fetchData])
 
     const { name, surname } = useUserConfiguration();
     const [text, setText] = useState<string>('');
@@ -40,16 +50,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [checked, setChecked] = useState(true);
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
-
-    const submit = (text:string, checked:boolean) => {
-        setValidInput(true);
-        if(text.length > 0 && text.length < 3) {
-            setValidInput(false);
-        } else {
-            setSuccess(true);
-            onSubmit(text, checked);
-        }
-    }
 
     return (
         <>
