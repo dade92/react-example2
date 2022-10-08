@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Name from './Name';
 import styled from "styled-components";
 import { useUserConfiguration } from "./CustomerConfiguration";
-import { Button, Checkbox, FormControlLabel, IconButton, TextField, Typography } from "@mui/material";
+import { Alert, AlertTitle, Button, Checkbox, FormControlLabel, IconButton, Snackbar, TextField, Typography } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 
 
@@ -13,13 +13,24 @@ const Title = styled.h1`
 `;
 
 interface Props {
-    onClick: (text: string, checked: boolean)=>void;
+    onSubmit: (text: string, checked: boolean)=>void;
 }
 
-export const ShowCustomerData: React.FC<Props> = ({onClick}) => {
+export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const { name, surname } = useUserConfiguration()
-    const [text, setText] = useState('')
+    const [text, setText] = useState<string>('');
     const [checked, setChecked] = useState(true);
+    const [validInput, setValidInput] = useState(true);
+    const [success, setSuccess] = useState(false);
+
+    const submit = (text:string, checked:boolean) => {
+        if(text.length > 0 && text.length < 3) {
+            setValidInput(false);
+        } else {
+            setSuccess(true);
+            onSubmit(text, checked);
+        }
+    }
 
     return (
         <>
@@ -27,13 +38,27 @@ export const ShowCustomerData: React.FC<Props> = ({onClick}) => {
             <Name name={name} surname={surname} onClick={()=>console.log('clicked')}/>
 
             <TextField id="filled-basic" label="Name" variant="outlined" onChange={(e)=>setText(e.target.value)}/>
-            <FormControlLabel control={<Checkbox checked={checked} onChange={(e)=>setChecked(e.target.checked)}/>} label="Want this?" />
-            <Button variant="contained" color="success" onClick={()=>onClick(text, checked)}>SUBMIT</Button>
+            <FormControlLabel 
+                control={<Checkbox checked={checked} onChange={(e)=>setChecked(e.target.checked)}/>} label="Want this?" />
+            <Button variant="contained" color="success" onClick={()=>submit(text, checked)}>SUBMIT</Button>
 
             <IconButton color="primary" aria-label="upload picture" component="label">
                 <input hidden accept="image/*" type="file" />
                 <PhotoCamera />
             </IconButton>
+            {!validInput && 
+                <Alert severity="warning">
+                    <AlertTitle>Warning</AlertTitle>
+                    Input must be greater than 2 letters</Alert>}
+            {
+             <Snackbar open={success} autoHideDuration={2000} onClose={()=>setSuccess(false)}>
+                <Alert severity="success" sx={{ width: '100%' }}>
+                  Congratulations!
+                </Alert>
+            </Snackbar>
+              
+            }
         </>
     )
+
 }
