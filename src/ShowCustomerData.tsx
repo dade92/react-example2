@@ -24,6 +24,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [success, setSuccess] = useState(false);
 
     const submit = (text:string, checked:boolean) => {
+        setValidInput(true);
         if(text.length > 0 && text.length < 3) {
             setValidInput(false);
         } else {
