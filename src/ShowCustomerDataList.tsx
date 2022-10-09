@@ -4,6 +4,7 @@ import { RemoteUser } from "./Data";
 import CommentIcon from '@mui/icons-material/Comment';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
+import { adaptUsers, RemoteUserResponse } from "./RemoteUserResponseAdapter";
 
 enum Action {
     INBOX = "INBOX",
@@ -17,7 +18,8 @@ export const ShowCustomerDataList: React.FC = () => {
         const data = await fetch('http://localhost:8081/retrieveUsers');
         const response = await data.json();
         console.log(response);
-        setUsers(response.users);
+        const remoteUserResponse: RemoteUserResponse[] = response.users;
+        setUsers(adaptUsers(remoteUserResponse));
       },[]);
     
     useEffect(()=> { fetchData() }, [fetchData])
