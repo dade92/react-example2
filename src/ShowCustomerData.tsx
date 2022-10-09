@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Name from './Name';
 import styled from "styled-components";
 import { useUserConfiguration } from "./CustomerConfiguration";
-import { Alert, AlertTitle, Avatar, Button, Checkbox, FormControlLabel, IconButton, Snackbar, TextField, Typography } from "@mui/material";
+import { Alert, AlertTitle, Button, Checkbox, FormControlLabel, IconButton, Snackbar, TextField, Typography } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 
 

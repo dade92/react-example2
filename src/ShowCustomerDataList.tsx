@@ -1,6 +1,7 @@
-import { Box, List, ListItem } from "@mui/material";
+import { Box, IconButton, List, ListItem, ListItemText } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { RemoteUser } from "./ShowCustomerData";
+import CommentIcon from '@mui/icons-material/Comment';
 
 export const ShowCustomerDataList: React.FC = () => {
     const [users,setUsers] = useState<RemoteUser[]>([])
@@ -12,14 +13,26 @@ export const ShowCustomerDataList: React.FC = () => {
         setUsers(response.users);
       },[]);
     
-      useEffect(()=> { fetchData() }, [fetchData])
+    useEffect(()=> { fetchData() }, [fetchData])
+
+    const handleComment = (userName: string) => {
+        console.log(userName);
+    }
 
     return (
         <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             <List>
                 {users.map(user => {
-                    return <ListItem>
-                        {user.name} - {user.surname}
+                    return <ListItem 
+                            key={user.name} 
+                            secondaryAction={
+                                <IconButton aria-label="comment" onClick={()=>handleComment(user.name)}>
+                                    <CommentIcon />
+                                </IconButton>}
+                            >
+                            <ListItemText>
+                                {user.name} - {user.surname}
+                            </ListItemText>
                     </ListItem>
                 })}
             </List>
