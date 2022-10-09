@@ -19,7 +19,7 @@ interface Props {
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const fetchData = useCallback(async () => {
-        const data = await fetch('/retrieveUser');
+        const data = await fetch('http://localhost:8081/retrieveUser');
         const response = await data.json();
         console.log(response);
         setRemoteUser({

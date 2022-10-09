@@ -31,6 +31,7 @@ export const server: () => Server = () =>
   createServer({
     logging: true,
     routes() {
+      this.urlPrefix='http://localhost:8081';
       this.get('/retrieveUser', init200);
       this.get('/retrieveUsers', init200Array);
     },
