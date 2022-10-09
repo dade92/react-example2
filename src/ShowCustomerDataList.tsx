@@ -18,8 +18,7 @@ export const ShowCustomerDataList: React.FC = () => {
         const data = await fetch('http://localhost:8081/retrieveUsers');
         const response = await data.json();
         console.log(response);
-        const remoteUserResponse: RemoteUserResponse[] = response.users;
-        setUsers(adaptUsers(remoteUserResponse));
+        setUsers(adaptUsers(response.users));
       },[]);
     
     useEffect(()=> { fetchData() }, [fetchData])
