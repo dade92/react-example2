@@ -9,11 +9,17 @@ const initResponseArray = {
   users: [
     {
       name: 'Sergio',
-      surname: 'Botti'
+      surname: 'Botti',
+      data: {
+        profile: 'test'
+      }
     },
     {
       name: 'Elena',
-      surname: 'Botti'
+      surname: 'Botti',
+      data: {
+        profile: 'test2'
+      }
     },
   ]
 };

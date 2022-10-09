@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useUserConfiguration } from "./CustomerConfiguration";
 import { Alert, AlertTitle, Button, Checkbox, FormControlLabel, IconButton, Snackbar, TextField, Typography } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
+import { RemoteUser } from "./Data";
 
 
 const Title = styled.h1`
@@ -11,11 +12,6 @@ const Title = styled.h1`
   text-align: center;
   color: palevioletred;
 `;
-
-export interface RemoteUser {
-    name: string;
-    surname: string;
-}
 
 interface Props {
     onSubmit: (text: string, checked: boolean)=>void;
@@ -28,7 +24,10 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
         console.log(response);
         setRemoteUser({
             name: response.name,
-            surname: response.surname
+            surname: response.surname,
+            data: {
+                profile: ''
+            }
         })
       },[]);
 
