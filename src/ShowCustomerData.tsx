@@ -12,7 +12,7 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
-interface RemoteUser {
+export interface RemoteUser {
     name: string;
     surname: string;
 }
@@ -23,7 +23,7 @@ interface Props {
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const fetchData = useCallback(async () => {
-        const data = await fetch('/init');
+        const data = await fetch('/retrieveUser');
         const response = await data.json();
         console.log(response);
         setRemoteUser({
