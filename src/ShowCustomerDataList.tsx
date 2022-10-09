@@ -33,7 +33,7 @@ export const ShowCustomerDataList: React.FC = () => {
     }
 
     return (
-        <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        <Box sx={{ width: '100%', maxWidth: 360, overflow: 'hidden', border: '1px dashed grey' }}>
             <List>
                 {users.map(user => {
                     return <ListItem 
