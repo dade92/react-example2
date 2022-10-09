@@ -5,6 +5,7 @@ import { useUserConfiguration } from "./CustomerConfiguration";
 import { Alert, AlertTitle, Button, Checkbox, FormControlLabel, IconButton, Snackbar, TextField, Typography } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 import { RemoteUser } from "./Data";
+import Stack from '@mui/material/Stack';
 
 
 const Title = styled.h1`
@@ -51,7 +52,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [success, setSuccess] = useState(false);
 
     return (
-        <>
+        <Stack spacing={1} sx={{ width: 300 }}>
             <Title data-testid="title">Title</Title>
             <Name name={name} surname={surname} onClick={()=>console.log('clicked')}/>
 
@@ -77,7 +78,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             </Snackbar>
               
             }
-        </>
+        </Stack>
     )
 
 }
