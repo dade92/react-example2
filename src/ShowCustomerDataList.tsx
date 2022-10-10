@@ -4,7 +4,7 @@ import { RemoteUser } from "./Data";
 import CommentIcon from '@mui/icons-material/Comment';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
-import { adaptUsers, RemoteUserResponse } from "./RemoteUserResponseAdapter";
+import { adaptUsers } from "./RemoteUserResponseAdapter";
 
 enum Action {
     INBOX = "INBOX",
