@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { UserConfiguration } from './CustomerConfiguration';
 import { ShowCustomerData } from './ShowCustomerData';
 import { ShowCustomerDataList } from './ShowCustomerDataList';
-import { ShowGithubUsers } from "/Users/davide/Documents/programming/react-example2/src/ShowGithubUsers";
 
 const App = () => {
   return (
