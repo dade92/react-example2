@@ -52,7 +52,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [success, setSuccess] = useState(false);
 
     return (
-        <Stack spacing={1} sx={{ width: 600 }}>
+        <Stack spacing={1} sx={{ width: 600 }} data-testid={'stack'}>
             <Title data-testid="title">Title</Title>
             <Name name={name} surname={surname} onClick={()=>console.log('clicked')}/>
 

@@ -1,7 +1,6 @@
 import React from 'react';
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import { ShowCustomerData } from './ShowCustomerData';
-import { UserConfiguration } from './CustomerConfiguration'
 
 describe('ShowCustomerData', () => {
     afterEach(() => {
@@ -13,7 +12,9 @@ describe('ShowCustomerData', () => {
     })
     
     it('renders correctly', () => {
-        const {getByTestId} = render(<ShowCustomerData onSubmit={jest.fn}/>);
-        expect(getByTestId('title')).toHaveTextContent("Title");
+        render(<ShowCustomerData onSubmit={jest.fn}/>);
+
+        expect(screen.getByTestId('title')).toHaveTextContent("Title");
+        expect(screen.getByTestId('stack')).toBeDefined();
     })
 })

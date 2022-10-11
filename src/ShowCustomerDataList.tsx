@@ -36,7 +36,7 @@ export const ShowCustomerDataList: React.FC = () => {
     return (
         <Box sx={{width: '100%', maxWidth: 360, overflow: 'hidden', border: '1px dashed grey'}}>
             <List>
-                {users.map(user =>
+                {users.map(user => (
                     <ListItem
                         key={user.name}
                         divider={true}
@@ -49,7 +49,7 @@ export const ShowCustomerDataList: React.FC = () => {
                             {user.name} - {user.surname} - {user.data.profile}
                         </ListItemText>
                     </ListItem>
-                )}
+                    ))}
             </List>
             <List>
                 <ListItem disablePadding>
