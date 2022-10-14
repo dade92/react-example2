@@ -1,5 +1,6 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton } from "@mui/material";
 import React, { FC } from "react";
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
     isOpen: boolean;
@@ -17,6 +18,19 @@ export const MyModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
       >
         <DialogTitle id="alert-dialog-title">
           {"Are you sure?"}
+          {
+            <IconButton
+              aria-label="close"
+              onClick={onClose}
+              sx={{
+                position: 'absolute',
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}>
+                  <CloseIcon />
+              </IconButton>
+          }
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

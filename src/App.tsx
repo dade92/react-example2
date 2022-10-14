@@ -4,7 +4,7 @@ import { MyModal } from './MyModal';
 import { ShowCustomerData } from './ShowCustomerData';
 import { ShowCustomerDataList } from './ShowCustomerDataList';
 
-const App = () => {
+const App: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   return (
