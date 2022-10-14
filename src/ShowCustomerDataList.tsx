@@ -1,4 +1,4 @@
-import {Box, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Box, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import React, {useCallback, useEffect, useState} from "react";
 import {RemoteUser} from "./Data";
 import CommentIcon from '@mui/icons-material/Comment';
@@ -38,7 +38,6 @@ export const ShowCustomerDataList: React.FC = () => {
                 {users.map(user => (
                     <ListItem
                         key={user.name}
-                        divider={true}
                         secondaryAction={
                             <IconButton aria-label="comment" onClick={() => handleComment(user.name)}>
                                 <CommentIcon/>
@@ -49,6 +48,7 @@ export const ShowCustomerDataList: React.FC = () => {
                         </ListItemText>
                     </ListItem>
                     ))}
+            <Divider>ACTIONS</Divider>
                 <ListItem disablePadding>
                     <ListItemButton onClick={() => handleClick(Action.INBOX)}>
                         <ListItemIcon>
