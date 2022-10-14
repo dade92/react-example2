@@ -35,7 +35,6 @@ export const ShowCustomerDataList: React.FC = () => {
 
     return (
         <Box sx={{width: '100%', maxWidth: 360, overflow: 'hidden', border: '1px dashed grey'}}>
-            <List>
                 {users.map(user => (
                     <ListItem
                         key={user.name}
@@ -50,8 +49,6 @@ export const ShowCustomerDataList: React.FC = () => {
                         </ListItemText>
                     </ListItem>
                     ))}
-            </List>
-            <List>
                 <ListItem disablePadding>
                     <ListItemButton onClick={() => handleClick(Action.INBOX)}>
                         <ListItemIcon>
@@ -68,7 +65,6 @@ export const ShowCustomerDataList: React.FC = () => {
                         <ListItemText primary="Drafts"/>
                     </ListItemButton>
                 </ListItem>
-            </List>
         </Box>
     );
 }

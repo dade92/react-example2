@@ -46,8 +46,8 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
 
     const { name, surname } = useUserConfiguration();
     const [text, setText] = useState<string>('');
+    const [checked, setChecked] = useState(false);
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
-    const [checked, setChecked] = useState(true);
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
 
@@ -58,8 +58,8 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
 
             <TextField id="filled-basic" label="Name" variant="outlined" onChange={(e)=>setText(e.target.value)}/>
             <FormControlLabel 
-                control={<Checkbox checked={checked} onChange={(e)=>setChecked(e.target.checked)}/>} label="Want this?" />
-            <Button variant="contained" color="success" onClick={()=>submit(text, checked)}>SUBMIT</Button>
+                control={<Checkbox checked={checked} onChange={(e)=>setChecked(e.target.checked)}/>} label="Accept t&c" />
+            <Button variant="contained" color="success" onClick={()=>submit(text, checked)} disabled={!checked}>SUBMIT</Button>
             <Typography variant="body1" gutterBottom>{remoteUser?.name} {remoteUser?.surname}</Typography>
 
             <IconButton color="primary" aria-label="upload picture" component="label">
