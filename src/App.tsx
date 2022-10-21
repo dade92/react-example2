@@ -1,4 +1,4 @@
-import { CircularProgress } from '@mui/material';
+import { Alert, AlertTitle, CircularProgress } from '@mui/material';
 import React, { useState } from 'react';
 import { createCustomer } from './CreateCustomer';
 import { UserConfiguration } from './CustomerConfiguration';
@@ -9,6 +9,7 @@ import { ShowCustomerDataList } from './ShowCustomerDataList';
 const App: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [errorAlert, setErrorAlert] = useState<boolean>(false);
   let username = '';
 
   return (
@@ -25,7 +26,12 @@ const App: React.FC = () => {
       {
         openModal && <MyModal isOpen={openModal} onClose={()=>setOpenModal(false)} onConfirm={
           () => {
-            createCustomer(username, () => {
+            createCustomer(username, 
+            () => {
+              setErrorAlert(false);
+              setLoading(false);
+            }, () => {
+              setErrorAlert(true);
               setLoading(false);
             });
             setOpenModal(false);
@@ -35,6 +41,12 @@ const App: React.FC = () => {
       }
       {
         loading && <CircularProgress />
+      }
+      {
+        errorAlert && <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          Something went wrong. Try again
+        </Alert>
       }
     </div>
   )

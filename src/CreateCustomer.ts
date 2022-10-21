@@ -1,10 +1,8 @@
-import React from 'react';
-  
 interface CreateCustomerResponse {
   code: string;
 };
   
-export const createCustomer = async (name: string, onConfirm: () => void) => {
+export const createCustomer = async (name: string, onSuccess: () => void, onFailure: () => void) => {
   const response = await fetch('http://localhost:8081/createCustomer', {
     method: 'POST',
     body: JSON.stringify({
@@ -17,11 +15,13 @@ export const createCustomer = async (name: string, onConfirm: () => void) => {
   });
 
   if (!response.ok) {
-    throw new Error(`Error! status: ${response.status}`);
+    console.log('Response is not OK: ', response);
+    onFailure();
+  } else {
+    const result = (await response.json()) as CreateCustomerResponse;
+
+    console.log('result is: ', result.code);
+
+    onSuccess();
   }
-  const result = (await response.json()) as CreateCustomerResponse;
-
-  console.log('result is: ', result.code);
-
-  onConfirm();
 };
