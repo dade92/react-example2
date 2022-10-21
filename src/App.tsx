@@ -1,38 +1,14 @@
+import { CircularProgress } from '@mui/material';
 import React, { useState } from 'react';
+import { createCustomer } from './CreateCustomer';
 import { UserConfiguration } from './CustomerConfiguration';
 import { MyModal } from './MyModal';
 import { ShowCustomerData } from './ShowCustomerData';
 import { ShowCustomerDataList } from './ShowCustomerDataList';
 
-interface CreateCustomerRequest {
-  name: string;
-}
-
-interface CreateCustomerResponse {
-  code: string;
-}
-
-const createCustomer = async (name: string) => {
-  const response = await fetch('http://localhost:8081/createCustomer', {
-    method: 'POST',
-    body: JSON.stringify({
-      name: name
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-  });
-  if (!response.ok) {
-    throw new Error(`Error! status: ${response.status}`);
-  }
-  const result = (await response.json()) as CreateCustomerResponse;
-
-  console.log('result is: ', result.code);
-};
-
 const App: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   let username = '';
 
   return (
@@ -49,10 +25,16 @@ const App: React.FC = () => {
       {
         openModal && <MyModal isOpen={openModal} onClose={()=>setOpenModal(false)} onConfirm={
           () => {
-            createCustomer(username);
+            createCustomer(username, () => {
+              setLoading(false);
+            });
             setOpenModal(false);
+            setLoading(true);
           }
         }/>
+      }
+      {
+        loading && <CircularProgress />
       }
     </div>
   )
