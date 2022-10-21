@@ -24,8 +24,13 @@ const initResponseArray = {
   ]
 };
 
+const createCustomerResponse = {
+  code: '666'
+}
+
 const init200 = (): Response => new Response(200, {}, initResponse);
 const init200Array = (): Response => new Response(200, {}, initResponseArray);
+const createCustomer200 = (): Response => new Response(200, {}, createCustomerResponse);
 
 export const server: () => Server = () =>
   createServer({
@@ -34,5 +39,6 @@ export const server: () => Server = () =>
       this.urlPrefix='http://localhost:8081';
       this.get('/retrieveUser', init200);
       this.get('/retrieveUsers', init200Array);
+      this.post('/createCustomer', createCustomer200);
     },
   });
