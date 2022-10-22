@@ -12,6 +12,16 @@ const App: React.FC = () => {
   const [errorAlert, setErrorAlert] = useState<boolean>(false);
   let username = '';
 
+  const onCreateCustomerSuccess = () => {
+    setErrorAlert(false);
+    setLoading(false);
+  };
+
+  const onCreateCustomerFailure = () => {
+    setErrorAlert(true);
+    setLoading(false);
+  };
+
   return (
     <div className="App">
        <UserConfiguration>
@@ -25,14 +35,8 @@ const App: React.FC = () => {
       {
         openModal && <MyModal isOpen={openModal} onClose={()=>setOpenModal(false)} onConfirm={
           () => {
-            createCustomer(username, 
-            () => {
-              setErrorAlert(false);
-              setLoading(false);
-            }, () => {
-              setErrorAlert(true);
-              setLoading(false);
-            });
+            createCustomer(username, onCreateCustomerSuccess, onCreateCustomerFailure);
+
             setOpenModal(false);
             setLoading(true);
           }
