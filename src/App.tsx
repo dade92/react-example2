@@ -22,7 +22,6 @@ const App: React.FC = () => {
             }}/>
       </UserConfiguration>
       <ShowCustomerDataList/>
-      {/* <ShowGithubUsers/> */}
       {
         openModal && <MyModal isOpen={openModal} onClose={()=>setOpenModal(false)} onConfirm={
           () => {
