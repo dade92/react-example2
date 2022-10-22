@@ -42,9 +42,7 @@ const App: React.FC = () => {
           }
         }/>
       }
-      {
-        loading && <CircularProgress />
-      }
+      { loading && <CircularProgress /> }
       {
         errorAlert && <Alert severity="error">
           <AlertTitle>Error</AlertTitle>
