@@ -1,12 +1,10 @@
 import React from 'react';
 import { AppFlow } from './AppFlow';
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <AppFlow/>
-    </div>
-  )
-}
+const App: React.FC = () => (
+  <div className="App">
+    <AppFlow />
+  </div>
+)
 
 export default App;
