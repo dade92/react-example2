@@ -25,6 +25,7 @@ describe('ShowCustomerDataList',()=> {
     })
 
     it('handles API error',async ()=> {
+        //TODO handle error properly
         render(<ShowCustomerDataList/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
