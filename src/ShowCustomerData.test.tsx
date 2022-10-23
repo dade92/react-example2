@@ -24,6 +24,7 @@ describe('ShowCustomerData', () => {
         fireEvent.click(screen.getByTestId('submit-button'));
 
         expect(callback).toBeCalledTimes(1);
+        expect(screen.getByTestId('snackbar')).toBeVisible();
         expect(screen.queryByTestId('alert')).toBeNull();
     })
 
@@ -38,6 +39,7 @@ describe('ShowCustomerData', () => {
         fireEvent.click(screen.getByTestId('submit-button'));
 
         expect(screen.getByTestId('alert')).toBeVisible();
+        expect(screen.queryByTestId('snackbar')).toBeNull();
         expect(callback).toBeCalledTimes(0);
     })
 })

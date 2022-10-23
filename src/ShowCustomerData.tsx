@@ -72,7 +72,7 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
                     Input must be greater than 2 letters</Alert>
             }
             {
-                <Snackbar open={success} autoHideDuration={2000} onClose={() => setSuccess(false)}>
+                <Snackbar open={success} autoHideDuration={2000} data-testid={'snackbar'} onClose={() => setSuccess(false)}>
                     <Alert severity="success" sx={{ width: '100%' }}>
                         Congratulations!
                     </Alert>
