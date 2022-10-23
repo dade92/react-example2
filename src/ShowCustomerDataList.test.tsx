@@ -28,7 +28,6 @@ describe('ShowCustomerDataList',()=> {
         render(<ShowCustomerDataList/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
-
         expect(screen.getByTestId('loader')).toBeDefined();
     })
 
