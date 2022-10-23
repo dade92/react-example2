@@ -35,7 +35,7 @@ export const ShowCustomerDataList: React.FC = () => {
 
     return (
         <Box sx={{width: '100%', maxWidth: 360, overflow: 'hidden', border: '1px dashed grey'}}>
-                {users.map((user, index) => (
+                {users.length > 0 ? users.map((user, index) => (
                     <ListItem
                         key={user.name}
                         data-testid={'user-item-'+`${index}`}
@@ -48,7 +48,7 @@ export const ShowCustomerDataList: React.FC = () => {
                             {user.name} - {user.surname} - {user.data.profile}
                         </ListItemText>
                     </ListItem>
-                    ))}
+                    )) : <span data-testid={'loader'}>Loading users...</span>}
             <Divider>ACTIONS</Divider>
                 <ListItem disablePadding data-testid={'inbox-item'}>
                     <ListItemButton onClick={() => handleClick(Action.INBOX)}>
