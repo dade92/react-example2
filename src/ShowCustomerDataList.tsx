@@ -35,9 +35,10 @@ export const ShowCustomerDataList: React.FC = () => {
 
     return (
         <Box sx={{width: '100%', maxWidth: 360, overflow: 'hidden', border: '1px dashed grey'}}>
-                {users.map(user => (
+                {users.map((user, index) => (
                     <ListItem
                         key={user.name}
+                        data-testid={'user-item-'+`${index}`}
                         secondaryAction={
                             <IconButton aria-label="comment" onClick={() => handleComment(user.name)}>
                                 <CommentIcon/>
@@ -49,7 +50,7 @@ export const ShowCustomerDataList: React.FC = () => {
                     </ListItem>
                     ))}
             <Divider>ACTIONS</Divider>
-                <ListItem disablePadding>
+                <ListItem disablePadding data-testid={'inbox-item'}>
                     <ListItemButton onClick={() => handleClick(Action.INBOX)}>
                         <ListItemIcon>
                             <InboxIcon/>
@@ -57,7 +58,7 @@ export const ShowCustomerDataList: React.FC = () => {
                         <ListItemText primary="Inbox"/>
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
+                <ListItem disablePadding data-testid={'drafts-item'}>
                     <ListItemButton onClick={() => handleClick(Action.DRAFTS)}>
                         <ListItemIcon>
                             <DraftsIcon/>
