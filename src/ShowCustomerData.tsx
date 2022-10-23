@@ -56,10 +56,10 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
             <Title data-testid="title">Title</Title>
             <Name name={name} surname={surname} onClick={() => console.log('clicked')} />
 
-            <TextField id="filled-basic" label="Name" variant="outlined" onChange={(e) => setText(e.target.value)} />
+            <TextField id="filled-basic" data-testid={'text'} label="Name" variant="outlined" onChange={(e) => setText(e.target.value)} />
             <FormControlLabel
-                control={<Checkbox checked={checked} onChange={(e) => setChecked(e.target.checked)} />} label="Accept t&c" />
-            <Button variant="contained" color="success" onClick={() => submit(text, checked)} disabled={!checked}>SUBMIT</Button>
+                control={<Checkbox data-testid={'checkbox'} checked={checked} onChange={(e) => setChecked(e.target.checked)} />} label="Accept t&c" />
+            <Button variant="contained" color="success" data-testid={'submit-button'} onClick={() => submit(text, checked)} disabled={!checked}>SUBMIT</Button>
             <Typography variant="body1" gutterBottom>{remoteUser?.name} {remoteUser?.surname}</Typography>
 
             <IconButton color="primary" aria-label="upload picture" component="label">
@@ -67,7 +67,7 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
                 <PhotoCamera />
             </IconButton>
             {
-                !validInput && <Alert severity="warning">
+                !validInput && <Alert severity="warning" data-testid={'alert'}>
                     <AlertTitle>Warning</AlertTitle>
                     Input must be greater than 2 letters</Alert>
             }
