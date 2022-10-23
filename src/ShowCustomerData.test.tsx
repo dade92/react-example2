@@ -13,29 +13,29 @@ describe('ShowCustomerData', () => {
         expect(screen.getByTestId('stack')).toBeDefined();
     })
 
-    it('Calls callback after click', async () => {
+    it('Calls callback after click', () => {
         const callback = jest.fn()
 
         render(<ShowCustomerData onSubmit={callback}/>);
 
-        await fireEvent.click(screen.getByTestId('checkbox'));
-        await fireEvent.change(screen.getByTestId('text').querySelector('input')!, {target: {value: 'test'}});
+        fireEvent.click(screen.getByTestId('checkbox'));
+        fireEvent.change(screen.getByTestId('text').querySelector('input')!, {target: {value: 'test'}});
 
-        await fireEvent.click(screen.getByTestId('submit-button'));
+        fireEvent.click(screen.getByTestId('submit-button'));
 
         expect(callback).toBeCalledTimes(1);
         expect(screen.queryByTestId('alert')).toBeNull();
     })
 
-    it('Show error message if text is less than 3 chars', async () => {
+    it('Show error message if text is less than 3 chars', () => {
         const callback = jest.fn()
 
         render(<ShowCustomerData onSubmit={callback}/>);
 
-        await fireEvent.click(screen.getByTestId('checkbox'));
-        await fireEvent.change(screen.getByTestId('text').querySelector('input')!, {target: {value: 'te'}});
+        fireEvent.click(screen.getByTestId('checkbox'));
+        fireEvent.change(screen.getByTestId('text').querySelector('input')!, {target: {value: 'te'}});
 
-        await fireEvent.click(screen.getByTestId('submit-button'));
+        fireEvent.click(screen.getByTestId('submit-button'));
 
         expect(screen.getByTestId('alert')).toBeVisible();
         expect(callback).toBeCalledTimes(0);
