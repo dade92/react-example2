@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AppFlow } from './AppFlow';
+import "./App.css";
 
 const AppFlowContainer = styled.div`
   display: flex;
@@ -9,9 +10,9 @@ const AppFlowContainer = styled.div`
 `
 
 const App: React.FC = () => (
-  <AppFlowContainer>
+  <div className='AppFlow'>
     <AppFlow/>
-  </AppFlowContainer>
+  </div>
 )
 
 export default App;
