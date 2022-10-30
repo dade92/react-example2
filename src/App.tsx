@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { AppFlow } from './AppFlow';
 
 const AppFlowContainer = styled.div`
-  margin: auto;
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
 
 const App: React.FC = () => (
