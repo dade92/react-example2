@@ -53,7 +53,7 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
 
     return (
         <Stack spacing={1} sx={{ width: 600 }} data-testid={'stack'}>
-            <Title data-testid="title">Title</Title>
+            <Title data-testid="title">AppFlow</Title>
             <Name name={name} surname={surname} onClick={() => console.log('clicked')} />
 
             <TextField id="filled-basic" data-testid={'text'} label="Name" variant="outlined" onChange={(e) => setText(e.target.value)} />
