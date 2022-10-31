@@ -6,11 +6,12 @@ describe('ShowCustomerData', () => {
         cleanup
     })
     
-    it('renders correctly', () => {
+    it('renders correctly, with button disabled', () => {
         render(<ShowCustomerData onSubmit={jest.fn}/>);
 
-        expect(screen.getByTestId('title')).toHaveTextContent("Title");
+        expect(screen.getByTestId('title')).toHaveTextContent("AppFlow");
         expect(screen.getByTestId('stack')).toBeDefined();
+        expect(screen.getByTestId('submit-button')).toBeDisabled();
     })
 
     it('Calls callback after click', () => {
