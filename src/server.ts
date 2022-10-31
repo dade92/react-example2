@@ -41,6 +41,6 @@ export const server: () => Server = () =>
       this.urlPrefix='http://localhost:8081';
       this.get('/retrieveUser', init200);
       this.get('/retrieveUsers', init200Array);
-      this.post('/createCustomer', createCustomer400, { timing: 5000 });
+      this.post('/createCustomer', createCustomer200, { timing: 5000 });
     },
   });
