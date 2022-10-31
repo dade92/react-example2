@@ -16,7 +16,7 @@ describe('ShowCustomerDataList',()=> {
     })
 
     it('renders correctly',async ()=> {
-        render(<ShowCustomerDataList/>)
+        render(<ShowCustomerDataList onUndo={jest.fn}/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
 
@@ -26,7 +26,7 @@ describe('ShowCustomerDataList',()=> {
 
     it('handles API error',async ()=> {
         //TODO handle error properly
-        render(<ShowCustomerDataList/>)
+        render(<ShowCustomerDataList onUndo={jest.fn}/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
         expect(screen.getByTestId('loader')).toBeDefined();

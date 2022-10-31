@@ -37,7 +37,9 @@ export const AppFlow: React.FC = () => {
                 }} />
             </UserConfiguration>
             }
-            {state.status == Status.SHOW_CUSTOMER_DATA_LIST && <ShowCustomerDataList />}
+            {state.status == Status.SHOW_CUSTOMER_DATA_LIST && <ShowCustomerDataList onUndo={()=>{
+                dispatch({type: 'SHOW_CUSTOMER_DATA'})
+            }}/>}
             {
                 openModal && <MyModal isOpen={openModal} onClose={() => setOpenModal(false)} onConfirm={
                     () => {

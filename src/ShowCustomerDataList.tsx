@@ -1,4 +1,4 @@
-import {Box, CircularProgress, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Box, Button, CircularProgress, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import React, {useCallback, useEffect, useState} from "react";
 import {RemoteUser} from "./Data";
 import CommentIcon from '@mui/icons-material/Comment';
@@ -12,7 +12,11 @@ enum Action {
     DRAFTS = "DRAFTS"
 }
 
-export const ShowCustomerDataList: React.FC = () => {
+interface Props {
+    onUndo: ()=>void;
+}
+
+export const ShowCustomerDataList: React.FC<Props> = ({onUndo}) => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
 
@@ -76,6 +80,8 @@ export const ShowCustomerDataList: React.FC = () => {
                         <ListItemText primary="Drafts"/>
                     </ListItemButton>
                 </ListItem>
+            <Divider />
+            <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo}>UNDO</Button>
         </Box>
     );
 }
