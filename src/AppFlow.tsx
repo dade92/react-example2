@@ -9,14 +9,12 @@ import { ShowCustomerDataList } from "./ShowCustomerDataList";
 
 export const AppFlow: React.FC = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
     const [errorAlert, setErrorAlert] = useState<boolean>(false);
     const [state, dispatch] = useReducer(reducer, initialState);
     let username = '';
 
     const onCreateCustomerSuccess = () => {
         setErrorAlert(false);
-        setLoading(false);
         dispatch({
             type: 'SHOW_CUSTOMER_DATA_LIST'
         });
@@ -24,7 +22,9 @@ export const AppFlow: React.FC = () => {
 
     const onCreateCustomerFailure = () => {
         setErrorAlert(true);
-        setLoading(false);
+        dispatch({
+            type: 'SHOW_CUSTOMER_DATA'
+        });
     };
 
     return (
@@ -45,11 +45,14 @@ export const AppFlow: React.FC = () => {
                     () => {
                         createCustomer(username, onCreateCustomerSuccess, onCreateCustomerFailure);
                         setOpenModal(false);
-                        setLoading(true);
+                        setErrorAlert(false);
+                        dispatch({
+                            type: 'LOADING'
+                        })
                     }
                 } />
             }
-            {loading && <CircularProgress />}
+            {state.status == Status.LOADING && <CircularProgress />}
             {
                 errorAlert && <Alert severity="error">
                     <AlertTitle>Error</AlertTitle>
