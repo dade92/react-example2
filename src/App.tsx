@@ -1,55 +1,18 @@
-import { Alert, AlertTitle, CircularProgress } from '@mui/material';
-import React, { useState } from 'react';
-import { createCustomer } from './CreateCustomer';
-import { UserConfiguration } from './CustomerConfiguration';
-import { MyModal } from './MyModal';
-import { ShowCustomerData } from './ShowCustomerData';
-import { ShowCustomerDataList } from './ShowCustomerDataList';
+import React from 'react';
+import styled from 'styled-components';
+import { AppFlow } from './AppFlow';
+import "./App.css";
 
-const App: React.FC = () => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [errorAlert, setErrorAlert] = useState<boolean>(false);
-  let username = '';
+const AppFlowContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
 
-  return (
-    <div className="App">
-       <UserConfiguration>
-            <ShowCustomerData onSubmit={(name:string, checked: boolean)=>{
-              console.log(name+checked);
-              username = name;
-              setOpenModal(true);
-            }}/>
-      </UserConfiguration>
-      <ShowCustomerDataList/>
-      {/* <ShowGithubUsers/> */}
-      {
-        openModal && <MyModal isOpen={openModal} onClose={()=>setOpenModal(false)} onConfirm={
-          () => {
-            createCustomer(username, 
-            () => {
-              setErrorAlert(false);
-              setLoading(false);
-            }, () => {
-              setErrorAlert(true);
-              setLoading(false);
-            });
-            setOpenModal(false);
-            setLoading(true);
-          }
-        }/>
-      }
-      {
-        loading && <CircularProgress />
-      }
-      {
-        errorAlert && <Alert severity="error">
-          <AlertTitle>Error</AlertTitle>
-          Something went wrong. Try again
-        </Alert>
-      }
-    </div>
-  )
-}
+const App: React.FC = () => (
+  <div className='AppFlow'>
+    <AppFlow/>
+  </div>
+)
 
 export default App;

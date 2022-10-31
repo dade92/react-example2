@@ -4,6 +4,8 @@ import './index.css';
 import MyApp from './App';
 import reportWebVitals from './reportWebVitals';
 import { server } from './server';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { darkTheme } from './customTheme';
 
 if (process.env.NODE_ENV === 'development') {
   server();
@@ -11,7 +13,10 @@ if (process.env.NODE_ENV === 'development') {
 
 ReactDOM.render(
   <React.StrictMode>
-    <MyApp />
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <MyApp />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

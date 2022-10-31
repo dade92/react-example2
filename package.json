@@ -22,13 +22,15 @@
     "styled-components": "^5.3.6",
     "ts-jest": "^27.1.3",
     "typescript": "^4.6.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "jest-preview": "^0.1.7"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --passWithNoTests --silent",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "jest-preview": "jest-preview"
   },
   "eslintConfig": {
     "extends": [

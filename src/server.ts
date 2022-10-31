@@ -30,6 +30,7 @@ const createCustomerResponse = {
 
 const init200 = (): Response => new Response(200, {}, initResponse);
 const init200Array = (): Response => new Response(200, {}, initResponseArray);
+const init500Array = (): Response => new Response(500, {}, {});
 const createCustomer200 = (): Response => new Response(200, {}, createCustomerResponse);
 const createCustomer400 = (): Response => new Response(400, {}, {});
 
@@ -40,6 +41,6 @@ export const server: () => Server = () =>
       this.urlPrefix='http://localhost:8081';
       this.get('/retrieveUser', init200);
       this.get('/retrieveUsers', init200Array);
-      this.post('/createCustomer', createCustomer400, { timing: 5000 });
+      this.post('/createCustomer', createCustomer200, { timing: 5000 });
     },
   });

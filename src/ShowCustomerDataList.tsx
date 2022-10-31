@@ -1,10 +1,11 @@
-import {Box, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Box, CircularProgress, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import React, {useCallback, useEffect, useState} from "react";
 import {RemoteUser} from "./Data";
 import CommentIcon from '@mui/icons-material/Comment';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import {adaptUsers} from "./RemoteUserResponseAdapter";
+import { LoaderUsers } from "./LoaderUsers";
 
 enum Action {
     INBOX = "INBOX",
@@ -12,13 +13,20 @@ enum Action {
 }
 
 export const ShowCustomerDataList: React.FC = () => {
-    const [users, setUsers] = useState<RemoteUser[]>([])
+    const [users, setUsers] = useState<RemoteUser[]>([]);
+    const [loaderError, setLoaderError] = useState<boolean>(false);
 
     const fetchData = useCallback(async () => {
         const data = await fetch('http://localhost:8081/retrieveUsers');
-        const response = await data.json();
-        console.log(response);
-        setUsers(adaptUsers(response.users));
+        if(data.ok) {
+            const response = await data.json();
+            console.log(response);
+            setUsers(adaptUsers(response.users));
+        } else {
+            console.log('error in loading users');
+            setLoaderError(true);
+        }
+
     }, []);
 
     useEffect(() => {
@@ -35,9 +43,11 @@ export const ShowCustomerDataList: React.FC = () => {
 
     return (
         <Box sx={{width: '100%', maxWidth: 360, overflow: 'hidden', border: '1px dashed grey'}}>
-                {users.map(user => (
+                {
+                users.length > 0 ? users.map((user, index) => (
                     <ListItem
                         key={user.name}
+                        data-testid={'user-item-'+`${index}`}
                         secondaryAction={
                             <IconButton aria-label="comment" onClick={() => handleComment(user.name)}>
                                 <CommentIcon/>
@@ -47,9 +57,10 @@ export const ShowCustomerDataList: React.FC = () => {
                             {user.name} - {user.surname} - {user.data.profile}
                         </ListItemText>
                     </ListItem>
-                    ))}
+                    )) : <LoaderUsers data-testid={'loader'} error={loaderError}/>
+                }
             <Divider>ACTIONS</Divider>
-                <ListItem disablePadding>
+                <ListItem disablePadding data-testid={'inbox-item'}>
                     <ListItemButton onClick={() => handleClick(Action.INBOX)}>
                         <ListItemIcon>
                             <InboxIcon/>
@@ -57,7 +68,7 @@ export const ShowCustomerDataList: React.FC = () => {
                         <ListItemText primary="Inbox"/>
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
+                <ListItem disablePadding data-testid={'drafts-item'}>
                     <ListItemButton onClick={() => handleClick(Action.DRAFTS)}>
                         <ListItemIcon>
                             <DraftsIcon/>
