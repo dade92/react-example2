@@ -12,11 +12,15 @@ const ThankYouWrapper = styled.div`
     align-items: center; /*centers items on the cross-axis (y by default)*/
 `;
 
-export const ThankYouPage: React.FC = () => {
+interface Props {
+    customerName: string;
+}
+
+export const ThankYouPage: React.FC<Props> = ({customerName}) => {
     return (
         <ThankYouWrapper>
             <ThumbUpIcon />
-            <span>Thanks for your selection</span>
+            <span>Thanks for your selection {customerName}!</span>
         </ThankYouWrapper>
     )
 }

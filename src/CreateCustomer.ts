@@ -2,7 +2,7 @@ interface CreateCustomerResponse {
   code: string;
 };
   
-export const createCustomer = async (name: string, onSuccess: () => void, onFailure: () => void) => {
+export const createCustomer = async (name: string, onSuccess: (customerName: string) => void, onFailure: () => void) => {
   const response = await fetch('http://localhost:8081/createCustomer', {
     method: 'POST',
     body: JSON.stringify({
@@ -22,6 +22,6 @@ export const createCustomer = async (name: string, onSuccess: () => void, onFail
 
     console.log('result is: ', result.code);
 
-    onSuccess();
+    onSuccess(name);
   }
 };

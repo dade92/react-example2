@@ -5,12 +5,29 @@ export enum Status {
     THANK_YOU_PAGE
 }
 
-interface State {
-    status: Status;
+type ShowCustomerDataState = {
+    status: Status.SHOW_CUSTOMER_DATA;
 }
 
+type ShowCustomerDataListState = {
+    status: Status.SHOW_CUSTOMER_DATA_LIST;
+    customerName: string;
+}
+
+type LoadingState = {
+    status: Status.LOADING;
+}
+
+type ThankYouPageState = {
+    status: Status.THANK_YOU_PAGE;
+    customerName: string;
+}
+
+type State = ShowCustomerDataState | ShowCustomerDataListState | LoadingState | ThankYouPageState;
+
 type ShowCustomerDataListAction = {
-    type: 'SHOW_CUSTOMER_DATA_LIST'
+    type: 'SHOW_CUSTOMER_DATA_LIST';
+    customerName: string;
 }
 
 type ShowCustomerDataAction = {
@@ -23,6 +40,7 @@ type LoadingAction = {
 
 type ThankYouPageAction = {
     type: 'THANK_YOU_PAGE'
+    customerName: string;
 }
 
 type Action = ShowCustomerDataAction | ShowCustomerDataListAction | LoadingAction | ThankYouPageAction;
@@ -35,7 +53,8 @@ export const reducer = (state: State, action: Action): State => {
     switch(action.type) {
         case 'SHOW_CUSTOMER_DATA_LIST':
             return {
-                status: Status.SHOW_CUSTOMER_DATA_LIST
+                status: Status.SHOW_CUSTOMER_DATA_LIST,
+                customerName: action.customerName
             }
         case 'SHOW_CUSTOMER_DATA':
             return {
@@ -47,7 +66,8 @@ export const reducer = (state: State, action: Action): State => {
             }
         case 'THANK_YOU_PAGE':
             return {
-                status: Status.THANK_YOU_PAGE
+                status: Status.THANK_YOU_PAGE,
+                customerName: action.customerName
             }
     }
 };
