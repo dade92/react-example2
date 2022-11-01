@@ -17,12 +17,11 @@ interface Props {
     onUndo: ()=>void;
 }
 
-const CustomerListContainer = styled.div`
+const ButtonContainer = styled.div`
     display: flex;
     flex-direction: column;
-
-
-`
+    gap: 10px;
+`;
 
 export const ShowCustomerDataList: React.FC<Props> = ({onUndo}) => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
@@ -89,7 +88,10 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo}) => {
                     </ListItemButton>
                 </ListItem>
             <Divider />
+            <ButtonContainer>
             <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo}>UNDO</Button>
+            <Button variant="contained" color="success" data-testid={'submit-button'} onClick={()=>{console.log('')}}>SUBMIT</Button>
+            </ButtonContainer>
         </Stack>
     );
 }

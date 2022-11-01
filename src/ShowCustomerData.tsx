@@ -7,6 +7,7 @@ import { PhotoCamera } from "@mui/icons-material";
 import { RemoteUser } from "./Data";
 import Stack from '@mui/material/Stack';
 import { LoaderUsers } from "./LoaderUsers";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 
 const Title = styled.h1`
@@ -59,13 +60,16 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
     return (
         <Stack spacing={1} sx={{ width: 600 }} data-testid={'stack'}>
             <Title data-testid="title">AppFlow</Title>
-            <div>{remoteUser == undefined ? <LoaderUsers error={false}/> : <Typography variant="body1" gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}</div>
-            {/* <Name name={name} surname={surname} onClick={() => console.log('clicked')} /> */}
+            <div>
+                {remoteUser == undefined ? 
+                        <LoaderUsers error={false}/> : 
+                        <Typography variant="body1" gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}
+            </div>
 
             <TextField id="filled-basic" data-testid={'text'} label="Name" variant="outlined" onChange={(e) => setText(e.target.value)} />
             <FormControlLabel
                 control={<Checkbox data-testid={'checkbox'} checked={checked} onChange={(e) => setChecked(e.target.checked)} />} label="Accept t&c" />
-            <Button variant="contained" color="success" data-testid={'submit-button'} onClick={() => submit(text, checked)} disabled={!checked}>SUBMIT</Button>
+            <Button variant="contained" color="success" endIcon={<NavigateNextIcon />} data-testid={'submit-button'} onClick={() => submit(text, checked)} disabled={!checked}>SUBMIT</Button>
 
             <IconButton color="primary" aria-label="upload picture" component="label">
                 <input hidden accept="image/*" type="file" />
@@ -79,7 +83,7 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
             {
                 <Snackbar open={success} autoHideDuration={2000} data-testid={'snackbar'} onClose={() => setSuccess(false)}>
                     <Alert severity="success" sx={{ width: '100%' }}>
-                        Congratulations!
+                        Data inserted correctly!
                     </Alert>
                 </Snackbar>
 
