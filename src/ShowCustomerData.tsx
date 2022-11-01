@@ -6,12 +6,17 @@ import { Alert, AlertTitle, Button, Checkbox, FormControlLabel, IconButton, Snac
 import { PhotoCamera } from "@mui/icons-material";
 import { RemoteUser } from "./Data";
 import Stack from '@mui/material/Stack';
+import { LoaderUsers } from "./LoaderUsers";
 
 
 const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
+`;
+
+const UserContainer = styled.div`
+  
 `;
 
 interface Props {
@@ -54,13 +59,13 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
     return (
         <Stack spacing={1} sx={{ width: 600 }} data-testid={'stack'}>
             <Title data-testid="title">AppFlow</Title>
-            <Name name={name} surname={surname} onClick={() => console.log('clicked')} />
+            <div>{remoteUser == undefined ? <LoaderUsers error={false}/> : <Typography variant="body1" gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}</div>
+            {/* <Name name={name} surname={surname} onClick={() => console.log('clicked')} /> */}
 
             <TextField id="filled-basic" data-testid={'text'} label="Name" variant="outlined" onChange={(e) => setText(e.target.value)} />
             <FormControlLabel
                 control={<Checkbox data-testid={'checkbox'} checked={checked} onChange={(e) => setChecked(e.target.checked)} />} label="Accept t&c" />
             <Button variant="contained" color="success" data-testid={'submit-button'} onClick={() => submit(text, checked)} disabled={!checked}>SUBMIT</Button>
-            <Typography variant="body1" gutterBottom>{remoteUser?.name} {remoteUser?.surname}</Typography>
 
             <IconButton color="primary" aria-label="upload picture" component="label">
                 <input hidden accept="image/*" type="file" />

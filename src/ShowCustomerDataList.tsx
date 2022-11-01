@@ -1,4 +1,4 @@
-import {Box, Button, CircularProgress, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Box, Button, CircularProgress, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack} from "@mui/material";
 import React, {useCallback, useEffect, useState} from "react";
 import {RemoteUser} from "./Data";
 import CommentIcon from '@mui/icons-material/Comment';
@@ -6,6 +6,7 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import {adaptUsers} from "./RemoteUserResponseAdapter";
 import { LoaderUsers } from "./LoaderUsers";
+import styled from "styled-components";
 
 enum Action {
     INBOX = "INBOX",
@@ -15,6 +16,13 @@ enum Action {
 interface Props {
     onUndo: ()=>void;
 }
+
+const CustomerListContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+
+
+`
 
 export const ShowCustomerDataList: React.FC<Props> = ({onUndo}) => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
@@ -46,7 +54,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo}) => {
     }
 
     return (
-        <Box sx={{width: '100%', maxWidth: 360, overflow: 'hidden', border: '1px dashed grey'}}>
+        <Stack spacing={1} sx={{ width: 600 }}>
                 {
                 users.length > 0 ? users.map((user, index) => (
                     <ListItem
@@ -82,6 +90,6 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo}) => {
                 </ListItem>
             <Divider />
             <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo}>UNDO</Button>
-        </Box>
+        </Stack>
     );
 }
