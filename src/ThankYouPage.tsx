@@ -19,8 +19,8 @@ interface Props {
 export const ThankYouPage: React.FC<Props> = ({customerName}) => {
     return (
         <ThankYouWrapper>
-            <ThumbUpIcon />
-            <span>Thanks for your selection {customerName}!</span>
+            <ThumbUpIcon data-testid='thumbs-up'/>
+            <span data-testid='thankyou-message'>Thanks for your selection {customerName}!</span>
         </ThankYouWrapper>
     )
 }
