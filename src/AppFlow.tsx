@@ -6,6 +6,7 @@ import { MyModal } from "./MyModal";
 import { initialState, reducer, Status } from "./Reducer";
 import { ShowCustomerData } from "./ShowCustomerData";
 import { ShowCustomerDataList } from "./ShowCustomerDataList";
+import { ThankYouPage } from "./ThankYouPage";
 
 export const AppFlow: React.FC = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
@@ -53,7 +54,7 @@ export const AppFlow: React.FC = () => {
                 } />
             }
             {state.status == Status.LOADING && <CircularProgress />}
-            {state.status == Status.THANK_YOU_PAGE && <span>Thank you!!</span>}
+            {state.status == Status.THANK_YOU_PAGE && <ThankYouPage/>}
             {
                 errorAlert && <Alert severity="error">
                     <AlertTitle>Error</AlertTitle>
