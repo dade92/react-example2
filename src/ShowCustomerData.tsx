@@ -69,7 +69,7 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
             <TextField id="filled-basic" data-testid={'text'} label="Name" variant="outlined" onChange={(e) => setText(e.target.value)} />
             <FormControlLabel
                 control={<Checkbox data-testid={'checkbox'} checked={checked} onChange={(e) => setChecked(e.target.checked)} />} label="Accept t&c" />
-            <Button variant="contained" color="success" endIcon={<NavigateNextIcon />} data-testid={'submit-button'} onClick={() => submit(text, checked)} disabled={!checked}>SUBMIT</Button>
+            <Button variant="contained" color="success" endIcon={<NavigateNextIcon />} data-testid={'submit-button'} onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
             <IconButton color="primary" aria-label="upload picture" component="label">
                 <input hidden accept="image/*" type="file" />
