@@ -16,7 +16,7 @@ describe('ShowCustomerDataList',()=> {
     })
 
     it('renders correctly',async ()=> {
-        render(<ShowCustomerDataList onUndo={jest.fn}/>)
+        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn}/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
 
@@ -26,7 +26,7 @@ describe('ShowCustomerDataList',()=> {
 
     it('handles API error',async ()=> {
         //TODO handle error properly
-        render(<ShowCustomerDataList onUndo={jest.fn}/>)
+        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn}/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
         expect(screen.getByTestId('loader')).toBeDefined();
@@ -35,7 +35,7 @@ describe('ShowCustomerDataList',()=> {
     it('calls onUndo when undo button is clicked', () => {
         const callback = jest.fn();
         
-        render(<ShowCustomerDataList onUndo={callback}/>)
+        render(<ShowCustomerDataList onUndo={callback} onSubmit={jest.fn}/>)
 
         fireEvent.click(screen.getByTestId('undo-button'));
 

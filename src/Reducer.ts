@@ -2,6 +2,7 @@ export enum Status {
     SHOW_CUSTOMER_DATA,
     SHOW_CUSTOMER_DATA_LIST,
     LOADING,
+    THANK_YOU_PAGE
 }
 
 interface State {
@@ -20,7 +21,11 @@ type LoadingAction = {
     type: 'LOADING'
 }
 
-type Action = ShowCustomerDataAction | ShowCustomerDataListAction | LoadingAction;
+type ThankYouPageAction = {
+    type: 'THANK_YOU_PAGE'
+}
+
+type Action = ShowCustomerDataAction | ShowCustomerDataListAction | LoadingAction | ThankYouPageAction;
 
 export const initialState: State = {
     status: Status.SHOW_CUSTOMER_DATA
@@ -39,6 +44,10 @@ export const reducer = (state: State, action: Action): State => {
         case 'LOADING':
             return {
                 status: Status.LOADING
+            }
+        case 'THANK_YOU_PAGE':
+            return {
+                status: Status.THANK_YOU_PAGE
             }
     }
 };

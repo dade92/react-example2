@@ -15,6 +15,7 @@ enum Action {
 
 interface Props {
     onUndo: ()=>void;
+    onSubmit: ()=>void;
 }
 
 const ButtonContainer = styled.div`
@@ -23,7 +24,7 @@ const ButtonContainer = styled.div`
     gap: 10px;
 `;
 
-export const ShowCustomerDataList: React.FC<Props> = ({onUndo}) => {
+export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit}) => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
 
@@ -90,7 +91,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo}) => {
             <Divider />
             <ButtonContainer>
             <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo}>UNDO</Button>
-            <Button variant="contained" color="success" data-testid={'submit-button'} onClick={()=>{console.log('')}}>SUBMIT</Button>
+            <Button variant="contained" color="success" data-testid={'submit-button'} onClick={()=>{onSubmit()}}>SUBMIT</Button>
             </ButtonContainer>
         </Stack>
     );

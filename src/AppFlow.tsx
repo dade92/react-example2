@@ -39,7 +39,7 @@ export const AppFlow: React.FC = () => {
             }
             {state.status == Status.SHOW_CUSTOMER_DATA_LIST && <ShowCustomerDataList onUndo={()=>{
                 dispatch({type: 'SHOW_CUSTOMER_DATA'})
-            }}/>}
+            }} onSubmit={()=>{dispatch({type: 'THANK_YOU_PAGE'})}}/>}
             {
                 openModal && <MyModal isOpen={openModal} onClose={() => setOpenModal(false)} onConfirm={
                     () => {
@@ -53,6 +53,7 @@ export const AppFlow: React.FC = () => {
                 } />
             }
             {state.status == Status.LOADING && <CircularProgress />}
+            {state.status == Status.THANK_YOU_PAGE && <span>Thank you!!</span>}
             {
                 errorAlert && <Alert severity="error">
                     <AlertTitle>Error</AlertTitle>
