@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 
 
 interface GithubUser {
@@ -21,7 +21,7 @@ export const ShowGithubUsers: React.FC = () => {
         <>
             <h3>github users</h3>
             {
-                users.length == 0 
+                users.length == 0
                     ? <p>Loading...</p>
                     : users.map((user) => {
                         return (

@@ -1,12 +1,12 @@
-import { Alert, AlertTitle, CircularProgress } from "@mui/material";
-import { useReducer, useState } from "react";
-import { createCustomer } from "./CreateCustomer";
-import { UserConfiguration } from "./CustomerConfiguration";
-import { MyModal } from "./MyModal";
-import { initialState, reducer, Status } from "./Reducer";
-import { ShowCustomerData } from "./ShowCustomerData";
-import { ShowCustomerDataList } from "./ShowCustomerDataList";
-import { ThankYouPage } from "./ThankYouPage";
+import {Alert, AlertTitle, CircularProgress} from "@mui/material";
+import {useReducer, useState} from "react";
+import {createCustomer} from "./CreateCustomer";
+import {UserConfiguration} from "./CustomerConfiguration";
+import {MyModal} from "./MyModal";
+import {initialState, reducer, Status} from "./Reducer";
+import {ShowCustomerData} from "./ShowCustomerData";
+import {ShowCustomerDataList} from "./ShowCustomerDataList";
+import {ThankYouPage} from "./ThankYouPage";
 
 export const AppFlow: React.FC = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
@@ -36,12 +36,14 @@ export const AppFlow: React.FC = () => {
                     console.log(name + checked);
                     setUsername(name);
                     setOpenModal(true);
-                }} />
+                }}/>
             </UserConfiguration>
             }
-            {state.status == Status.SHOW_CUSTOMER_DATA_LIST && <ShowCustomerDataList onUndo={()=>{
+            {state.status == Status.SHOW_CUSTOMER_DATA_LIST && <ShowCustomerDataList onUndo={() => {
                 dispatch({type: 'SHOW_CUSTOMER_DATA'})
-            }} onSubmit={()=>{dispatch({type: 'THANK_YOU_PAGE', customerName: state.customerName})}}/>}
+            }} onSubmit={() => {
+                dispatch({type: 'THANK_YOU_PAGE', customerName: state.customerName})
+            }}/>}
             {
                 openModal && <MyModal isOpen={openModal} onClose={() => setOpenModal(false)} onConfirm={
                     () => {
@@ -52,9 +54,9 @@ export const AppFlow: React.FC = () => {
                             type: 'LOADING'
                         })
                     }
-                } />
+                }/>
             }
-            {state.status == Status.LOADING && <CircularProgress />}
+            {state.status == Status.LOADING && <CircularProgress/>}
             {state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={state.customerName}/>}
             {
                 errorAlert && <Alert severity="error">

@@ -1,4 +1,4 @@
-import { RemoteUser } from "./Data"
+import {RemoteUser} from "./Data"
 
 export interface RemoteUserResponse {
     name: string;

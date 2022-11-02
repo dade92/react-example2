@@ -1,30 +1,30 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react"
-import { Server } from "miragejs";
-import { server } from "./server";
-import { ShowCustomerDataList } from "./ShowCustomerDataList"
+import {fireEvent, render, screen, waitFor} from "@testing-library/react"
+import {Server} from "miragejs";
+import {server} from "./server";
+import {ShowCustomerDataList} from "./ShowCustomerDataList"
 
-describe('ShowCustomerDataList',()=> {
+describe('ShowCustomerDataList', () => {
 
     let mockServer: Server;
 
-    beforeEach(()=>{
+    beforeEach(() => {
         mockServer = server();
     })
 
-    afterEach(()=>{
+    afterEach(() => {
         mockServer.shutdown();
     })
 
-    it('renders correctly',async ()=> {
+    it('renders correctly', async () => {
         render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn}/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
 
-        await waitFor(()=>expect(screen.getByTestId('user-item-0')).toBeDefined());
-        await waitFor(()=>expect(screen.getByTestId('user-item-1')).toBeDefined());
+        await waitFor(() => expect(screen.getByTestId('user-item-0')).toBeDefined());
+        await waitFor(() => expect(screen.getByTestId('user-item-1')).toBeDefined());
     })
 
-    it('handles API error',async ()=> {
+    it('handles API error', async () => {
         //TODO handle error properly
         render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn}/>)
 
@@ -34,7 +34,7 @@ describe('ShowCustomerDataList',()=> {
 
     it('calls onUndo when undo button is clicked', () => {
         const callback = jest.fn();
-        
+
         render(<ShowCustomerDataList onUndo={callback} onSubmit={jest.fn}/>)
 
         fireEvent.click(screen.getByTestId('undo-button'));

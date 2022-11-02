@@ -1,11 +1,11 @@
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { ShowCustomerData } from './ShowCustomerData';
+import {cleanup, fireEvent, render, screen} from '@testing-library/react';
+import {ShowCustomerData} from './ShowCustomerData';
 
 describe('ShowCustomerData', () => {
     afterEach(() => {
         cleanup
     })
-    
+
     it('renders correctly, with button disabled', () => {
         render(<ShowCustomerData onSubmit={jest.fn}/>);
 

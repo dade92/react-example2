@@ -50,7 +50,7 @@ export const initialState: State = {
 };
 
 export const reducer = (state: State, action: Action): State => {
-    switch(action.type) {
+    switch (action.type) {
         case 'SHOW_CUSTOMER_DATA_LIST':
             return {
                 status: Status.SHOW_CUSTOMER_DATA_LIST,
