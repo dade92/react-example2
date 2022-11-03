@@ -16,7 +16,7 @@ export const MyModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
             onClose={onClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description">
-            <DialogTitle id="alert-dialog-title">
+            <DialogTitle data-testid={'title'} id="alert-dialog-title">
                 {"Are you sure?"}
                 {
                     <IconButton
@@ -33,13 +33,13 @@ export const MyModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
                 }
             </DialogTitle>
             <DialogContent dividers>
-                <DialogContentText id="alert-dialog-description">
+                <DialogContentText data-testid={'content'} id="alert-dialog-description">
                     By clicking on confirm you confirm the operation
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose}>Disagree</Button>
-                <Button onClick={onConfirm} autoFocus>
+                <Button data-testid={'close-button'} onClick={onClose}>Disagree</Button>
+                <Button data-testid={'confirm-button'} onClick={onConfirm} autoFocus>
                     Confirm
                 </Button>
             </DialogActions>
