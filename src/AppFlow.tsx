@@ -1,4 +1,4 @@
-import {Alert, AlertTitle, CircularProgress} from "@mui/material";
+import {CircularProgress} from "@mui/material";
 import {useReducer, useState} from "react";
 import {createCustomer} from "./CreateCustomer";
 import {UserConfiguration} from "./CustomerConfiguration";
@@ -7,15 +7,14 @@ import {initialState, reducer, Status} from "./Reducer";
 import {ShowCustomerData} from "./ShowCustomerData";
 import {ShowCustomerDataList} from "./ShowCustomerDataList";
 import {ThankYouPage} from "./ThankYouPage";
+import {ErrorPage} from "./ErrorPage";
 
 export const AppFlow: React.FC = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
-    const [errorAlert, setErrorAlert] = useState<boolean>(false);
     const [state, dispatch] = useReducer(reducer, initialState);
     const [username, setUsername] = useState<string>('');
 
     const onCreateCustomerSuccess = (customerName: string) => {
-        setErrorAlert(false);
         dispatch({
             type: 'SHOW_CUSTOMER_DATA_LIST',
             customerName: customerName
@@ -23,9 +22,8 @@ export const AppFlow: React.FC = () => {
     };
 
     const onCreateCustomerFailure = () => {
-        setErrorAlert(true);
         dispatch({
-            type: 'SHOW_CUSTOMER_DATA'
+            type: 'ERROR'
         });
     };
 
@@ -49,7 +47,6 @@ export const AppFlow: React.FC = () => {
                     () => {
                         createCustomer(username, onCreateCustomerSuccess, onCreateCustomerFailure);
                         setOpenModal(false);
-                        setErrorAlert(false);
                         dispatch({
                             type: 'LOADING'
                         })
@@ -58,12 +55,9 @@ export const AppFlow: React.FC = () => {
             }
             {state.status == Status.LOADING && <CircularProgress/>}
             {state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={state.customerName}/>}
-            {
-                errorAlert && <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    Something went wrong. Try again
-                </Alert>
-            }
+            {state.status == Status.ERROR && <ErrorPage onTryAgain={() => {
+                dispatch({type: 'SHOW_CUSTOMER_DATA'})
+            }}/>}
         </>
     );
 };

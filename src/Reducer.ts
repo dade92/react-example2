@@ -2,7 +2,8 @@ export enum Status {
     SHOW_CUSTOMER_DATA,
     SHOW_CUSTOMER_DATA_LIST,
     LOADING,
-    THANK_YOU_PAGE
+    THANK_YOU_PAGE,
+    ERROR
 }
 
 type ShowCustomerDataState = {
@@ -23,7 +24,11 @@ type ThankYouPageState = {
     customerName: string;
 }
 
-type State = ShowCustomerDataState | ShowCustomerDataListState | LoadingState | ThankYouPageState;
+type ErrorState = {
+    status: Status.ERROR
+}
+
+type State = ShowCustomerDataState | ShowCustomerDataListState | LoadingState | ThankYouPageState | ErrorState;
 
 type ShowCustomerDataListAction = {
     type: 'SHOW_CUSTOMER_DATA_LIST';
@@ -43,7 +48,11 @@ type ThankYouPageAction = {
     customerName: string;
 }
 
-type Action = ShowCustomerDataAction | ShowCustomerDataListAction | LoadingAction | ThankYouPageAction;
+type ErrorAction = {
+    type: 'ERROR'
+}
+
+type Action = ShowCustomerDataAction | ShowCustomerDataListAction | LoadingAction | ThankYouPageAction | ErrorAction;
 
 export const initialState: State = {
     status: Status.SHOW_CUSTOMER_DATA
@@ -68,6 +77,10 @@ export const reducer = (state: State, action: Action): State => {
             return {
                 status: Status.THANK_YOU_PAGE,
                 customerName: action.customerName
+            }
+        case 'ERROR':
+            return {
+                status: Status.ERROR
             }
     }
 };

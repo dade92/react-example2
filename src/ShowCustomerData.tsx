@@ -31,10 +31,6 @@ const UploadContainer = styled.div`
   justify-content: center;
 `;
 
-const UploadSpan = styled.div`
-  align-self: center;
-`;
-
 interface Props {
     onSubmit: (text: string, checked: boolean) => void;
 }

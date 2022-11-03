@@ -1,7 +1,7 @@
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import styled from 'styled-components';
 
-const ThankYouWrapper = styled.div`
+export const CenterWrapper = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
@@ -18,9 +18,9 @@ interface Props {
 
 export const ThankYouPage: React.FC<Props> = ({customerName}) => {
     return (
-        <ThankYouWrapper>
+        <CenterWrapper>
             <ThumbUpIcon data-testid='thumbs-up'/>
             <span data-testid='thankyou-message'>Thanks for your selection {customerName}!</span>
-        </ThankYouWrapper>
+        </CenterWrapper>
     )
 }
