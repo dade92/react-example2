@@ -93,11 +93,10 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
 
 
             <UploadContainer>
-                <UploadSpan >Upload your picture:</UploadSpan>
-                <IconButton color="primary" aria-label="upload picture" component="label">
+                <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
+                    Upload your picture
                     <input hidden accept="image/*" type="file"/>
-                    <PhotoCamera/>
-                </IconButton>
+                </Button>
             </UploadContainer>
             {
                 !validInput && <Alert severity="warning" data-testid={'alert'}>
