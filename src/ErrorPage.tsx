@@ -13,18 +13,17 @@ interface Props {
     onTryAgain: () => void;
 }
 
-export const ErrorPage: React.FC<Props> = ({onTryAgain}) => {
-    return (
+export const ErrorPage: React.FC<Props> = ({onTryAgain}) =>
+    (
         <CenterWrapper>
-            <img src="/error.png" alt="image" />
+            <img data-testid={'error-img'} src="/error.png" alt="image"/>
             <Alert severity="error">
                 <ErrorContainer>
-                    <span>Something went wrong.</span>
-                    <Button color="secondary" component="label" startIcon={<ArrowBackIcon/>} onClick={onTryAgain}>
+                    <span data-testid={'error-message'}>Something went wrong.</span>
+                    <Button color="secondary" component="label" startIcon={<ArrowBackIcon/>} onClick={onTryAgain} data-testid={'try-again-button'}>
                         Try again
                     </Button>
                 </ErrorContainer>
             </Alert>
         </CenterWrapper>
     )
-}
