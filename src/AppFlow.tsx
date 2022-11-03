@@ -1,4 +1,3 @@
-import {CircularProgress} from "@mui/material";
 import React, {useReducer, useState} from "react";
 import {createCustomer} from "./CreateCustomer";
 import {UserConfiguration} from "./CustomerConfiguration";
@@ -8,6 +7,7 @@ import {ShowCustomerData} from "./ShowCustomerData";
 import {ShowCustomerDataList} from "./ShowCustomerDataList";
 import {ThankYouPage} from "./ThankYouPage";
 import {ErrorPage} from "./ErrorPage";
+import {CustomLoader} from "./CustomLoader";
 
 export const AppFlow: React.FC = () => {
     const [openModal, setOpenModal] = useState<boolean>(false);
@@ -53,8 +53,12 @@ export const AppFlow: React.FC = () => {
                     }
                 }/>
             }
-            {state.status == Status.LOADING && <CircularProgress/>}
-            {state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={state.customerName}/>}
+            {state.status == Status.LOADING && <CustomLoader/>}
+            {state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={state.customerName} onRestart={() => {
+                dispatch({
+                    type: 'SHOW_CUSTOMER_DATA'
+                })
+            }}/>}
             {state.status == Status.ERROR && <ErrorPage onTryAgain={() => {
                 dispatch({type: 'SHOW_CUSTOMER_DATA'})
             }}/>}

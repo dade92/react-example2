@@ -17,7 +17,6 @@ import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
-
 const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
@@ -94,9 +93,11 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                 </Button>
             </UploadContainer>
             {
-                !validInput && <Alert severity="warning" data-testid={'alert'}>
+                !validInput &&
+                <Alert severity="warning" data-testid={'alert'}>
                     <AlertTitle>Warning</AlertTitle>
-                    Input must be greater than 2 letters</Alert>
+                    Input must be greater than 2 letters
+                </Alert>
             }
             {
                 <Snackbar open={success} autoHideDuration={2000} data-testid={'snackbar'}
