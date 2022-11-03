@@ -25,8 +25,14 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
-const UserContainer = styled.div`
-  
+const UploadContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const UploadSpan = styled.div`
+  align-self: center;
 `;
 
 interface Props {
@@ -77,7 +83,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                     <Typography variant="body1" gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}
             </div>
 
-            <TextField id="filled-basic" data-testid={'text'} label="Name" variant="outlined"
+            <TextField id="filled-basic" data-testid={'text'} label="Your alias" variant="outlined"
                        onChange={(e) => setText(e.target.value)}/>
             <FormControlLabel
                 control={<Checkbox data-testid={'checkbox'} checked={checked}
@@ -85,10 +91,14 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
-            <IconButton color="primary" aria-label="upload picture" component="label">
-                <input hidden accept="image/*" type="file"/>
-                <PhotoCamera/>
-            </IconButton>
+
+            <UploadContainer>
+                <UploadSpan >Upload your picture:</UploadSpan>
+                <IconButton color="primary" aria-label="upload picture" component="label">
+                    <input hidden accept="image/*" type="file"/>
+                    <PhotoCamera/>
+                </IconButton>
+            </UploadContainer>
             {
                 !validInput && <Alert severity="warning" data-testid={'alert'}>
                     <AlertTitle>Warning</AlertTitle>
