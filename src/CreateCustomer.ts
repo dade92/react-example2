@@ -1,6 +1,6 @@
 interface CreateCustomerResponse {
     code: string;
-};
+}
 
 export const createCustomer = async (name: string, onSuccess: (customerName: string) => void, onFailure: () => void) => {
     const response = await fetch('http://localhost:8081/createCustomer', {

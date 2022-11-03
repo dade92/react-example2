@@ -6,6 +6,6 @@ describe('ThankYouPage', () => {
         render(<ThankYouPage customerName={'Sergio'}/>);
 
         expect(screen.getByTestId('thankyou-message').textContent).toBe('Thanks for your selection Sergio!');
-        expect(screen.getByTestId('thumbs-up')).toBeVisible;
+        expect(screen.getByTestId('thumbs-up')).toBeVisible();
     })
 })

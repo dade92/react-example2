@@ -7,7 +7,6 @@ import {
     Button,
     Checkbox,
     FormControlLabel,
-    IconButton,
     Snackbar,
     TextField,
     Typography

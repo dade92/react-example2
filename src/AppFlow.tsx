@@ -1,5 +1,5 @@
 import {CircularProgress} from "@mui/material";
-import {useReducer, useState} from "react";
+import React, {useReducer, useState} from "react";
 import {createCustomer} from "./CreateCustomer";
 import {UserConfiguration} from "./CustomerConfiguration";
 import {MyModal} from "./MyModal";

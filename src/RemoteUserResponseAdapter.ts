@@ -10,15 +10,13 @@ interface UserDataResponse {
     profile: string;
 }
 
-const adaptToDomain = (remoteUserResponse: RemoteUserResponse): RemoteUser => {
-    return {
+const adaptToDomain = (remoteUserResponse: RemoteUserResponse): RemoteUser => ({
         name: remoteUserResponse.name,
         surname: remoteUserResponse.surname,
         data: {
             profile: remoteUserResponse.data.profile
         }
-    }
-}
+    })
 
 export const adaptUsers = (remoteUsers: RemoteUserResponse[]): RemoteUser[] => {
     return remoteUsers.map(ru => adaptToDomain(ru));
