@@ -1,6 +1,6 @@
 import React from "react";
 import {Alert, Button} from "@mui/material";
-import {CenterWrapper} from "./ThankYouPage";
+import {CenterWrapper} from "./CenterWrapper";
 import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
