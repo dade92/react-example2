@@ -34,7 +34,7 @@ interface Props {
 }
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
-    const fetchData = useCallback(async () => {
+    const fetchData = async () => {
         const data = await fetch('http://localhost:8081/retrieveUser');
         const response = await data.json();
         console.log(response);
@@ -45,6 +45,10 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                 profile: ''
             }
         })
+    };
+
+    useEffect(() => {
+        fetchData()
     }, []);
 
     const submit = (text: string, checked: boolean) => {
@@ -56,10 +60,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             onSubmit(text, checked);
         }
     }
-
-    useEffect(() => {
-        fetchData()
-    }, [fetchData])
 
     const {name, surname} = useUserConfiguration();
     const [text, setText] = useState<string>('');
