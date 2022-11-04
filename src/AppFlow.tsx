@@ -16,7 +16,7 @@ export const AppFlow: React.FC = () => {
 
     const onCreateCustomerSuccess = (customerName: string) => {
         dispatch({
-            type: 'SHOW_CUSTOMER_DATA_LIST',
+            type: 'THANK_YOU_PAGE',
             customerName: customerName
         });
     };
@@ -33,14 +33,17 @@ export const AppFlow: React.FC = () => {
                 <ShowCustomerData onSubmit={(name: string, checked: boolean) => {
                     console.log(name + checked);
                     setUsername(name);
-                    setOpenModal(true);
+                    dispatch({
+                        type: 'SHOW_CUSTOMER_DATA_LIST',
+                        customerName: name
+                    });
                 }}/>
             </UserConfiguration>
             }
             {state.status == Status.SHOW_CUSTOMER_DATA_LIST && <ShowCustomerDataList onUndo={() => {
                 dispatch({type: 'SHOW_CUSTOMER_DATA'})
             }} onSubmit={() => {
-                dispatch({type: 'THANK_YOU_PAGE', customerName: state.customerName})
+                setOpenModal(true);
             }}/>}
             {
                 openModal && <MyModal isOpen={openModal} onClose={() => setOpenModal(false)} onConfirm={

@@ -7,6 +7,7 @@ import DraftsIcon from '@mui/icons-material/Drafts';
 import {adaptUsers} from "./RemoteUserResponseAdapter";
 import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 enum Action {
     INBOX = "INBOX",
@@ -20,8 +21,9 @@ interface Props {
 
 const ButtonContainer = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
+    justify-content: center;
 `;
 
 export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit}) => {
@@ -90,7 +92,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit}) => {
             </ListItem>
             <Divider/>
             <ButtonContainer>
-                <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo}>UNDO</Button>
+                <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo} startIcon={<ArrowBackIcon/>}>UNDO</Button>
                 <Button variant="contained" color="success" data-testid={'submit-button'} onClick={() => {
                     onSubmit()
                 }}>SUBMIT</Button>
