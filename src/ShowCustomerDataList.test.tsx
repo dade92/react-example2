@@ -1,6 +1,6 @@
 import {fireEvent, render, screen, waitFor} from "@testing-library/react"
-import {Server} from "miragejs";
-import {server} from "./server";
+import {createServer, Server} from "miragejs";
+import {init500Array, server} from "./server";
 import {ShowCustomerDataList} from "./ShowCustomerDataList"
 
 describe('ShowCustomerDataList', () => {
@@ -25,11 +25,18 @@ describe('ShowCustomerDataList', () => {
     })
 
     it('handles API error', async () => {
-        //TODO handle error properly
-        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn}/>)
+        mockServer = createServer({
+            logging: true,
+            routes() {
+                this.urlPrefix = 'http://localhost:8081';
+                this.get('/retrieveUsers', init500Array);
+            },
+        });
+        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn}/>);
 
-        expect(screen.getByTestId('inbox-item')).toBeDefined();
-        expect(screen.getByTestId('loader')).toBeDefined();
+        expect(screen.getByTestId('inbox-item')).toBeVisible();
+        expect(screen.getByTestId('loader')).toBeVisible();
+        await waitFor(() => expect(screen.getByTestId('error-label')).toBeVisible());
     })
 
     it('calls onUndo when undo button is clicked', () => {

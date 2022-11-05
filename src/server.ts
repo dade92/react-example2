@@ -30,7 +30,7 @@ const createCustomerResponse = {
 
 const init200 = (): Response => new Response(200, {}, initResponse);
 const init200Array = (): Response => new Response(200, {}, initResponseArray);
-const init500Array = (): Response => new Response(500, {}, {});
+export const init500Array = (): Response => new Response(500, {}, {});
 const createCustomer200 = (): Response => new Response(200, {}, createCustomerResponse);
 const createCustomer400 = (): Response => new Response(400, {}, {});
 
