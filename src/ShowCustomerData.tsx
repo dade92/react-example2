@@ -26,6 +26,12 @@ interface Props {
 }
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
+    const {name, surname} = useUserConfiguration();
+    const [text, setText] = useState<string>('');
+    const [checked, setChecked] = useState(false);
+    const [remoteUser, setRemoteUser] = useState<RemoteUser>();
+    const [validInput, setValidInput] = useState(true);
+    const [success, setSuccess] = useState(false);
     const [joke, setJoke] = useState('');
 
     const fetchData = async () => {
@@ -39,6 +45,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                 profile: ''
             }
         })
+
     };
 
     useEffect(() => {
@@ -48,7 +55,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     useEffect(() => {
         getChuckNorrisJoke()
             .then(joke => setJoke(joke.value))
-    }, [])
+    }, []);
 
     const submit = (text: string, checked: boolean) => {
         setValidInput(true);
@@ -58,14 +65,8 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             setSuccess(true);
             onSubmit(text, checked);
         }
-    }
 
-    const {name, surname} = useUserConfiguration();
-    const [text, setText] = useState<string>('');
-    const [checked, setChecked] = useState(false);
-    const [remoteUser, setRemoteUser] = useState<RemoteUser>();
-    const [validInput, setValidInput] = useState(true);
-    const [success, setSuccess] = useState(false);
+    }
 
     return (
         <Stack spacing={1} sx={{width: 600}} data-testid={'stack'}>
