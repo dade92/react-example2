@@ -1,12 +1,21 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Name from './Name';
+import React, {useCallback, useEffect, useState} from "react";
 import styled from "styled-components";
-import { useUserConfiguration } from "./CustomerConfiguration";
-import { Alert, AlertTitle, Button, Checkbox, FormControlLabel, IconButton, Snackbar, TextField, Typography } from "@mui/material";
-import { PhotoCamera } from "@mui/icons-material";
-import { RemoteUser } from "./Data";
+import {useUserConfiguration} from "./CustomerConfiguration";
+import {
+    Alert,
+    AlertTitle,
+    Button,
+    Checkbox,
+    FormControlLabel,
+    Snackbar,
+    TextField,
+    Typography
+} from "@mui/material";
+import {PhotoCamera} from "@mui/icons-material";
+import {RemoteUser} from "./Data";
 import Stack from '@mui/material/Stack';
-
+import {LoaderUsers} from "./LoaderUsers";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -14,12 +23,18 @@ const Title = styled.h1`
   color: palevioletred;
 `;
 
+const UploadContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
 interface Props {
     onSubmit: (text: string, checked: boolean) => void;
 }
 
-export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
-    const fetchData = useCallback(async () => {
+export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
+    const fetchData = async () => {
         const data = await fetch('http://localhost:8081/retrieveUser');
         const response = await data.json();
         console.log(response);
@@ -30,6 +45,10 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
                 profile: ''
             }
         })
+    };
+
+    useEffect(() => {
+        fetchData()
     }, []);
 
     const submit = (text: string, checked: boolean) => {
@@ -42,9 +61,7 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
         }
     }
 
-    useEffect(() => { fetchData() }, [fetchData])
-
-    const { name, surname } = useUserConfiguration();
+    const {name, surname} = useUserConfiguration();
     const [text, setText] = useState<string>('');
     const [checked, setChecked] = useState(false);
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
@@ -52,29 +69,41 @@ export const ShowCustomerData: React.FC<Props> = ({ onSubmit }) => {
     const [success, setSuccess] = useState(false);
 
     return (
-        <Stack spacing={1} sx={{ width: 600 }} data-testid={'stack'}>
+        <Stack spacing={1} sx={{width: 600}} data-testid={'stack'}>
             <Title data-testid="title">AppFlow</Title>
-            <Name name={name} surname={surname} onClick={() => console.log('clicked')} />
+            <div>
+                {remoteUser == undefined ?
+                    <LoaderUsers error={false}/> :
+                    <Typography variant="body1" gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}
+            </div>
 
-            <TextField id="filled-basic" data-testid={'text'} label="Name" variant="outlined" onChange={(e) => setText(e.target.value)} />
+            <TextField id="filled-basic" data-testid={'text'} label="Your alias" variant="outlined"
+                       onChange={(e) => setText(e.target.value)}/>
             <FormControlLabel
-                control={<Checkbox data-testid={'checkbox'} checked={checked} onChange={(e) => setChecked(e.target.checked)} />} label="Accept t&c" />
-            <Button variant="contained" color="success" data-testid={'submit-button'} onClick={() => submit(text, checked)} disabled={!checked}>SUBMIT</Button>
-            <Typography variant="body1" gutterBottom>{remoteUser?.name} {remoteUser?.surname}</Typography>
+                control={<Checkbox data-testid={'checkbox'} checked={checked}
+                                   onChange={(e) => setChecked(e.target.checked)}/>} label="Accept t&c"/>
+            <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
+                    onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
-            <IconButton color="primary" aria-label="upload picture" component="label">
-                <input hidden accept="image/*" type="file" />
-                <PhotoCamera />
-            </IconButton>
+
+            <UploadContainer>
+                <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
+                    Upload your picture
+                    <input hidden accept="image/*" type="file"/>
+                </Button>
+            </UploadContainer>
             {
-                !validInput && <Alert severity="warning" data-testid={'alert'}>
+                !validInput &&
+                <Alert severity="warning" data-testid={'alert'}>
                     <AlertTitle>Warning</AlertTitle>
-                    Input must be greater than 2 letters</Alert>
+                    Input must be greater than 2 letters
+                </Alert>
             }
             {
-                <Snackbar open={success} autoHideDuration={2000} data-testid={'snackbar'} onClose={() => setSuccess(false)}>
-                    <Alert severity="success" sx={{ width: '100%' }}>
-                        Congratulations!
+                <Snackbar open={success} autoHideDuration={2000} data-testid={'snackbar'}
+                          onClose={() => setSuccess(false)}>
+                    <Alert severity="success" sx={{width: '100%'}}>
+                        Data inserted correctly!
                     </Alert>
                 </Snackbar>
 

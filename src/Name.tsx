@@ -7,11 +7,11 @@ interface Props {
 }
 
 const Name: React.FC<Props> = ({name, surname, onClick}) => {
-  return (
-      <div>
-          <p data-testid="name" onClick={onClick}>{name} / {surname}</p>
-      </div>
-  )
+    return (
+        <div>
+            <p data-testid="name" onClick={onClick}>{name} / {surname}</p>
+        </div>
+    )
 }
 
 export default Name;

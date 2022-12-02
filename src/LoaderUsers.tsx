@@ -1,16 +1,16 @@
-import { CircularProgress } from "@mui/material";
-import { FC } from "react";
+import {CircularProgress} from "@mui/material";
+import {FC} from "react";
 
 interface Props {
     error: boolean;
 }
 
 export const LoaderUsers: FC<Props> = ({error}) => (
-        <>
+    <>
         {
-            error 
-            ? <span data-testid={'error-label'}>Error in loading users...</span> 
-            : <CircularProgress data-testid={'loader'}/>
+            error
+                ? <span data-testid={'error-label'}>Error in loading users...</span>
+                : <CircularProgress data-testid={'loader'}/>
         }
-        </>
-    )
+    </>
+)

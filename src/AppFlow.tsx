@@ -1,54 +1,73 @@
-import { Alert, AlertTitle, CircularProgress } from "@mui/material";
-import { useState } from "react";
-import { createCustomer } from "./CreateCustomer";
-import { UserConfiguration } from "./CustomerConfiguration";
-import { MyModal } from "./MyModal";
-import { ShowCustomerData } from "./ShowCustomerData";
-import { ShowCustomerDataList } from "./ShowCustomerDataList";
+import React, {useReducer, useState} from "react";
+import {createCustomer} from "./CreateCustomer";
+import {UserConfiguration} from "./CustomerConfiguration";
+import {initialState, reducer, Status} from "./Reducer";
+import {ShowCustomerData} from "./ShowCustomerData";
+import {ShowCustomerDataList} from "./ShowCustomerDataList";
+import {ThankYouPage} from "./ThankYouPage";
+import {ErrorPage} from "./ErrorPage";
+import {CustomLoader} from "./CustomLoader";
 
 export const AppFlow: React.FC = () => {
-    const [openModal, setOpenModal] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [errorAlert, setErrorAlert] = useState<boolean>(false);
-    let username = '';
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const [username, setUsername] = useState<string>('');
 
-    const onCreateCustomerSuccess = () => {
-        setErrorAlert(false);
-        setLoading(false);
+    const onCreateCustomerSuccess = (customerName: string) => {
+        dispatch({
+            type: 'THANK_YOU_PAGE',
+            customerName: customerName
+        });
     };
 
     const onCreateCustomerFailure = () => {
-        setErrorAlert(true);
-        setLoading(false);
+        dispatch({
+            type: 'ERROR'
+        });
     };
 
     return (
         <>
-            <UserConfiguration>
+            {state.status == Status.SHOW_CUSTOMER_DATA && <UserConfiguration>
                 <ShowCustomerData onSubmit={(name: string, checked: boolean) => {
                     console.log(name + checked);
-                    username = name;
-                    setOpenModal(true);
-                }} />
+                    setUsername(name);
+                    dispatch({
+                        type: 'SHOW_CUSTOMER_DATA_LIST',
+                        customerName: name,
+                        isModalOpen: false
+                    });
+                }}/>
             </UserConfiguration>
-            <ShowCustomerDataList />
-            {
-                openModal && <MyModal isOpen={openModal} onClose={() => setOpenModal(false)} onConfirm={
-                    () => {
+            }
+            {state.status == Status.SHOW_CUSTOMER_DATA_LIST &&
+                <ShowCustomerDataList
+                    onUndo={() => {
+                        dispatch({type: 'SHOW_CUSTOMER_DATA'})
+                    }}
+                    onSubmit={() => {
+                        dispatch({type: 'SHOW_CUSTOMER_DATA_LIST', customerName: username, isModalOpen: true});
+                    }}
+                    isModalOpen={state.isModalOpen}
+                    onModalClose={() => dispatch({
+                        type: 'SHOW_CUSTOMER_DATA_LIST',
+                        customerName: username,
+                        isModalOpen: false
+                    })}
+                    onModalConfirm={() => {
                         createCustomer(username, onCreateCustomerSuccess, onCreateCustomerFailure);
-
-                        setOpenModal(false);
-                        setLoading(true);
-                    }
-                } />
+                        dispatch({type: 'LOADING'})
+                    }}
+                />
             }
-            {loading && <CircularProgress />}
-            {
-                errorAlert && <Alert severity="error">
-                    <AlertTitle>Error</AlertTitle>
-                    Something went wrong. Try again
-                </Alert>
-            }
+            {state.status == Status.LOADING && <CustomLoader/>}
+            {state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={state.customerName} onRestart={() => {
+                dispatch({
+                    type: 'SHOW_CUSTOMER_DATA'
+                })
+            }}/>}
+            {state.status == Status.ERROR && <ErrorPage onTryAgain={() => {
+                dispatch({type: 'SHOW_CUSTOMER_DATA'})
+            }}/>}
         </>
     );
 };
