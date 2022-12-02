@@ -13,6 +13,7 @@ type ShowCustomerDataState = {
 type ShowCustomerDataListState = {
     status: Status.SHOW_CUSTOMER_DATA_LIST;
     customerName: string;
+    isModalOpen: boolean;
 }
 
 type LoadingState = {
@@ -33,6 +34,7 @@ type State = ShowCustomerDataState | ShowCustomerDataListState | LoadingState | 
 type ShowCustomerDataListAction = {
     type: 'SHOW_CUSTOMER_DATA_LIST';
     customerName: string;
+    isModalOpen: boolean;
 }
 
 type ShowCustomerDataAction = {
@@ -63,7 +65,8 @@ export const reducer = (state: State, action: Action): State => {
         case 'SHOW_CUSTOMER_DATA_LIST':
             return {
                 status: Status.SHOW_CUSTOMER_DATA_LIST,
-                customerName: action.customerName
+                customerName: action.customerName,
+                isModalOpen: action.isModalOpen
             }
         case 'SHOW_CUSTOMER_DATA':
             return {

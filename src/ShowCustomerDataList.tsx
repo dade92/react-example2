@@ -8,6 +8,8 @@ import {adaptUsers} from "./RemoteUserResponseAdapter";
 import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import {MyModal} from "./MyModal";
+import {createCustomer} from "./CreateCustomer";
 
 enum Action {
     INBOX = "INBOX",
@@ -17,6 +19,9 @@ enum Action {
 interface Props {
     onUndo: () => void;
     onSubmit: () => void;
+    onModalConfirm: () => void;
+    onModalClose: () => void;
+    isModalOpen: boolean;
 }
 
 const ButtonContainer = styled.div`
@@ -26,7 +31,7 @@ const ButtonContainer = styled.div`
     justify-content: center;
 `;
 
-export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit}) => {
+export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm, onModalClose, isModalOpen}) => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
 
@@ -56,47 +61,53 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit}) => {
     }
 
     return (
-        <Stack spacing={1} sx={{width: 600}}>
+        <>
+            <Stack spacing={1} sx={{width: 600}}>
+                {
+                    users.length > 0 ? users.map((user, index) => (
+                        <ListItem
+                            key={user.name}
+                            data-testid={'user-item-' + `${index}`}
+                            secondaryAction={
+                                <IconButton aria-label="comment" onClick={() => handleComment(user.name)}>
+                                    <CommentIcon/>
+                                </IconButton>}
+                        >
+                            <ListItemText>
+                                {user.name} - {user.surname} - {user.data.profile}
+                            </ListItemText>
+                        </ListItem>
+                    )) : <LoaderUsers data-testid={'loader'} error={loaderError}/>
+                }
+                <Divider>ACTIONS</Divider>
+                <ListItem disablePadding data-testid={'inbox-item'}>
+                    <ListItemButton onClick={() => handleClick(Action.INBOX)}>
+                        <ListItemIcon>
+                            <InboxIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Inbox"/>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding data-testid={'drafts-item'}>
+                    <ListItemButton onClick={() => handleClick(Action.DRAFTS)}>
+                        <ListItemIcon>
+                            <DraftsIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Drafts"/>
+                    </ListItemButton>
+                </ListItem>
+                <Divider/>
+                <ButtonContainer>
+                    <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo}
+                            startIcon={<ArrowBackIcon/>}>UNDO</Button>
+                    <Button variant="contained" color="success" data-testid={'submit-button'} onClick={() => {
+                        onSubmit()
+                    }}>SUBMIT</Button>
+                </ButtonContainer>
+            </Stack>
             {
-                users.length > 0 ? users.map((user, index) => (
-                    <ListItem
-                        key={user.name}
-                        data-testid={'user-item-' + `${index}`}
-                        secondaryAction={
-                            <IconButton aria-label="comment" onClick={() => handleComment(user.name)}>
-                                <CommentIcon/>
-                            </IconButton>}
-                    >
-                        <ListItemText>
-                            {user.name} - {user.surname} - {user.data.profile}
-                        </ListItemText>
-                    </ListItem>
-                )) : <LoaderUsers data-testid={'loader'} error={loaderError}/>
+                isModalOpen && <MyModal isOpen={isModalOpen} onClose={onModalClose} onConfirm={onModalConfirm}/>
             }
-            <Divider>ACTIONS</Divider>
-            <ListItem disablePadding data-testid={'inbox-item'}>
-                <ListItemButton onClick={() => handleClick(Action.INBOX)}>
-                    <ListItemIcon>
-                        <InboxIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary="Inbox"/>
-                </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding data-testid={'drafts-item'}>
-                <ListItemButton onClick={() => handleClick(Action.DRAFTS)}>
-                    <ListItemIcon>
-                        <DraftsIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary="Drafts"/>
-                </ListItemButton>
-            </ListItem>
-            <Divider/>
-            <ButtonContainer>
-                <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo} startIcon={<ArrowBackIcon/>}>UNDO</Button>
-                <Button variant="contained" color="success" data-testid={'submit-button'} onClick={() => {
-                    onSubmit()
-                }}>SUBMIT</Button>
-            </ButtonContainer>
-        </Stack>
+        </>
     );
 }

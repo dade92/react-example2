@@ -15,8 +15,9 @@ describe('ShowCustomerDataList', () => {
         mockServer.shutdown();
     })
 
+    //TODO test properly the confirm and callback called
     it('renders correctly', async () => {
-        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn}/>)
+        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
         expect(screen.getByTestId('inbox-item')).toHaveTextContent('Inbox');
@@ -35,7 +36,7 @@ describe('ShowCustomerDataList', () => {
                 this.get('/retrieveUsers', init500Array);
             },
         });
-        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn}/>);
+        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>);
 
         expect(screen.getByTestId('inbox-item')).toBeVisible();
         expect(screen.getByTestId('loader')).toBeVisible();
@@ -45,7 +46,7 @@ describe('ShowCustomerDataList', () => {
     it('calls onUndo when undo button is clicked', () => {
         const callback = jest.fn();
 
-        render(<ShowCustomerDataList onUndo={callback} onSubmit={jest.fn}/>)
+        render(<ShowCustomerDataList onUndo={callback} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
 
         fireEvent.click(screen.getByTestId('undo-button'));
 
