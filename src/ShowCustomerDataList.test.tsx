@@ -28,6 +28,15 @@ describe('ShowCustomerDataList', () => {
         await waitFor(() => expect(screen.getByTestId('user-item-1')).toBeDefined());
     })
 
+    it('calls the callback modal when confirmed', () => {
+        let onSubmit = jest.fn();
+        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={onSubmit} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
+
+        fireEvent.click(screen.getByTestId('submit-button'));
+
+        expect(onSubmit).toHaveBeenCalledTimes(1);
+    })
+
     it('handles API error', async () => {
         mockServer = createServer({
             logging: true,
