@@ -41,17 +41,13 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
         })
     };
 
-    const retrieveJoke = async () => {
-        let joke = await getChuckNorrisJoke();
-        setJoke(joke.value)
-    }
-
     useEffect(() => {
         fetchData()
     }, []);
 
     useEffect(() => {
-        retrieveJoke()
+        getChuckNorrisJoke()
+            .then(joke => setJoke(joke.value))
     }, [])
 
     const submit = (text: string, checked: boolean) => {
