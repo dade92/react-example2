@@ -15,7 +15,6 @@ describe('ShowCustomerDataList', () => {
         mockServer.shutdown();
     })
 
-    //TODO test properly the confirm and callback called
     it('renders correctly', async () => {
         render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
 
@@ -35,6 +34,12 @@ describe('ShowCustomerDataList', () => {
         fireEvent.click(screen.getByTestId('submit-button'));
 
         expect(onSubmit).toHaveBeenCalledTimes(1);
+    })
+
+    it('displays the modal if needed', () => {
+        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={true}/>);
+
+        expect(screen.getByTestId('confirm-dialog')).toBeVisible();
     })
 
     it('handles API error', async () => {

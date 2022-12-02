@@ -15,7 +15,8 @@ export const MyModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
             open={isOpen}
             onClose={onClose}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description">
+            aria-describedby="alert-dialog-description"
+            data-testid={'confirm-dialog'}>
             <DialogTitle data-testid={'title'} id="alert-dialog-title">
                 {"Are you sure?"}
                 {
