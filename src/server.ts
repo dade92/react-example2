@@ -5,6 +5,10 @@ const initResponse = {
     surname: 'Botti'
 };
 
+const chuckNorrisResponse = {
+    value: 'This is a joke'
+}
+
 const initResponseArray = {
     users: [
         {
@@ -29,6 +33,7 @@ const createCustomerResponse = {
 }
 
 const init200 = (): Response => new Response(200, {}, initResponse);
+const chuckNorris200 = (): Response => new Response(200, {}, chuckNorrisResponse);
 const init200Array = (): Response => new Response(200, {}, initResponseArray);
 export const init500Array = (): Response => new Response(500, {}, {});
 const createCustomer200 = (): Response => new Response(200, {}, createCustomerResponse);
@@ -42,5 +47,7 @@ export const server: () => Server = () =>
             this.get('/retrieveUser', init200);
             this.get('/retrieveUsers', init200Array);
             this.post('/createCustomer', createCustomer200, {timing: 5000});
+            this.urlPrefix = '';
+            this.get('https://api.chucknorris.io/jokes/random', chuckNorris200);
         },
     });
