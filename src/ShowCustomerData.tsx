@@ -1,21 +1,13 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import {useUserConfiguration} from "./CustomerConfiguration";
-import {
-    Alert,
-    AlertTitle,
-    Button,
-    Checkbox,
-    FormControlLabel,
-    Snackbar,
-    TextField,
-    Typography
-} from "@mui/material";
+import {Alert, AlertTitle, Button, Checkbox, FormControlLabel, Snackbar, TextField, Typography} from "@mui/material";
 import {PhotoCamera} from "@mui/icons-material";
 import {RemoteUser} from "./Data";
 import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import {getChuckNorrisJoke} from "./GetChuckNorrisJokes";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -34,6 +26,8 @@ interface Props {
 }
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
+    const [joke, setJoke] = useState('');
+
     const fetchData = async () => {
         const data = await fetch('http://localhost:8081/retrieveUser');
         const response = await data.json();
@@ -47,9 +41,18 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
         })
     };
 
+    const retrieveJoke = async () => {
+        let joke = await getChuckNorrisJoke();
+        setJoke(joke.value)
+    }
+
     useEffect(() => {
         fetchData()
     }, []);
+
+    useEffect(() => {
+        retrieveJoke()
+    }, [])
 
     const submit = (text: string, checked: boolean) => {
         setValidInput(true);
@@ -85,6 +88,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
+            <span>{joke}</span>
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
