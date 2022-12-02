@@ -7,7 +7,7 @@ import {server} from './server';
 import {CssBaseline, ThemeProvider} from '@mui/material';
 import {darkTheme} from './customTheme';
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.REACT_APP_STAGE === 'local') {
     server();
 }
 

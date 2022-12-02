@@ -26,7 +26,8 @@
     "jest-preview": "^0.1.7"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_STAGE=local react-scripts start",
+    "start-qa": "REACT_APP_STAGE=qa react-scripts start",
     "build": "react-scripts build",
     "test": "jest --passWithNoTests --silent",
     "eject": "react-scripts eject",
