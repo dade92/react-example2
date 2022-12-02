@@ -39,25 +39,26 @@ export const AppFlow: React.FC = () => {
                 }}/>
             </UserConfiguration>
             }
-            {state.status == Status.SHOW_CUSTOMER_DATA_LIST && <ShowCustomerDataList onUndo={() => {
-                dispatch({type: 'SHOW_CUSTOMER_DATA'})
-            }} onSubmit={() => {
-                dispatch({
-                    type: 'SHOW_CUSTOMER_DATA_LIST',
-                    customerName: username,
-                    isModalOpen: true
-                });
-            }} isModalOpen={state.isModalOpen} onModalClose={() => dispatch({
-                type: 'SHOW_CUSTOMER_DATA_LIST',
-                customerName: username,
-                isModalOpen: false
-            })} onModalConfirm={() => {
-                createCustomer(username, onCreateCustomerSuccess, onCreateCustomerFailure);
-                dispatch({
-                    type: 'LOADING'
-                })
+            {state.status == Status.SHOW_CUSTOMER_DATA_LIST &&
+                <ShowCustomerDataList
+                    onUndo={() => {
+                        dispatch({type: 'SHOW_CUSTOMER_DATA'})
+                    }}
+                    onSubmit={() => {
+                        dispatch({type: 'SHOW_CUSTOMER_DATA_LIST', customerName: username, isModalOpen: true});
+                    }}
+                    isModalOpen={state.isModalOpen}
+                    onModalClose={() => dispatch({
+                        type: 'SHOW_CUSTOMER_DATA_LIST',
+                        customerName: username,
+                        isModalOpen: false
+                    })}
+                    onModalConfirm={() => {
+                        createCustomer(username, onCreateCustomerSuccess, onCreateCustomerFailure);
+                        dispatch({type: 'LOADING'})
+                    }}
+                />
             }
-            }/>}
             {state.status == Status.LOADING && <CustomLoader/>}
             {state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={state.customerName} onRestart={() => {
                 dispatch({
