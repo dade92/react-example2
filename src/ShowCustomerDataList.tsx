@@ -36,15 +36,16 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
     const [loaderError, setLoaderError] = useState<boolean>(false);
 
     const fetchData = useCallback(async () => {
-        const data = await fetch('http://localhost:8081/retrieveUsers');
-        if (data.ok) {
-            const response = await data.json();
-            console.log(response);
-            setUsers(adaptUsers(response.users));
-        } else {
-            console.log('error in loading users');
-            setLoaderError(true);
-        }
+        await fetch('http://localhost:8081/retrieveUsers')
+                            .then(data =>data.json())
+                            .then(r => {
+                                    console.log(r);
+                                    setUsers(adaptUsers(r.users));
+                                })
+                            .catch(error => {
+                                console.log('error in loading users');
+                                setLoaderError(true);
+                            })
 
     }, []);
 
