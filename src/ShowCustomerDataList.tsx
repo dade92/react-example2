@@ -64,8 +64,8 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
         <>
             <Stack spacing={1} sx={{width: 600}}>
                 {
-                    users.length > 0 ? users.map((user, index) => (
-                        <ListItem
+                    users.length > 0 ? users.map((user, index) => {
+                        return <ListItem
                             key={user.name}
                             data-testid={'user-item-' + `${index}`}
                             secondaryAction={
@@ -77,7 +77,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
                                 {user.name} - {user.surname} - {user.data.profile}
                             </ListItemText>
                         </ListItem>
-                    )) : <LoaderUsers data-testid={'loader'} error={loaderError}/>
+                    }) : <LoaderUsers data-testid={'loader'} error={loaderError}/>
                 }
                 <Divider>ACTIONS</Divider>
                 <ListItem disablePadding data-testid={'inbox-item'}>

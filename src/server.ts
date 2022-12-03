@@ -25,6 +25,13 @@ const initResponseArray = {
                 profile: 'test2'
             }
         },
+        {
+            name: 'Paola',
+            surname: 'Meroni',
+            data: {
+                profile: 'test3'
+            }
+        },
     ]
 };
 

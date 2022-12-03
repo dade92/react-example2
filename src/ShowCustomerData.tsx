@@ -85,7 +85,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
-            <span>{joke}</span>
+            <Typography variant="body1" gutterBottom>{joke}</Typography>
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
