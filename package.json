@@ -30,6 +30,7 @@
     "start-qa": "REACT_APP_STAGE=qa react-scripts start",
     "build": "react-scripts build",
     "test": "jest --passWithNoTests --silent",
+    "test-coverage": "jest --passWithNoTests --silent --coverage",
     "eject": "react-scripts eject",
     "jest-preview": "jest-preview"
   },
