@@ -35,7 +35,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [joke, setJoke] = useState('');
 
     const fetchData = async () => {
-        const data = await fetch('http://localhost:8081/retrieveUser');
+        const data = await fetch('/find?name=Sergio');
         const response = await data.json();
         console.log(response);
         setRemoteUser({

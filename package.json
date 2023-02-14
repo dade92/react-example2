@@ -55,5 +55,6 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.25",
     "webpack": "^5.74.0"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }
