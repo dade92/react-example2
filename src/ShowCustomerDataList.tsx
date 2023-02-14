@@ -35,6 +35,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
 
+    //TODO fix this url too
     const fetchData = useCallback(async () => {
         await fetch('http://localhost:8081/retrieveUsers')
                             .then(data =>data.json())
