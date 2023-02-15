@@ -3,10 +3,21 @@ interface CreateCustomerResponse {
 }
 
 export const createCustomer = async (name: string, onSuccess: (customerName: string) => void, onFailure: () => void) => {
-    const response = await fetch('/createCustomer', {
+    const response = await fetch('/insert', {
         method: 'POST',
         body: JSON.stringify({
-            name: name
+            name: name,
+            age: 30,
+            favouriteDestinations: {
+                destinations: [
+                    {
+                        city: "Milan"
+                    },
+                    {
+                        city: "Erba"
+                    }
+                ]
+            }
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -14,13 +25,11 @@ export const createCustomer = async (name: string, onSuccess: (customerName: str
         },
     });
 
-    if (!response.ok) {
+    if (response.status != 204) {
         console.log('Response is not OK: ', response);
         onFailure();
     } else {
-        const result = (await response.json()) as CreateCustomerResponse;
-
-        console.log('result is: ', result.code);
+        console.log('result is: ', response.status);
 
         onSuccess(name);
     }
