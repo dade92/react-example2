@@ -12,10 +12,8 @@ interface UserDataResponse {
 
 const adaptToDomain = (remoteUserResponse: RemoteUserResponse): RemoteUser => ({
         name: remoteUserResponse.name,
-        surname: remoteUserResponse.surname,
-        data: {
-            profile: remoteUserResponse.data.profile
-        }
+        surname: null,
+        data: null
     })
 
 export const adaptUsers = (remoteUsers: RemoteUserResponse[]): RemoteUser[] => {

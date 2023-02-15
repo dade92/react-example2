@@ -50,11 +50,9 @@ export const server: () => Server = () =>
     createServer({
         logging: true,
         routes() {
-            this.urlPrefix = 'http://localhost:8081';
-            this.get('/retrieveUser', init200);
+            this.get('/find', init200);
             this.get('/retrieveUsers', init200Array);
             this.post('/createCustomer', createCustomer200, {timing: 5000});
-            this.urlPrefix = '';
             this.get('https://api.chucknorris.io/jokes/random', chuckNorris200);
         },
     });

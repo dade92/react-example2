@@ -3,8 +3,7 @@ interface CreateCustomerResponse {
 }
 
 export const createCustomer = async (name: string, onSuccess: (customerName: string) => void, onFailure: () => void) => {
-    //TODO fix this url too
-    const response = await fetch('http://localhost:8081/createCustomer', {
+    const response = await fetch('/createCustomer', {
         method: 'POST',
         body: JSON.stringify({
             name: name

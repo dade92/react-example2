@@ -1,7 +1,7 @@
 export interface RemoteUser {
     name: string;
-    surname: string;
-    data: UserData
+    surname: string | null;
+    data: UserData | null;
 }
 
 interface UserData {
