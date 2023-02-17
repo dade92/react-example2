@@ -1,21 +1,13 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import {useUserConfiguration} from "./CustomerConfiguration";
-import {
-    Alert,
-    AlertTitle,
-    Button,
-    Checkbox,
-    FormControlLabel,
-    Snackbar,
-    TextField,
-    Typography
-} from "@mui/material";
+import {Alert, AlertTitle, Button, Checkbox, FormControlLabel, Snackbar, TextField, Typography} from "@mui/material";
 import {PhotoCamera} from "@mui/icons-material";
 import {RemoteUser} from "./Data";
 import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import {RestClient} from "./RestClient";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -33,22 +25,34 @@ interface Props {
     onSubmit: (text: string, checked: boolean) => void;
 }
 
+interface ChuckNorrisJokeResponse {
+    value: string;
+}
+
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
+    const {name, surname} = useUserConfiguration();
+    const [text, setText] = useState<string>('');
+    const [checked, setChecked] = useState(false);
+    const [remoteUser, setRemoteUser] = useState<RemoteUser>();
+    const [validInput, setValidInput] = useState(true);
+    const [success, setSuccess] = useState(false);
+    const [joke, setJoke] = useState('');
+    const restClient = new RestClient();
+
     const fetchData = async () => {
-        const data = await fetch('http://localhost:8081/retrieveUser');
-        const response = await data.json();
+        const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Sergio');
         console.log(response);
-        setRemoteUser({
-            name: response.name,
-            surname: response.surname,
-            data: {
-                profile: ''
-            }
-        })
+        setRemoteUser(response)
     };
 
     useEffect(() => {
         fetchData()
+    }, []);
+
+    useEffect(() => {
+        restClient.get<ChuckNorrisJokeResponse>(
+            'https://api.chucknorris.io/jokes/random'
+        ).then(joke => setJoke(joke.value))
     }, []);
 
     const submit = (text: string, checked: boolean) => {
@@ -61,20 +65,13 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
         }
     }
 
-    const {name, surname} = useUserConfiguration();
-    const [text, setText] = useState<string>('');
-    const [checked, setChecked] = useState(false);
-    const [remoteUser, setRemoteUser] = useState<RemoteUser>();
-    const [validInput, setValidInput] = useState(true);
-    const [success, setSuccess] = useState(false);
-
     return (
         <Stack spacing={1} sx={{width: 600}} data-testid={'stack'}>
             <Title data-testid="title">AppFlow</Title>
             <div>
                 {remoteUser == undefined ?
                     <LoaderUsers error={false}/> :
-                    <Typography variant="body1" gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}
+                    <Typography variant="body1" data-testid={'username'} gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}
             </div>
 
             <TextField id="filled-basic" data-testid={'text'} label="Your alias" variant="outlined"
@@ -85,6 +82,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
+            <Typography data-testid={'joke'} variant="body1" gutterBottom>{joke}</Typography>
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>

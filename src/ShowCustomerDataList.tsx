@@ -4,12 +4,13 @@ import {RemoteUser} from "./Data";
 import CommentIcon from '@mui/icons-material/Comment';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
-import {adaptUsers} from "./RemoteUserResponseAdapter";
+import {adaptUsers, RemoteUserResponse} from "./RemoteUserResponseAdapter";
 import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {MyModal} from "./MyModal";
 import {createCustomer} from "./CreateCustomer";
+import {RestClient} from "./RestClient";
 
 enum Action {
     INBOX = "INBOX",
@@ -34,17 +35,18 @@ const ButtonContainer = styled.div`
 export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm, onModalClose, isModalOpen}) => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
+    const restClient = new RestClient();
 
-    const fetchData = useCallback(async () => {
-        const data = await fetch('http://localhost:8081/retrieveUsers');
-        if (data.ok) {
-            const response = await data.json();
-            console.log(response);
-            setUsers(adaptUsers(response.users));
-        } else {
-            console.log('error in loading users');
-            setLoaderError(true);
-        }
+    const fetchData = useCallback(() => {
+        restClient.get<RemoteUserResponse>('/retrieveUsers')
+                            .then(r => {
+                                    console.log(r);
+                                    setUsers(r.users);
+                                })
+                            .catch(error => {
+                                console.log('error in loading users');
+                                setLoaderError(true);
+                            })
 
     }, []);
 
@@ -64,8 +66,8 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
         <>
             <Stack spacing={1} sx={{width: 600}}>
                 {
-                    users.length > 0 ? users.map((user, index) => (
-                        <ListItem
+                    users.length > 0 ? users.map((user, index) => {
+                        return <ListItem
                             key={user.name}
                             data-testid={'user-item-' + `${index}`}
                             secondaryAction={
@@ -74,10 +76,10 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
                                 </IconButton>}
                         >
                             <ListItemText>
-                                {user.name} - {user.surname} - {user.data.profile}
+                                {user.name} - {user.surname}
                             </ListItemText>
                         </ListItem>
-                    )) : <LoaderUsers data-testid={'loader'} error={loaderError}/>
+                    }) : <LoaderUsers data-testid={'loader'} error={loaderError}/>
                 }
                 <Divider>ACTIONS</Divider>
                 <ListItem disablePadding data-testid={'inbox-item'}>

@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "react-example2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,9 +26,11 @@
     "jest-preview": "^0.1.7"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_STAGE=local react-scripts start",
+    "start-qa": "REACT_APP_STAGE=qa react-scripts start",
     "build": "react-scripts build",
     "test": "jest --passWithNoTests --silent",
+    "test-coverage": "jest --passWithNoTests --silent --coverage",
     "eject": "react-scripts eject",
     "jest-preview": "jest-preview"
   },
@@ -53,5 +55,6 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.25",
     "webpack": "^5.74.0"
-  }
+  },
+  "proxy": "http://localhost:8080"
 }

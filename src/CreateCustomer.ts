@@ -1,27 +1,35 @@
+import { RestClient } from "./RestClient";
+
 interface CreateCustomerResponse {
     code: string;
 }
 
+const restClient = new RestClient();
+
 export const createCustomer = async (name: string, onSuccess: (customerName: string) => void, onFailure: () => void) => {
-    const response = await fetch('http://localhost:8081/createCustomer', {
-        method: 'POST',
-        body: JSON.stringify({
-            name: name
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-        },
-    });
-
-    if (!response.ok) {
-        console.log('Response is not OK: ', response);
-        onFailure();
-    } else {
-        const result = (await response.json()) as CreateCustomerResponse;
-
-        console.log('result is: ', result.code);
+    try {
+        const response = await restClient.post(
+            '/insert',
+            {
+                name,
+                age: 30,
+                favouriteDestinations: {
+                    destinations: [
+                        {
+                            city: "Milan"
+                        },
+                        {
+                            city: "Erba"
+                        }
+                    ]
+                }
+            }
+        )
+        console.log('result is: ', response);
 
         onSuccess(name);
+    } catch (e: any) {
+        console.log('Response is not OK: ' + e);
+        onFailure();
     }
 };

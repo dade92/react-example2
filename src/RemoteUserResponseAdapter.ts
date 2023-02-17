@@ -1,23 +1,19 @@
 import {RemoteUser} from "./Data"
 
 export interface RemoteUserResponse {
-    name: string;
-    surname: string;
-    data: UserDataResponse;
+    users: RemoteUser[];
 }
 
 interface UserDataResponse {
     profile: string;
 }
 
-const adaptToDomain = (remoteUserResponse: RemoteUserResponse): RemoteUser => ({
+const adaptToDomain = (remoteUserResponse: RemoteUser): RemoteUser => ({
         name: remoteUserResponse.name,
-        surname: remoteUserResponse.surname,
-        data: {
-            profile: remoteUserResponse.data.profile
-        }
+        surname: null,
+        data: null
     })
 
-export const adaptUsers = (remoteUsers: RemoteUserResponse[]): RemoteUser[] => {
-    return remoteUsers.map(ru => adaptToDomain(ru));
+export const adaptUsers = (remoteUsers: RemoteUserResponse): RemoteUser[] => {
+    return remoteUsers.users.map(ru => adaptToDomain(ru));
 }

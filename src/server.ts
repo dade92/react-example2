@@ -5,6 +5,10 @@ const initResponse = {
     surname: 'Botti'
 };
 
+const chuckNorrisResponse = {
+    value: 'This is a joke'
+}
+
 const initResponseArray = {
     users: [
         {
@@ -21,26 +25,31 @@ const initResponseArray = {
                 profile: 'test2'
             }
         },
+        {
+            name: 'Paola',
+            surname: 'Meroni',
+            data: {
+                profile: 'test3'
+            }
+        },
     ]
 };
 
-const createCustomerResponse = {
-    code: '666'
-}
 
 const init200 = (): Response => new Response(200, {}, initResponse);
+const chuckNorris200 = (): Response => new Response(200, {}, chuckNorrisResponse);
 const init200Array = (): Response => new Response(200, {}, initResponseArray);
 export const init500Array = (): Response => new Response(500, {}, {});
-const createCustomer200 = (): Response => new Response(200, {}, createCustomerResponse);
+const createCustomer204 = (): Response => new Response(204);
 const createCustomer400 = (): Response => new Response(400, {}, {});
 
 export const server: () => Server = () =>
     createServer({
         logging: true,
         routes() {
-            this.urlPrefix = 'http://localhost:8081';
-            this.get('/retrieveUser', init200);
+            this.get('/find', init200);
             this.get('/retrieveUsers', init200Array);
-            this.post('/createCustomer', createCustomer200, {timing: 5000});
+            this.post('/insert', createCustomer204, {timing: 5000});
+            this.get('https://api.chucknorris.io/jokes/random', chuckNorris200);
         },
     });
