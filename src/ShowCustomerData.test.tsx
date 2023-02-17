@@ -1,15 +1,25 @@
-import {cleanup, fireEvent, render, screen} from '@testing-library/react';
+import {cleanup, fireEvent, render, screen, waitFor} from '@testing-library/react';
 import {ShowCustomerData} from './ShowCustomerData';
+import {Server} from "miragejs";
+import {server} from "./server";
 
 describe('ShowCustomerData', () => {
-    afterEach(() => {
-        cleanup
+    let mockServer: Server;
+
+    beforeEach(() => {
+        mockServer = server();
     })
 
-    it('renders correctly, with button disabled', () => {
+    afterEach(() => {
+        mockServer.shutdown();
+        cleanup();
+    })
+
+    it('renders correctly, with button disabled and proper downloaded text', async () => {
         render(<ShowCustomerData onSubmit={jest.fn}/>);
 
         expect(screen.getByTestId('title')).toHaveTextContent("AppFlow");
+        await waitFor(() => expect(screen.getByTestId('joke')).toHaveTextContent("This is a joke"));
         expect(screen.getByTestId('stack')).toBeDefined();
         expect(screen.getByTestId('submit-button')).toBeDisabled();
     })

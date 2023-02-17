@@ -37,13 +37,12 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
     const [joke, setJoke] = useState('');
-    const restClient = new RestClient()
+    const restClient = new RestClient();
 
     const fetchData = async () => {
         const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Sergio');
         console.log(response);
         setRemoteUser(response)
-
     };
 
     useEffect(() => {
@@ -64,7 +63,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             setSuccess(true);
             onSubmit(text, checked);
         }
-
     }
 
     return (
@@ -84,7 +82,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
-            <Typography variant="body1" gutterBottom>{joke}</Typography>
+            <Typography data-testid={'joke'} variant="body1" gutterBottom>{joke}</Typography>
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
