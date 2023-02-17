@@ -7,7 +7,6 @@ import {RemoteUser} from "./Data";
 import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import {getChuckNorrisJoke} from "./GetChuckNorrisJokes";
 import {RestClient} from "./RestClient";
 
 const Title = styled.h1`
@@ -24,6 +23,10 @@ const UploadContainer = styled.div`
 
 interface Props {
     onSubmit: (text: string, checked: boolean) => void;
+}
+
+interface ChuckNorrisJokeResponse {
+    value: string;
 }
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
@@ -48,8 +51,9 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     }, []);
 
     useEffect(() => {
-        getChuckNorrisJoke()
-            .then(joke => setJoke(joke.value))
+        restClient.get<ChuckNorrisJokeResponse>(
+            'https://api.chucknorris.io/jokes/random'
+        ).then(joke => setJoke(joke.value))
     }, []);
 
     const submit = (text: string, checked: boolean) => {
