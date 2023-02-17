@@ -27,7 +27,11 @@ export class RestClient {
             } else {
                 //TODO what if the body is empty (for instance for a 204 no content)?
                 console.log('response ok')
-                return response.json() as Promise<S>
+                if (response.status == 204) {
+                    return {} as Promise<S>
+                } else {
+                    return response.json() as Promise<S>
+                }
             }
         });
     }
