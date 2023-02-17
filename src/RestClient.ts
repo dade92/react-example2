@@ -9,7 +9,7 @@ export class RestClient {
         ).then(response => {
             if (!response.ok) {
                 throw new Error(response.statusText)
-            }else {
+            } else {
                 return response.json() as Promise<T>
             }
         });
@@ -21,10 +21,12 @@ export class RestClient {
             body: JSON.stringify(body),
             headers: headers,
         }).then(response => {
-            if(!response.ok) {
+            if (response.status != 200 && response.status != 204) {
+                console.log('response status is ' + response.status)
                 throw new Error(response.statusText)
             } else {
                 //TODO what if the body is empty (for instance for a 204 no content)?
+                console.log('response ok')
                 return response.json() as Promise<S>
             }
         });

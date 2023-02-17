@@ -35,15 +35,12 @@ const initResponseArray = {
     ]
 };
 
-const createCustomerResponse = {
-    code: '666'
-}
 
 const init200 = (): Response => new Response(200, {}, initResponse);
 const chuckNorris200 = (): Response => new Response(200, {}, chuckNorrisResponse);
 const init200Array = (): Response => new Response(200, {}, initResponseArray);
 export const init500Array = (): Response => new Response(500, {}, {});
-const createCustomer200 = (): Response => new Response(204, {}, createCustomerResponse);
+const createCustomer200 = (): Response => new Response(200, {test: 'test'});
 const createCustomer400 = (): Response => new Response(400, {}, {});
 
 export const server: () => Server = () =>
