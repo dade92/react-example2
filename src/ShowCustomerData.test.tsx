@@ -20,6 +20,7 @@ describe('ShowCustomerData', () => {
 
         expect(screen.getByTestId('title')).toHaveTextContent("AppFlow");
         await waitFor(() => expect(screen.getByTestId('joke')).toHaveTextContent("This is a joke"));
+        await waitFor(() => expect(screen.getByTestId('username')).toHaveTextContent("Hi Sergio Botti"));
         expect(screen.getByTestId('stack')).toBeDefined();
         expect(screen.getByTestId('submit-button')).toBeDisabled();
     })

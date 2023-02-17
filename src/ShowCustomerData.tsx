@@ -71,7 +71,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <div>
                 {remoteUser == undefined ?
                     <LoaderUsers error={false}/> :
-                    <Typography variant="body1" gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}
+                    <Typography variant="body1" data-testid={'username'} gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}
             </div>
 
             <TextField id="filled-basic" data-testid={'text'} label="Your alias" variant="outlined"
