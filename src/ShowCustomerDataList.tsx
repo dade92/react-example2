@@ -4,12 +4,13 @@ import {RemoteUser} from "./Data";
 import CommentIcon from '@mui/icons-material/Comment';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
-import {adaptUsers} from "./RemoteUserResponseAdapter";
+import {adaptUsers, RemoteUserResponse} from "./RemoteUserResponseAdapter";
 import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {MyModal} from "./MyModal";
 import {createCustomer} from "./CreateCustomer";
+import {RestClient} from "./RestClient";
 
 enum Action {
     INBOX = "INBOX",
@@ -34,13 +35,13 @@ const ButtonContainer = styled.div`
 export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm, onModalClose, isModalOpen}) => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
+    const restClient = new RestClient();
 
-    const fetchData = useCallback(async () => {
-        await fetch('/retrieveUsers')
-                            .then(data =>data.json())
+    const fetchData = useCallback(() => {
+        restClient.get<RemoteUserResponse>('/retrieveUsers')
                             .then(r => {
                                     console.log(r);
-                                    setUsers(adaptUsers(r.users));
+                                    setUsers(r.users);
                                 })
                             .catch(error => {
                                 console.log('error in loading users');
