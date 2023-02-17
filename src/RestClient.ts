@@ -21,17 +21,13 @@ export class RestClient {
             body: JSON.stringify(body),
             headers: headers,
         }).then(response => {
-            if (response.status != 200 && response.status != 204) {
+            if (response.status == 204) {
+                return {} as Promise<S>
+            } else if (response.status == 200) {
+                return response.json() as Promise<S>
+            } else {
                 console.log('response status is ' + response.status)
                 throw new Error(response.statusText)
-            } else {
-                //TODO what if the body is empty (for instance for a 204 no content)?
-                console.log('response ok')
-                if (response.status == 204) {
-                    return {} as Promise<S>
-                } else {
-                    return response.json() as Promise<S>
-                }
             }
         });
     }
