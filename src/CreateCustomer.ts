@@ -6,7 +6,7 @@ export const createCustomer = async (name: string, onSuccess: (customerName: str
     const response = await fetch('/insert', {
         method: 'POST',
         body: JSON.stringify({
-            name: name,
+            name,
             age: 30,
             favouriteDestinations: {
                 destinations: [
