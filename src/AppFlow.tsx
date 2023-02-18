@@ -11,6 +11,7 @@ import {CustomLoader} from "./CustomLoader";
 export const AppFlow: React.FC = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [username, setUsername] = useState<string>('');
+    const [age, setAge] = useState<number>(0);
 
     const onCreateCustomerSuccess = (customerName: string) => {
         dispatch({
@@ -28,9 +29,10 @@ export const AppFlow: React.FC = () => {
     return (
         <>
             {state.status == Status.SHOW_CUSTOMER_DATA && <UserConfiguration>
-                <ShowCustomerData onSubmit={(name: string, checked: boolean) => {
+                <ShowCustomerData onSubmit={(name: string, age:number, checked: boolean) => {
                     console.log(name + checked);
                     setUsername(name);
+                    setAge(age);
                     dispatch({
                         type: 'SHOW_CUSTOMER_DATA_LIST',
                         customerName: name,
@@ -54,7 +56,7 @@ export const AppFlow: React.FC = () => {
                         isModalOpen: false
                     })}
                     onModalConfirm={() => {
-                        createCustomer(username, onCreateCustomerSuccess, onCreateCustomerFailure);
+                        createCustomer(username, age, onCreateCustomerSuccess, onCreateCustomerFailure);
                         dispatch({type: 'LOADING'})
                     }}
                 />

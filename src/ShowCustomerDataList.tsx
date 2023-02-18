@@ -9,7 +9,6 @@ import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {MyModal} from "./MyModal";
-import {createCustomer} from "./CreateCustomer";
 import {RestClient} from "./RestClient";
 
 enum Action {

@@ -33,7 +33,7 @@ const UploadContainer = styled.div`
 `;
 
 interface Props {
-    onSubmit: (text: string, checked: boolean) => void;
+    onSubmit: (text: string, age: number, checked: boolean) => void;
 }
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
@@ -58,11 +58,11 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
 
     const submit = (text: string, checked: boolean) => {
         setValidInput(true);
-        if (text.length >= 0 && text.length < 3) {
+        if (text.length >= 0 && text.length < 3 || age === undefined) {
             setValidInput(false);
         } else {
             setSuccess(true);
-            onSubmit(text, checked);
+            onSubmit(text, parseInt(age), checked);
         }
     }
 
