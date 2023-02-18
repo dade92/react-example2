@@ -33,6 +33,8 @@ describe('ShowCustomerData', () => {
 
         fireEvent.click(screen.getByTestId('checkbox'));
         fireEvent.change(screen.getByTestId('text').querySelector('input')!, {target: {value: 'test'}});
+        //TODO this stuff does not work
+        fireEvent.change(screen.getByTestId('age-selector').querySelector('input')!, {target: {value: '30'}});
 
         fireEvent.click(screen.getByTestId('submit-button'));
 

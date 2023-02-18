@@ -85,6 +85,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                 value={age}
                 label="Age"
                 onChange={handleAgeChange}
+                data-testid={'age-selector'}
             >
                 {
                     Array(90).fill(90).map((_, value) => {
