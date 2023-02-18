@@ -19,6 +19,7 @@ describe('ShowCustomerData', () => {
         render(<ShowCustomerData onSubmit={jest.fn}/>);
 
         expect(screen.getByTestId('title')).toHaveTextContent("AppFlow");
+        //TODO fix this: should be in another test
         await waitFor(() => expect(screen.getByTestId('joke')).toHaveTextContent("This is a joke"));
         await waitFor(() => expect(screen.getByTestId('username')).toHaveTextContent("Hi Sergio Botti"));
         expect(screen.getByTestId('stack')).toBeDefined();

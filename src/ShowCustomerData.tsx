@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {RestClient} from "./RestClient";
+import {ChuckNorrisJoke} from "./ChuckNorrisJoke";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -25,10 +26,6 @@ interface Props {
     onSubmit: (text: string, checked: boolean) => void;
 }
 
-interface ChuckNorrisJokeResponse {
-    value: string;
-}
-
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const {name, surname} = useUserConfiguration();
     const [text, setText] = useState<string>('');
@@ -36,7 +33,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
-    const [joke, setJoke] = useState('');
     const restClient = new RestClient();
 
     const fetchData = async () => {
@@ -47,12 +43,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
 
     useEffect(() => {
         fetchData()
-    }, []);
-
-    useEffect(() => {
-        restClient.get<ChuckNorrisJokeResponse>(
-            'https://api.chucknorris.io/jokes/random'
-        ).then(joke => setJoke(joke.value))
     }, []);
 
     const submit = (text: string, checked: boolean) => {
@@ -82,7 +72,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
-            <Typography data-testid={'joke'} variant="body1" gutterBottom>{joke}</Typography>
+            <ChuckNorrisJoke/>
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
