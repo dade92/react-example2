@@ -17,7 +17,6 @@ import {RemoteUser} from "./Data";
 import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import {RestClient} from "./RestClient";
 import {ChuckNorrisJoke} from "./ChuckNorrisJoke";
 import { useRestClientConfiguration } from "./RestClientConfiguration";
 
