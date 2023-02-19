@@ -1,10 +1,13 @@
 import React from 'react';
 import {AppFlow} from './AppFlow';
 import "./App.css";
+import RestClientConfiguration from "./RestClientConfiguration";
 
 const App: React.FC = () => (
     <div className='AppFlow'>
-        <AppFlow/>
+        <RestClientConfiguration>
+            <AppFlow/>
+        </RestClientConfiguration>
     </div>
 )
 

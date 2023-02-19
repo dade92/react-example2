@@ -10,6 +10,7 @@ import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {MyModal} from "./MyModal";
 import {RestClient} from "./RestClient";
+import { useRestClientConfiguration } from "./RestClientConfiguration";
 
 enum Action {
     INBOX = "INBOX",
@@ -34,7 +35,7 @@ const ButtonContainer = styled.div`
 export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm, onModalClose, isModalOpen}) => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
-    const restClient = new RestClient();
+    const restClient = useRestClientConfiguration();
 
     const fetchData = useCallback(() => {
         restClient.get<RemoteUserResponse>('/retrieveUsers')
