@@ -7,10 +7,12 @@ import {ShowCustomerDataList} from "./ShowCustomerDataList";
 import {ThankYouPage} from "./ThankYouPage";
 import {ErrorPage} from "./ErrorPage";
 import {CustomLoader} from "./CustomLoader";
+import { useRestClientConfiguration } from "./RestClientConfiguration";
 
 export const AppFlow: React.FC = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [username, setUsername] = useState<string>('');
+    const restClient = useRestClientConfiguration();
 
     const onCreateCustomerSuccess = (customerName: string) => {
         dispatch({
@@ -54,7 +56,7 @@ export const AppFlow: React.FC = () => {
                         isModalOpen: false
                     })}
                     onModalConfirm={() => {
-                        createCustomer(username, onCreateCustomerSuccess, onCreateCustomerFailure);
+                        createCustomer(restClient, username, onCreateCustomerSuccess, onCreateCustomerFailure);
                         dispatch({type: 'LOADING'})
                     }}
                 />
