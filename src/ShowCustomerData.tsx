@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {RestClient} from "./RestClient";
+import { useRestClientConfiguration } from "./RestClientConfiguration";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -37,7 +38,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
     const [joke, setJoke] = useState('');
-    const restClient = new RestClient();
+    const restClient = useRestClientConfiguration();
 
     const fetchData = async () => {
         const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Sergio');

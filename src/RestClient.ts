@@ -32,3 +32,5 @@ export class RestClient {
         });
     }
 }
+
+export default RestClient;
