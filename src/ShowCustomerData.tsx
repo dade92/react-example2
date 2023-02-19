@@ -45,7 +45,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
-    const [joke, setJoke] = useState('');
     const restClient = useRestClientConfiguration();
 
     const fetchData = async () => {

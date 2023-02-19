@@ -1,13 +1,13 @@
 import React, {FC, useEffect, useState} from "react";
 import {Typography} from "@mui/material";
-import {RestClient} from "./RestClient";
+import { useRestClientConfiguration } from "./RestClientConfiguration";
 
 interface ChuckNorrisJokeResponse {
     value: string;
 }
 
 export const ChuckNorrisJoke: FC = () => {
-    const restClient = new RestClient();
+    const restClient = useRestClientConfiguration();
     const [joke, setJoke] = useState<string>('')
 
     useEffect(() => {
