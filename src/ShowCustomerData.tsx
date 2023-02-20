@@ -47,7 +47,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const restClient = useRestClientConfiguration();
 
     const fetchData = async () => {
-        const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Sergio');
+        const response: RemoteUser = await restClient.get<RemoteUser>(`/find?name=${name}`);
         console.log(response);
         setRemoteUser(response)
     };
@@ -88,7 +88,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                 data-testid={'age-selector'}
             >
                 {
-                    Array(90).fill(90).map((_, value) => {
+                    Array(90).fill(90, 10, 90).map((_, value) => {
                         return <MenuItem value={value}>{value}</MenuItem>
                     })
                 }
