@@ -47,13 +47,13 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const restClient = useRestClientConfiguration();
 
     const fetchData = async () => {
-        const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Sergio');
+        const response: RemoteUser = await restClient.get<RemoteUser>('/find?name='+name);
         console.log(response);
         setRemoteUser(response)
     };
 
     useEffect(() => {
-        fetchData()
+        fetchData();
     }, []);
 
     const submit = (text: string, checked: boolean) => {
