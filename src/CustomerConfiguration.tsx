@@ -17,6 +17,6 @@ export const UserConfiguration: React.FC<{ children: ReactNode }> = ({children})
     )
 }
 
-const retrieveUser = (): User => ({name: "Sergio", surname: "Botti"})
+const retrieveUser = (): User => ({name: "Davide", surname: "Botti"})
 
 export const useUserConfiguration = () => React.useContext(UserContext);
