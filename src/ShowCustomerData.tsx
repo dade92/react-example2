@@ -9,6 +9,7 @@ import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {RestClient} from "./RestClient";
 import { useRestClientConfiguration } from "./RestClientConfiguration";
+import { useTranslations } from "./TranslationsConfiguration";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -30,8 +31,11 @@ interface ChuckNorrisJokeResponse {
     value: string;
 }
 
+const HI_KEY = 'appflow.customerData.hi';
+
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const {name, surname} = useUserConfiguration();
+    const { translationRepository } = useTranslations();
     const [text, setText] = useState<string>('');
     const [checked, setChecked] = useState(false);
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
@@ -72,7 +76,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <div>
                 {remoteUser == undefined ?
                     <LoaderUsers error={false}/> :
-                    <Typography variant="body1" data-testid={'username'} gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}
+                    <Typography variant="body1" data-testid={'username'} gutterBottom>{translationRepository(HI_KEY)} {remoteUser?.name} {remoteUser?.surname}</Typography>}
             </div>
 
             <TextField id="filled-basic" data-testid={'text'} label="Your alias" variant="outlined"
