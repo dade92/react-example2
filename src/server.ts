@@ -1,8 +1,10 @@
 import {createServer, Response, Server} from 'miragejs';
 
 const translationsResponse = {
-    'appflow.customerData.hi': 'Hi',
-    'appflow.customerData.t_and_c': 'Accept t&c',
+    translations: {
+        'appflow.customerData.hi': 'Hi',
+        'appflow.customerData.t_and_c': 'Accept t&c',
+    }
 }
 
 const initResponse = {

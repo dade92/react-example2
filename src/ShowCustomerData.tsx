@@ -45,7 +45,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const restClient = useRestClientConfiguration();
 
     const fetchData = async () => {
-        const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Sergio');
+        const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Davide');
         console.log(response);
         setRemoteUser(response)
     };

@@ -9,6 +9,10 @@ interface TranslationMap {
 
 type TranslationRepository = (key: string) => string;
 
+interface RemoteTranslations {
+    translations: TranslationMap;
+}
+
 interface Translations {
     data: TranslationMap;
     translationRepository: TranslationRepository;
@@ -26,10 +30,10 @@ const RetrieveTranslations = (restClient: RestClient): TranslationMap => {
 
 
     useEffect(()=> {
-        const response = restClient.get<TranslationMap>('/translations');
+        const response = restClient.get<RemoteTranslations>('/translations');
 
         response.then((translations) =>{
-            setData(translations);
+            setData(translations.translations);
         }).catch(()=> {
             console.log('Error fetching translations');
         })
