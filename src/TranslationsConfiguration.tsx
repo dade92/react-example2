@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ReactNode } from "react";
+import RestClient from "./RestClient";
+import { useRestClientConfiguration } from "./RestClientConfiguration";
 
 interface TranslationMap {
     [key: string]: string;
@@ -12,11 +14,28 @@ interface Translations {
     translationRepository: TranslationRepository;
 }
 
-const retrieveTranslations = (): TranslationMap => {
+const retrieveConstTranslations = (): TranslationMap => {
     return {
         'appflow.customerData.hi': 'Hi',
         'appflow.customerData.t_and_c': 'Accept t&c',
     }
+}
+
+const RetrieveTranslations = (restClient: RestClient): TranslationMap => {
+    const [data, setData] = useState<TranslationMap>({} as TranslationMap);
+
+
+    useEffect(()=> {
+        const response = restClient.get<TranslationMap>('/translations');
+
+        response.then((translations) =>{
+            setData(translations);
+        }).catch(()=> {
+            console.log('Error fetching translations');
+        })
+    }, [])
+
+    return data;
 }
 
 const createTranslationRepository = (data: TranslationMap): TranslationRepository => {
@@ -26,7 +45,8 @@ const createTranslationRepository = (data: TranslationMap): TranslationRepositor
 const TranslationsContext = React.createContext<Translations>({} as Translations);
 
 export const TranslationsConfiguration: React.FC<{ children: ReactNode }> = ({children}) => {
-    const translations = retrieveTranslations();
+    const restClient = useRestClientConfiguration();
+    const translations = RetrieveTranslations(restClient);
     const defaultTranslationRepository: TranslationRepository = createTranslationRepository(translations);
 
     return (

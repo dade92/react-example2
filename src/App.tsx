@@ -6,11 +6,11 @@ import { TranslationsConfiguration } from './TranslationsConfiguration';
 
 const App: React.FC = () => (
     <div className='AppFlow'>
-        <TranslationsConfiguration>
-            <RestClientConfiguration>
-                <AppFlow/>
-            </RestClientConfiguration>
-        </TranslationsConfiguration>
+        <RestClientConfiguration>
+            <TranslationsConfiguration>
+                    <AppFlow/>
+            </TranslationsConfiguration>
+        </RestClientConfiguration>
     </div>
 )
 
