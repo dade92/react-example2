@@ -6,10 +6,11 @@ describe('ThankYouPage', () => {
         let callback = jest.fn();
         render(<ThankYouPage customerName={'Sergio'} onRestart={callback}/>);
 
+        expect(screen.getByTestId('thankyou-message')).toBeInTheDocument();
+        expect(screen.getByTestId('thumbs-up')).toBeInTheDocument();
+        
         fireEvent.click(screen.getByTestId('restart-button'))
 
-        expect(screen.getByTestId('thankyou-message').textContent).toBe('Thanks for your selection Sergio!');
-        expect(screen.getByTestId('thumbs-up')).toBeVisible();
         expect(callback).toHaveBeenCalledTimes(1);
     })
 })

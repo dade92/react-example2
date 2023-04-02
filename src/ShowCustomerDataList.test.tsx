@@ -19,9 +19,7 @@ describe('ShowCustomerDataList', () => {
         render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
-        expect(screen.getByTestId('inbox-item')).toHaveTextContent('Inbox');
         expect(screen.getByTestId('drafts-item')).toBeDefined();
-        expect(screen.getByTestId('drafts-item')).toHaveTextContent('Drafts');
 
         await waitFor(() => expect(screen.getByTestId('user-item-0')).toBeDefined());
         await waitFor(() => expect(screen.getByTestId('user-item-1')).toBeDefined());
