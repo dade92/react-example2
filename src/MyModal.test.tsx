@@ -1,16 +1,28 @@
-import {fireEvent, screen} from "@testing-library/react";
+import {fireEvent, screen, waitFor} from "@testing-library/react";
 import {MyModal} from "./MyModal";
 import { render } from "./TestUtils";
+import { Server } from "miragejs";
+import { server } from "./server";
 
 describe('MyModal', () => {
+    let mockServer: Server;
+
+    beforeEach(() => {
+        mockServer = server();
+    })
+
+    afterEach(() => {
+        mockServer.shutdown();
+    })
+
     it('renders correctly and calls the callback', () => {
         const onConfirm = jest.fn();
         const onClose = jest.fn();
 
         render(<MyModal isOpen={true} onConfirm={onConfirm} onClose={onClose}/>)
 
-        expect(screen.getByTestId('title')).toHaveTextContent('Are you sure?')
-        expect(screen.getByTestId('content')).toHaveTextContent('By clicking on confirm you confirm the operation')
+        waitFor(() => expect(screen.getByTestId('title')).toHaveTextContent('Are you sure???'));
+        waitFor(() => expect(screen.getByTestId('content')).toHaveTextContent('By clicking on confirm you confirm the operation'));
 
         fireEvent.click(screen.getByTestId('confirm-button'));
 
