@@ -30,7 +30,7 @@ const RetrieveTranslations = (restClient: RestClient): TranslationMap => {
 
 
     useEffect(()=> {
-        const response = restClient.get<RemoteTranslations>('/translations');
+        const response = restClient.get<RemoteTranslations>('/translations/en');
 
         response.then((translations) =>{
             setData(translations.translations);

@@ -56,7 +56,7 @@ export const server: () => Server = () =>
         logging: true,
         routes() {
             this.get('/find', init200);
-            this.get('/translations', translations200);
+            this.get('/translations/:language', translations200);
             this.get('/retrieveUsers', init200Array);
             this.post('/insert', createCustomer204, {timing: 5000});
             this.get('https://api.chucknorris.io/jokes/random', chuckNorris200);
