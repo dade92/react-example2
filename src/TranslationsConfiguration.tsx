@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ReactNode } from "react";
-import RestClient from "./RestClient";
 import { useRestClientConfiguration } from "./RestClientConfiguration";
-import { RetrieveTranslations } from "./RetrieveTranslations";
+import { RemoteTranslations, RetrieveTranslations } from "./RetrieveTranslations";
 
 export interface TranslationMap {
     [key: string]: string;
@@ -15,13 +14,6 @@ interface Translations {
     translationRepository: TranslationRepository;
 }
 
-const retrieveConstTranslations = (): TranslationMap => {
-    return {
-        'appflow.customerData.hi': 'Hi',
-        'appflow.customerData.t_and_c': 'Accept t&c',
-    }
-}
-
 const createTranslationRepository = (data: TranslationMap): TranslationRepository => {
     return (key: string): string => data[key] || '';
 }
@@ -30,7 +22,7 @@ const TranslationsContext = React.createContext<Translations>({} as Translations
 
 export const TranslationsConfiguration: React.FC<{ children: ReactNode }> = ({children}) => {
     const restClient = useRestClientConfiguration();
-    const translations = RetrieveTranslations(restClient);
+    const translations = RetrieveTranslations(() => restClient.get<RemoteTranslations>('/translations/en'));
     const defaultTranslationRepository: TranslationRepository = createTranslationRepository(translations);
 
     return (

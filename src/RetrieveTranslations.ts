@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
-import RestClient from "./RestClient";
 import { TranslationMap } from "./TranslationsConfiguration";
 
-interface RemoteTranslations {
+export interface RemoteTranslations {
     translations: TranslationMap;
 }
 
-export const RetrieveTranslations = (restClient: RestClient): TranslationMap => {
+export const RetrieveTranslations = (fetch: () => Promise<RemoteTranslations>): TranslationMap => {
     const [data, setData] = useState<TranslationMap>({} as TranslationMap);
 
 
     useEffect(()=> {
-        const response = restClient.get<RemoteTranslations>('/translations/en');
+        const response = fetch();
 
-        response.then((translations) =>{
-            setData(translations.translations);
+        response.then((r) =>{
+            setData(r.translations);
         }).catch(()=> {
             console.log('Error fetching translations');
         })
