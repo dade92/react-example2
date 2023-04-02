@@ -9,7 +9,7 @@ interface Props {
     onClose: () => void;
 }
 
-export const MyModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
+export const ConfirmationModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
     const { translationRepository } = useTranslations();
     
     return (

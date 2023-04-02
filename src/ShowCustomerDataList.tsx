@@ -8,7 +8,7 @@ import {RemoteUserResponse} from "./RemoteUserResponseAdapter";
 import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import {MyModal} from "./MyModal";
+import {ConfirmationModal} from "./ConfirmationModal";
 import { useRestClientConfiguration } from "./RestClientConfiguration";
 import { useTranslations } from "./TranslationsConfiguration";
 
@@ -109,7 +109,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
                 </ButtonContainer>
             </Stack>
             {
-                isModalOpen && <MyModal isOpen={isModalOpen} onClose={onModalClose} onConfirm={onModalConfirm}/>
+                isModalOpen && <ConfirmationModal isOpen={isModalOpen} onClose={onModalClose} onConfirm={onModalConfirm}/>
             }
         </>
     );

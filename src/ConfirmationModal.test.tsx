@@ -1,5 +1,5 @@
 import {fireEvent, screen, waitFor} from "@testing-library/react";
-import {MyModal} from "./MyModal";
+import {ConfirmationModal} from "./ConfirmationModal";
 import { render } from "./TestUtils";
 import { Server } from "miragejs";
 import { server } from "./server";
@@ -19,7 +19,7 @@ describe('MyModal', () => {
         const onConfirm = jest.fn();
         const onClose = jest.fn();
 
-        render(<MyModal isOpen={true} onConfirm={onConfirm} onClose={onClose}/>)
+        render(<ConfirmationModal isOpen={true} onConfirm={onConfirm} onClose={onClose}/>)
 
         waitFor(() => expect(screen.getByTestId('title')).toHaveTextContent('Are you sure???'));
         waitFor(() => expect(screen.getByTestId('content')).toHaveTextContent('By clicking on confirm you confirm the operation'));
@@ -34,7 +34,7 @@ describe('MyModal', () => {
         const onClose = jest.fn();
         const onConfirm = jest.fn();
 
-        render(<MyModal isOpen={true} onConfirm={onConfirm} onClose={onClose}/>)
+        render(<ConfirmationModal isOpen={true} onConfirm={onConfirm} onClose={onClose}/>)
 
         fireEvent.click(screen.getByTestId('close-button'));
 
