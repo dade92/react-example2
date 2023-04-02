@@ -1,5 +1,6 @@
-import {fireEvent, render, screen} from "@testing-library/react";
+import {fireEvent, screen} from "@testing-library/react";
 import {MyModal} from "./MyModal";
+import { render } from "./TestUtils";
 
 describe('MyModal', () => {
     it('renders correctly and calls the callback', () => {

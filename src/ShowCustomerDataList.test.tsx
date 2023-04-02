@@ -1,7 +1,8 @@
-import {fireEvent, render, screen, waitFor} from "@testing-library/react"
+import {fireEvent, screen, waitFor} from "@testing-library/react"
 import {createServer, Server} from "miragejs";
 import {init500Array, server} from "./server";
 import {ShowCustomerDataList} from "./ShowCustomerDataList"
+import { render } from "./TestUtils";
 
 describe('ShowCustomerDataList', () => {
 

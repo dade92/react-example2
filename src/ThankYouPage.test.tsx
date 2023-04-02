@@ -1,5 +1,6 @@
-import {fireEvent, render, screen} from '@testing-library/react'
+import {fireEvent, screen} from '@testing-library/react'
 import {ThankYouPage} from './ThankYouPage'
+import { render } from './TestUtils';
 
 describe('ThankYouPage', () => {
     it('renders correctly', () => {
