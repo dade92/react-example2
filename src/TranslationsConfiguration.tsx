@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactNode } from "react";
 import { useRestClientConfiguration } from "./RestClientConfiguration";
-import { RemoteTranslations, RetrieveTranslations } from "./RetrieveTranslations";
+import { RemoteTranslations, useRetrieveTranslations } from "./RetrieveTranslations";
 
 export interface TranslationMap {
     [key: string]: string;
@@ -22,7 +22,7 @@ const TranslationsContext = React.createContext<Translations>({} as Translations
 
 export const TranslationsConfiguration: React.FC<{ children: ReactNode }> = ({children}) => {
     const restClient = useRestClientConfiguration();
-    const translations = RetrieveTranslations(() => restClient.get<RemoteTranslations>('/translations/en'));
+    const translations = useRetrieveTranslations(() => restClient.get<RemoteTranslations>('/translations/en'));
     const defaultTranslationRepository: TranslationRepository = createTranslationRepository(translations);
 
     return (

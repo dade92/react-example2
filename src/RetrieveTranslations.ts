@@ -5,7 +5,7 @@ export interface RemoteTranslations {
     translations: TranslationMap;
 }
 
-export const RetrieveTranslations = (fetch: () => Promise<RemoteTranslations>): TranslationMap => {
+export const useRetrieveTranslations = (fetch: () => Promise<RemoteTranslations>): TranslationMap => {
     const [data, setData] = useState<TranslationMap>({} as TranslationMap);
 
 
