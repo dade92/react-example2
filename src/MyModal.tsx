@@ -1,6 +1,7 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton} from "@mui/material";
 import React, {FC} from "react";
 import CloseIcon from '@mui/icons-material/Close';
+import { useTranslations } from "./TranslationsConfiguration";
 
 interface Props {
     isOpen: boolean;
@@ -9,6 +10,8 @@ interface Props {
 }
 
 export const MyModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
+    const { translationRepository } = useTranslations();
+    
     return (
         <Dialog
             style={{color: 'black'}}
@@ -18,7 +21,7 @@ export const MyModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
             aria-describedby="alert-dialog-description"
             data-testid={'confirm-dialog'}>
             <DialogTitle data-testid={'title'} id="alert-dialog-title">
-                {"Are you sure?"}
+                {translationRepository('appflow.customerData.areyousure')}
                 {
                     <IconButton
                         aria-label="close"
@@ -35,13 +38,13 @@ export const MyModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
             </DialogTitle>
             <DialogContent dividers>
                 <DialogContentText data-testid={'content'} id="alert-dialog-description">
-                    By clicking on confirm you confirm the operation
+                    {translationRepository('appflow.customerData.confirmModal')}
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button data-testid={'close-button'} onClick={onClose}>Disagree</Button>
+                <Button data-testid={'close-button'} onClick={onClose}>{translationRepository('appflow.customerData.disagree')}</Button>
                 <Button data-testid={'confirm-button'} onClick={onConfirm} autoFocus>
-                    Confirm
+                    {translationRepository('appflow.customerData.confirm')}
                 </Button>
             </DialogActions>
         </Dialog>

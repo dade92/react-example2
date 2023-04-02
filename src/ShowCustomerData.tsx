@@ -79,11 +79,11 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                     <Typography variant="body1" data-testid={'username'} gutterBottom>{translationRepository(HI_KEY)} {remoteUser?.name} {remoteUser?.surname}</Typography>}
             </div>
 
-            <TextField id="filled-basic" data-testid={'text'} label="Your alias" variant="outlined"
+            <TextField id="filled-basic" data-testid={'text'} label={translationRepository('appflow.customerData.alias')} variant="outlined"
                        onChange={(e) => setText(e.target.value)}/>
             <FormControlLabel
                 control={<Checkbox data-testid={'checkbox'} checked={checked}
-                                   onChange={(e) => setChecked(e.target.checked)}/>} label="Accept t&c"/>
+                                   onChange={(e) => setChecked(e.target.checked)}/>} label={translationRepository('appflow.customerData.t_and_c')}/>
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
@@ -91,7 +91,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
-                    Upload your picture
+                    {translationRepository('appflow.customerData.photo')}
                     <input hidden accept="image/*" type="file"/>
                 </Button>
             </UploadContainer>
@@ -99,7 +99,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                 !validInput &&
                 <Alert severity="warning" data-testid={'alert'}>
                     <AlertTitle>Warning</AlertTitle>
-                    Input must be greater than 2 letters
+                    {translationRepository('appflow.customerData.alertmessage')}
                 </Alert>
             }
             {

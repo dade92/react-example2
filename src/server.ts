@@ -4,6 +4,18 @@ const translationsResponse = {
     translations: {
         'appflow.customerData.hi': 'Hi',
         'appflow.customerData.t_and_c': 'Accept t&c',
+        'appflow.customerData.alias': 'Your alias',
+        'appflow.customerData.actions': 'Actions',
+        'appflow.customerData.submit': 'Submit',
+        'appflow.customerData.undo': 'Undo',
+        'appflow.customerData.areyousure': 'Are you sure???',
+        'appflow.customerData.confirmModal': 'By clicking on confirm you confirm the operation',
+        'appflow.customerData.confirm': 'Confirm',
+        'appflow.customerData.disagree': 'Disagree',
+        'appflow.customerData.thankyoumessage': 'Thanks for your selection ',
+        'appflow.customerData.restart': 'Restart',
+        'appflow.customerData.photo': 'Upload your picture',
+        'appflow.customerData.alertmessage': 'Input must be greater than two letters',
     }
 }
 

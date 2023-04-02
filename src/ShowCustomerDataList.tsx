@@ -4,14 +4,13 @@ import {RemoteUser} from "./Data";
 import CommentIcon from '@mui/icons-material/Comment';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
-import {adaptUsers, RemoteUserResponse} from "./RemoteUserResponseAdapter";
+import {RemoteUserResponse} from "./RemoteUserResponseAdapter";
 import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {MyModal} from "./MyModal";
-import {createCustomer} from "./CreateCustomer";
-import {RestClient} from "./RestClient";
 import { useRestClientConfiguration } from "./RestClientConfiguration";
+import { useTranslations } from "./TranslationsConfiguration";
 
 enum Action {
     INBOX = "INBOX",
@@ -37,6 +36,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
     const restClient = useRestClientConfiguration();
+    const { translationRepository } = useTranslations();
 
     const fetchData = useCallback(() => {
         restClient.get<RemoteUserResponse>('/retrieveUsers')
@@ -82,7 +82,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
                         </ListItem>
                     }) : <LoaderUsers data-testid={'loader'} error={loaderError}/>
                 }
-                <Divider>ACTIONS</Divider>
+                <Divider>{translationRepository('appflow.customerData.actions')}</Divider>
                 <ListItem disablePadding data-testid={'inbox-item'}>
                     <ListItemButton onClick={() => handleClick(Action.INBOX)}>
                         <ListItemIcon>
@@ -102,10 +102,10 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
                 <Divider/>
                 <ButtonContainer>
                     <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo}
-                            startIcon={<ArrowBackIcon/>}>UNDO</Button>
+                            startIcon={<ArrowBackIcon/>}>{translationRepository('appflow.customerData.undo')}</Button>
                     <Button variant="contained" color="success" data-testid={'submit-button'} onClick={() => {
                         onSubmit()
-                    }}>SUBMIT</Button>
+                    }}>{translationRepository('appflow.customerData.submit')}</Button>
                 </ButtonContainer>
             </Stack>
             {
