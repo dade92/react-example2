@@ -15,4 +15,4 @@ export const RestClientConfiguration: React.FC<{ children: ReactNode }> = ({ chi
 
 export default RestClientConfiguration;
 
-export const useRestClientConfiguration = () => React.useContext(RestClientContext);
+export const useRestClient = () => React.useContext(RestClientContext);

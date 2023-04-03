@@ -7,12 +7,12 @@ import {ShowCustomerDataList} from "./ShowCustomerDataList";
 import {ThankYouPage} from "./ThankYouPage";
 import {ErrorPage} from "./ErrorPage";
 import {CustomLoader} from "./CustomLoader";
-import { useRestClientConfiguration } from "./RestClientConfiguration";
+import { useRestClient } from "./RestClientConfiguration";
 
 export const AppFlow: React.FC = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [username, setUsername] = useState<string>('');
-    const restClient = useRestClientConfiguration();
+    const restClient = useRestClient();
 
     const onCreateCustomerSuccess = (customerName: string) => {
         dispatch({

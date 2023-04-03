@@ -9,7 +9,7 @@ import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {ConfirmationModal} from "./ConfirmationModal";
-import { useRestClientConfiguration } from "./RestClientConfiguration";
+import { useRestClient } from "./RestClientConfiguration";
 import { useTranslations } from "./TranslationsConfiguration";
 
 enum Action {
@@ -35,7 +35,7 @@ const ButtonContainer = styled.div`
 export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm, onModalClose, isModalOpen}) => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
-    const restClient = useRestClientConfiguration();
+    const restClient = useRestClient();
     const { translationRepository } = useTranslations();
 
     const fetchData = useCallback(() => {

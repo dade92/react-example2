@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {RestClient} from "./RestClient";
-import { useRestClientConfiguration } from "./RestClientConfiguration";
+import { useRestClient } from "./RestClientConfiguration";
 import { useTranslations } from "./TranslationsConfiguration";
 
 const Title = styled.h1`
@@ -42,7 +42,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
     const [joke, setJoke] = useState('');
-    const restClient = useRestClientConfiguration();
+    const restClient = useRestClient();
 
     const fetchData = async () => {
         const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Davide');
