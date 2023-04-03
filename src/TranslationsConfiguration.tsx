@@ -1,7 +1,6 @@
-import React from "react";
-import { ReactNode } from "react";
-import { useRestClient } from "./RestClientConfiguration";
-import { RemoteTranslations, useRetrieveTranslations } from "./RetrieveTranslations";
+import React, {ReactNode} from "react";
+import {useRestClient} from "./RestClientConfiguration";
+import {RemoteTranslations, useRetrieveTranslations} from "./RetrieveTranslations";
 
 export interface TranslationMap {
     [key: string]: string;
@@ -14,9 +13,8 @@ interface Translations {
     translationRepository: TranslationRepository;
 }
 
-const createTranslationRepository = (data: TranslationMap): TranslationRepository => {
-    return (key: string): string => data[key] || '';
-}
+const createTranslationRepository = (data: TranslationMap): TranslationRepository =>
+    (key: string): string => data[key] || ''
 
 const TranslationsContext = React.createContext<Translations>({} as Translations);
 
