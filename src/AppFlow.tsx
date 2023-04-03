@@ -10,9 +10,9 @@ import {CustomLoader} from "./CustomLoader";
 import { useRestClient } from "./RestClientConfiguration";
 
 export const AppFlow: React.FC = () => {
+    const restClient = useRestClient();
     const [state, dispatch] = useReducer(reducer, initialState);
     const [username, setUsername] = useState<string>('');
-    const restClient = useRestClient();
 
     const onCreateCustomerSuccess = (customerName: string) => {
         dispatch({
