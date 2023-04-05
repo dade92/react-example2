@@ -6,8 +6,10 @@ import {
     AlertTitle,
     Button,
     Checkbox,
-    FormControlLabel, InputLabel, MenuItem,
-    Select, SelectChangeEvent,
+    FormControlLabel,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
     Snackbar,
     TextField,
     Typography
@@ -17,8 +19,9 @@ import {RemoteUser} from "./Data";
 import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import {useRestClient} from "./RestClientConfiguration";
+import {useTranslations} from "./TranslationsConfiguration";
 import {ChuckNorrisJoke} from "./ChuckNorrisJoke";
-import { useRestClientConfiguration } from "./RestClientConfiguration";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -36,18 +39,22 @@ interface Props {
     onSubmit: (text: string, age: number, checked: boolean) => void;
 }
 
+const HI_KEY = 'appflow.customerData.hi';
+
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const {name, surname} = useUserConfiguration();
+    const {translationRepository} = useTranslations();
     const [text, setText] = useState<string>('');
     const [age, setAge] = useState<string>();
     const [checked, setChecked] = useState(false);
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
-    const restClient = useRestClientConfiguration();
+    const [joke, setJoke] = useState('');
+    const restClient = useRestClient();
 
     const fetchData = async () => {
-        const response: RemoteUser = await restClient.get<RemoteUser>(`/find?name=${name}`);
+        const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Davide');
         console.log(response);
         setRemoteUser(response)
     };
@@ -76,10 +83,12 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <div>
                 {remoteUser == undefined ?
                     <LoaderUsers error={false}/> :
-                    <Typography variant="body1" data-testid={'username'} gutterBottom>Hi {remoteUser?.name} {remoteUser?.surname}</Typography>}
+                    <Typography variant="body1" data-testid={'username'}
+                                gutterBottom>{translationRepository(HI_KEY)} {remoteUser?.name} {remoteUser?.surname}</Typography>}
             </div>
 
-            <TextField id="filled-basic" data-testid={'text'} label="Your alias" variant="outlined"
+            <TextField id="filled-basic" data-testid={'text'}
+                       label={translationRepository('appflow.customerData.alias')} variant="outlined"
                        onChange={(e) => setText(e.target.value)}/>
             <Select
                 value={age}
@@ -95,7 +104,8 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             </Select>
             <FormControlLabel
                 control={<Checkbox data-testid={'checkbox'} checked={checked}
-                                   onChange={(e) => setChecked(e.target.checked)}/>} label="Accept t&c"/>
+                                   onChange={(e) => setChecked(e.target.checked)}/>}
+                label={translationRepository('appflow.customerData.t_and_c')}/>
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
@@ -103,7 +113,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
-                    Upload your picture
+                    {translationRepository('appflow.customerData.photo')}
                     <input hidden accept="image/*" type="file"/>
                 </Button>
             </UploadContainer>
@@ -111,7 +121,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                 !validInput &&
                 <Alert severity="warning" data-testid={'alert'}>
                     <AlertTitle>Warning</AlertTitle>
-                    Input must be greater than 2 letters
+                    {translationRepository('appflow.customerData.alertmessage')}
                 </Alert>
             }
             {

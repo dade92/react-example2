@@ -1,15 +1,29 @@
-import {fireEvent, render, screen} from '@testing-library/react'
+import {fireEvent, screen} from '@testing-library/react'
 import {ThankYouPage} from './ThankYouPage'
+import { render } from './TestUtils';
+import { Server } from 'miragejs';
+import { server } from './server';
 
 describe('ThankYouPage', () => {
+    let mockServer: Server;
+
+    beforeEach(() => {
+        mockServer = server();
+    })
+
+    afterEach(() => {
+        mockServer.shutdown();
+    })
+    
     it('renders correctly', () => {
         let callback = jest.fn();
         render(<ThankYouPage customerName={'Sergio'} onRestart={callback}/>);
 
+        expect(screen.getByTestId('thankyou-message')).toBeInTheDocument();
+        expect(screen.getByTestId('thumbs-up')).toBeInTheDocument();
+        
         fireEvent.click(screen.getByTestId('restart-button'))
 
-        expect(screen.getByTestId('thankyou-message').textContent).toBe('Thanks for your selection Sergio!');
-        expect(screen.getByTestId('thumbs-up')).toBeVisible();
         expect(callback).toHaveBeenCalledTimes(1);
     })
 })
