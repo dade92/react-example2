@@ -4,7 +4,7 @@ import { render } from "./TestUtils";
 import { Server } from "miragejs";
 import { server } from "./server";
 
-describe('MyModal', () => {
+describe('ConfirmationModal', () => {
     let mockServer: Server;
 
     beforeEach(() => {
