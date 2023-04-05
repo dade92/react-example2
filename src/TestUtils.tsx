@@ -6,7 +6,7 @@ import { TranslationsConfiguration } from './TranslationsConfiguration';
 const customRender = (
     ui: ReactElement
 ) => {
-    const AllTheProviders: FC<{ children: ReactNode }> = ({ children }) => (
+    const ContextWrapper: FC<{ children: ReactNode }> = ({ children }) => (
         <RestClientConfiguration>
             <TranslationsConfiguration>
                 {children}
@@ -15,7 +15,7 @@ const customRender = (
       );
 
     return render(ui, {
-        wrapper: AllTheProviders
+        wrapper: ContextWrapper
       });
 }
 
