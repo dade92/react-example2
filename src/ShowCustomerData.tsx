@@ -6,7 +6,9 @@ import {
     AlertTitle,
     Button,
     Checkbox,
+    FormControl,
     FormControlLabel,
+    InputLabel,
     MenuItem,
     Select,
     SelectChangeEvent,
@@ -40,6 +42,17 @@ interface Props {
 }
 
 const HI_KEY = 'appflow.customerData.hi';
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const {name, surname} = useUserConfiguration();
@@ -90,18 +103,22 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <TextField id="filled-basic" data-testid={'text'}
                        label={translationRepository('appflow.customerData.alias')} variant="outlined"
                        onChange={(e) => setText(e.target.value)}/>
-            <Select
-                value={age}
-                label="Age"
-                onChange={handleAgeChange}
-                data-testid={'age-selector'}
-            >
-                {
-                    Array(90).fill(90, 10, 90).map((_, value) => {
-                        return <MenuItem value={value}>{value}</MenuItem>
-                    })
-                }
-            </Select>
+            <FormControl>
+                <InputLabel id="age-label">Age</InputLabel>
+                <Select
+                    value={age}
+                    label="Age"
+                    onChange={handleAgeChange}
+                    data-testid={'age-selector'}
+                    MenuProps={MenuProps}
+                >
+                    {
+                        Array(90).fill(90, 10, 80).map((_, value) => {
+                            return <MenuItem value={value}>{value}</MenuItem>
+                        })
+                    }
+                </Select>
+            </FormControl>
             <FormControlLabel
                 control={<Checkbox data-testid={'checkbox'} checked={checked}
                                    onChange={(e) => setChecked(e.target.checked)}/>}
