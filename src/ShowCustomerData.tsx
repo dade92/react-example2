@@ -104,6 +104,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                 <InputLabel id="age-label">Age</InputLabel>
                 <Select
                     value={age}
+                    native={true}
                     label="Age"
                     onChange={handleAgeChange}
                     data-testid={'age-selector'}
