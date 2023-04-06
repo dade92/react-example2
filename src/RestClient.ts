@@ -1,10 +1,14 @@
 export class RestClient {
-    constructor() {
+
+    host: string;
+
+    constructor(host: string) {
+        this.host = host;
     }
 
     get<T>(url: string, headers: Record<string, string> = {'Content-Type': 'application/json'}): Promise<T> {
         return fetch(
-            url,
+            this.host + url,
             {headers: headers}
         ).then(response => {
             if (!response.ok) {
@@ -16,7 +20,7 @@ export class RestClient {
     }
 
     post<T, S>(url: string, body: T, headers: Record<string, string> = {'Content-Type': 'application/json'}): Promise<S> {
-        return fetch(url, {
+        return fetch(this.host + url, {
             method: 'POST',
             body: JSON.stringify(body),
             headers: headers,

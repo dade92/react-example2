@@ -28,7 +28,7 @@
   "scripts": {
     "start": "REACT_APP_STAGE=local react-scripts start",
     "start-qa": "REACT_APP_STAGE=qa react-scripts start",
-    "build": "react-scripts build",
+    "build": "REACT_APP_STAGE=production react-scripts build",
     "test": "jest --passWithNoTests --silent",
     "test-coverage": "jest --passWithNoTests --silent --coverage",
     "eject": "react-scripts eject",
