@@ -63,7 +63,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
-    const [joke, setJoke] = useState('');
     const restClient = useRestClient();
 
     const fetchData = async () => {
@@ -86,9 +85,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
         }
     }
 
-    const handleAgeChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value)
-    }
+    const handleAgeChange = (event: SelectChangeEvent) => setAge(event.target.value)
 
     return (
         <Stack spacing={1} sx={{width: 600}} data-testid={'stack'}>
