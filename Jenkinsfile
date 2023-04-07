@@ -21,7 +21,7 @@ pipeline {
                 sh 'docker build -t react-example2 .'
             }
         }
-        stage('Push image') {
+        stage('Publish docker image') {
             steps {
                 sh 'docker image tag react-example2 davide92/react-example2:latest'
                 sh 'docker push davide92/react-example2:latest'
