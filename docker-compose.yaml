@@ -1,9 +1,9 @@
 services:
   fe:
     image: davide92/react-example2
-      container_name: fe
-      ports:
-        - "80:80"
+    container_name: fe
+    ports:
+      - "80:80"
   app:
     image: davide92/spring-example2
     container_name: app
