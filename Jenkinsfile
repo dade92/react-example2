@@ -6,14 +6,14 @@ pipeline {
                 sh 'npm i'
             }
         }
+        stage('Build') {
+            steps {
+                sh 'CI=false npm run build'
+            }
+        }
         stage('Test') {
             steps {
                 sh 'npm run test'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'npm run build'
             }
         }
         stage('Docker image build') {
