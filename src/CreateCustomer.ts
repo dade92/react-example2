@@ -4,8 +4,6 @@ interface CreateCustomerResponse {
     code: string;
 }
 
-const restClient = new RestClient();
-
 export const createCustomer = async (restClient: RestClient, name: string, age: number, onSuccess: (customerName: string) => void, onFailure: () => void) => {
     try {
         const response = await restClient.post(
