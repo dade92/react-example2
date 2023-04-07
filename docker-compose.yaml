@@ -38,3 +38,9 @@ services:
     container_name: proxy
     ports:
       - "80:80"
+    # TODO substitute with a proper /alive endpoint
+    healthcheck:
+      test: [ "CMD", "wget", "-qO-", "http://backend/translations/en" ]
+      interval: 5s
+      timeout: 3s
+      retries: 3
