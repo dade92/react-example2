@@ -4,7 +4,7 @@ import RestClient from './RestClient'
 let host = '';
 
 if (process.env.REACT_APP_STAGE === 'production') {
-    host = 'http://localhost:8080'
+    host = 'http://localhost/api'
 }
 
 const RestClientContext = React.createContext<RestClient>(new RestClient(host));
