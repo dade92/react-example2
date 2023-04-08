@@ -36,11 +36,12 @@ services:
   proxy:
     image: davide92/reverse-proxy
     container_name: proxy
+    restart: always
     ports:
       - "80:80"
     # TODO substitute with a proper /alive endpoint
     healthcheck:
-      test: [ "CMD", "wget", "-qO-", "http://backend/translations/en" ]
+      test: [ "CMD", "wget", "-qO-", "http://backend:8080/translations/en" ]
       interval: 5s
       timeout: 3s
       retries: 3
