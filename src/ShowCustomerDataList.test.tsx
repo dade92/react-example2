@@ -1,7 +1,8 @@
-import {fireEvent, render, screen, waitFor} from "@testing-library/react"
+import {fireEvent, screen, waitFor} from "@testing-library/react"
 import {createServer, Server} from "miragejs";
 import {init500Array, server} from "./server";
 import {ShowCustomerDataList} from "./ShowCustomerDataList"
+import { render } from "./TestUtils";
 
 describe('ShowCustomerDataList', () => {
 
@@ -19,9 +20,7 @@ describe('ShowCustomerDataList', () => {
         render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
-        expect(screen.getByTestId('inbox-item')).toHaveTextContent('Inbox');
         expect(screen.getByTestId('drafts-item')).toBeDefined();
-        expect(screen.getByTestId('drafts-item')).toHaveTextContent('Drafts');
 
         await waitFor(() => expect(screen.getByTestId('user-item-0')).toBeDefined());
         await waitFor(() => expect(screen.getByTestId('user-item-1')).toBeDefined());

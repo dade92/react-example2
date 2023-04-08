@@ -1,7 +1,8 @@
-import {cleanup, fireEvent, render, screen, waitFor} from '@testing-library/react';
+import {cleanup, fireEvent, getByRole, screen, waitFor} from '@testing-library/react';
 import {ShowCustomerData} from './ShowCustomerData';
 import {Server} from "miragejs";
 import {server} from "./server";
+import { render } from './TestUtils';
 
 describe('ShowCustomerData', () => {
     let mockServer: Server;
@@ -26,15 +27,19 @@ describe('ShowCustomerData', () => {
         expect(screen.getByTestId('submit-button')).toBeDisabled();
     })
 
-    it('Calls callback after click', () => {
+    it('Calls callback after click', async () => {
         const callback = jest.fn()
 
         render(<ShowCustomerData onSubmit={callback}/>);
 
         fireEvent.click(screen.getByTestId('checkbox'));
         fireEvent.change(screen.getByTestId('text').querySelector('input')!, {target: {value: 'test'}});
-        //TODO this stuff does not work
-        fireEvent.change(screen.getByTestId('age-selector').querySelector('input')!, {target: {value: '30'}});
+
+        fireEvent.click(screen.getByTestId('age-selector'))
+        fireEvent.click(screen.getByText('30'))
+
+        // UserEvent.click(getByRole(screen.getByTestId("age-selector"), "combobox"));
+        // await waitFor(() => UserEvent.click(screen.getByText('25')));
 
         fireEvent.click(screen.getByTestId('submit-button'));
 
