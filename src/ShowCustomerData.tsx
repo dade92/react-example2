@@ -111,7 +111,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                 >
                     {
                         Array(90).fill(90, 10, 80).map((_, value) => {
-                            return <MenuItem value={value}>{value}</MenuItem>
+                            return <MenuItem data-testid={'age-selector-'+value} value={value}>{value}</MenuItem>
                         })
                     }
                 </Select>

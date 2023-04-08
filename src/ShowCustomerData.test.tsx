@@ -36,7 +36,7 @@ describe('ShowCustomerData', () => {
         fireEvent.change(screen.getByTestId('text').querySelector('input')!, {target: {value: 'test'}});
 
         fireEvent.click(screen.getByTestId('age-selector'))
-        fireEvent.click(screen.getByText('30'))
+        await waitFor(() => fireEvent.click(screen.getByText('30')))
 
         // UserEvent.click(getByRole(screen.getByTestId("age-selector"), "combobox"));
         // await waitFor(() => UserEvent.click(screen.getByText('25')));
