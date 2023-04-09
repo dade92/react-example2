@@ -34,6 +34,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 ## Deploy the entire application
 
 You can deploy the frontend, backend, the database and a 
-reverse Nginx proxy by running `docker compose up -d`. Then you can access
+reverse Nginx proxy by running `./run.sh`. Then you can access
 the application at `http://localhost`.\
 See the other repositories for the downloaded images.
