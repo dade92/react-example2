@@ -8,6 +8,7 @@ Go to section [Deploy the entire application](#Deploy the entire application) fo
 
 ## Available Scripts
 
+First thing first, run a `npm install` to install the needed dependencies. \
 In the project directory, you can run:
 
 ### `npm start`
