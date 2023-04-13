@@ -1,16 +1,16 @@
-import { RestClient } from "./RestClient";
+import {RestClient} from "./RestClient";
 
 interface CreateCustomerResponse {
     code: string;
 }
 
-export const createCustomer = async (restClient: RestClient, name: string, onSuccess: (customerName: string) => void, onFailure: () => void) => {
+export const createCustomer = async (restClient: RestClient, name: string, age: number, onSuccess: (customerName: string) => void, onFailure: () => void) => {
     try {
         const response = await restClient.post(
             '/insert',
             {
                 name,
-                age: 30,
+                age,
                 favouriteDestinations: {
                     destinations: [
                         {

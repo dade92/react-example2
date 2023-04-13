@@ -8,10 +8,10 @@ import {RemoteUserResponse} from "./RemoteUserResponseAdapter";
 import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import {ConfirmationModal} from "./ConfirmationModal";
 import { useRestClient } from "./RestClientConfiguration";
 import { useTranslations } from "./TranslationsConfiguration";
-
 enum Action {
     INBOX = "INBOX",
     DRAFTS = "DRAFTS"
