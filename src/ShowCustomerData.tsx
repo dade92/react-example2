@@ -39,15 +39,20 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [text, setText] = useState<string>('');
     const [checked, setChecked] = useState(false);
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
+    const [loadError, setLoadError] = useState<boolean>(false);
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
     const [joke, setJoke] = useState('');
     const restClient = useRestClient();
 
     const fetchData = async () => {
-        const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Davide');
-        console.log(response);
-        setRemoteUser(response)
+        restClient.get<RemoteUser>('/find?name=Davide')
+        .then((response)=> {
+            setRemoteUser(response);
+        })
+        .catch((e)=> {
+            setLoadError(true);
+        });
     };
 
     useEffect(() => {
@@ -75,7 +80,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <Title data-testid="title">AppFlow</Title>
             <div>
                 {remoteUser == undefined ?
-                    <LoaderUsers error={false}/> :
+                    <LoaderUsers error={loadError}/> :
                     <Typography variant="body1" data-testid={'username'} gutterBottom>{translationRepository(HI_KEY)} {remoteUser?.name} {remoteUser?.surname}</Typography>}
             </div>
 

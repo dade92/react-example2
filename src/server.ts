@@ -16,6 +16,7 @@ const translationsResponse = {
         'appflow.customerData.restart': 'Restart',
         'appflow.customerData.photo': 'Upload your picture',
         'appflow.customerData.alertmessage': 'Input must be greater than two letters',
+        'appflow.customerData.noUser': 'Error while loading user information',
     }
 }
 
@@ -55,7 +56,8 @@ const initResponseArray = {
 };
 
 
-const init200 = (): Response => new Response(200, {}, initResponse);
+const findUser200 = (): Response => new Response(200, {}, initResponse);
+const findUser500 = (): Response => new Response(500, {}, {});
 const translations200 = (): Response => new Response(200, {}, translationsResponse);
 const chuckNorris200 = (): Response => new Response(200, {}, chuckNorrisResponse);
 const init200Array = (): Response => new Response(200, {}, initResponseArray);
@@ -67,7 +69,7 @@ export const server: () => Server = () =>
     createServer({
         logging: true,
         routes() {
-            this.get('/find', init200);
+            this.get('/find', findUser500);
             this.get('/translations/:language', translations200);
             this.get('/retrieveUsers', init200Array);
             this.post('/insert', createCustomer204, {timing: 5000});
