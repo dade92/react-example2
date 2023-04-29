@@ -7,7 +7,6 @@ import {RemoteUser} from "./Data";
 import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import {RestClient} from "./RestClient";
 import { useRestClient } from "./RestClientConfiguration";
 import { useTranslations } from "./TranslationsConfiguration";
 
@@ -27,10 +26,6 @@ interface Props {
     onSubmit: (text: string, checked: boolean) => void;
 }
 
-interface ChuckNorrisJokeResponse {
-    value: string;
-}
-
 const HI_KEY = 'appflow.customerData.hi';
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
@@ -42,7 +37,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [loadError, setLoadError] = useState<boolean>(false);
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
-    const [joke, setJoke] = useState('');
     const restClient = useRestClient();
 
     const fetchData = async () => {
@@ -57,12 +51,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
 
     useEffect(() => {
         fetchData()
-    }, []);
-
-    useEffect(() => {
-        restClient.get<ChuckNorrisJokeResponse>(
-            'https://api.chucknorris.io/jokes/random'
-        ).then(joke => setJoke(joke.value))
     }, []);
 
     const submit = (text: string, checked: boolean) => {
@@ -91,8 +79,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                                    onChange={(e) => setChecked(e.target.checked)}/>} label={translationRepository('appflow.customerData.t_and_c')}/>
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
-
-            <Typography data-testid={'joke'} variant="body1" gutterBottom>{joke}</Typography>
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
