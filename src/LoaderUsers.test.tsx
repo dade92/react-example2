@@ -1,7 +1,20 @@
-import {render, screen} from "@testing-library/react"
+import { screen} from "@testing-library/react"
 import {LoaderUsers} from "./LoaderUsers"
+import { Server } from "miragejs";
+import { server } from "./server";
+import { render } from "./TestUtils";
 
 describe('LoaderUsers', () => {
+
+    let mockServer: Server;
+
+    beforeEach(() => {
+        mockServer = server();
+    })
+
+    afterEach(() => {
+        mockServer.shutdown();
+    })
 
     it('renders loader in case of no errors', () => {
         render(<LoaderUsers error={false}/>);
