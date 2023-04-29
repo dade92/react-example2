@@ -7,7 +7,6 @@ import {RemoteUser} from "./Data";
 import Stack from '@mui/material/Stack';
 import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import {RestClient} from "./RestClient";
 import { useRestClient } from "./RestClientConfiguration";
 import { useTranslations } from "./TranslationsConfiguration";
 
@@ -27,10 +26,6 @@ interface Props {
     onSubmit: (text: string, checked: boolean) => void;
 }
 
-interface ChuckNorrisJokeResponse {
-    value: string;
-}
-
 const HI_KEY = 'appflow.customerData.hi';
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
@@ -39,25 +34,23 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const [text, setText] = useState<string>('');
     const [checked, setChecked] = useState(false);
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
+    const [loadError, setLoadError] = useState<boolean>(false);
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
-    const [joke, setJoke] = useState('');
     const restClient = useRestClient();
 
     const fetchData = async () => {
-        const response: RemoteUser = await restClient.get<RemoteUser>('/find?name=Davide');
-        console.log(response);
-        setRemoteUser(response)
+        restClient.get<RemoteUser>('/find?name=Davide')
+        .then((response)=> {
+            setRemoteUser(response);
+        })
+        .catch((e)=> {
+            setLoadError(true);
+        });
     };
 
     useEffect(() => {
         fetchData()
-    }, []);
-
-    useEffect(() => {
-        restClient.get<ChuckNorrisJokeResponse>(
-            'https://api.chucknorris.io/jokes/random'
-        ).then(joke => setJoke(joke.value))
     }, []);
 
     const submit = (text: string, checked: boolean) => {
@@ -75,7 +68,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             <Title data-testid="title">AppFlow</Title>
             <div>
                 {remoteUser == undefined ?
-                    <LoaderUsers error={false}/> :
+                    <LoaderUsers error={loadError}/> :
                     <Typography variant="body1" data-testid={'username'} gutterBottom>{translationRepository(HI_KEY)} {remoteUser?.name} {remoteUser?.surname}</Typography>}
             </div>
 
@@ -86,8 +79,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                                    onChange={(e) => setChecked(e.target.checked)}/>} label={translationRepository('appflow.customerData.t_and_c')}/>
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
-
-            <Typography data-testid={'joke'} variant="body1" gutterBottom>{joke}</Typography>
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
