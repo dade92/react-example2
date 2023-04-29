@@ -41,8 +41,10 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
     const fetchData = useCallback(() => {
         restClient.get<RemoteUserResponse>('/retrieveUsers')
                             .then(r => {
-                                    console.log(r);
                                     setUsers(r.users);
+                                    if(r.users.length === 0) {
+                                        setLoaderError(true);
+                                    }
                                 })
                             .catch(error => {
                                 console.log('error in loading users');

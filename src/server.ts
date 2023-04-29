@@ -61,6 +61,7 @@ const findUser500 = (): Response => new Response(500, {}, {});
 const translations200 = (): Response => new Response(200, {}, translationsResponse);
 const chuckNorris200 = (): Response => new Response(200, {}, chuckNorrisResponse);
 const init200Array = (): Response => new Response(200, {}, initResponseArray);
+const userListEmpty = (): Response => new Response(200, {}, {users:[]});
 export const init500Array = (): Response => new Response(500, {}, {});
 const createCustomer204 = (): Response => new Response(204);
 const createCustomer400 = (): Response => new Response(400, {}, {});
@@ -71,7 +72,7 @@ export const server: () => Server = () =>
         routes() {
             this.get('/find', findUser500);
             this.get('/translations/:language', translations200);
-            this.get('/retrieveUsers', init200Array);
+            this.get('/retrieveUsers', userListEmpty);
             this.post('/insert', createCustomer204, {timing: 5000});
             this.get('https://api.chucknorris.io/jokes/random', chuckNorris200);
         },
