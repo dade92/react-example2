@@ -19,14 +19,14 @@ describe('LoaderUsers', () => {
     it('renders loader in case of no errors', () => {
         render(<LoaderUsers error={false}/>);
 
-        expect(screen.getByTestId('loader')).toBeDefined();
-        expect(screen.queryByTestId('error-label')).toBeNull();
+        expect(screen.getByTestId('loader')).toBeInTheDocument();
+        expect(screen.queryByTestId('error-label')).not.toBeInTheDocument();
     })
 
     it('renders error message in case of errors', () => {
         render(<LoaderUsers error={true}/>);
 
-        expect(screen.queryByTestId('loader')).toBeNull();
-        expect(screen.getByTestId('error-label')).toBeDefined();
+        expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
+        expect(screen.getByTestId('error-label')).toBeInTheDocument();
     })
 })

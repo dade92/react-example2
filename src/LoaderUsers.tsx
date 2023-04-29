@@ -1,4 +1,4 @@
-import {CircularProgress} from "@mui/material";
+import {Alert, AlertTitle, CircularProgress} from "@mui/material";
 import {FC} from "react";
 import { useTranslations } from "./TranslationsConfiguration";
 import styled from "styled-components";
@@ -20,7 +20,9 @@ export const LoaderUsers: FC<Props> = ({error}) => {
         <Wrapper>
             {
                 error
-                    ? <span data-testid={'error-label'}>{translationRepository('appflow.customerData.noUser')}</span>
+                    ? <Alert data-testid={'error-label'} severity="warning">
+                        {translationRepository('appflow.customerData.noUser')}
+                      </Alert>
                     : <CircularProgress data-testid={'loader'}/>
             }
         </Wrapper>
