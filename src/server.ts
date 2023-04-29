@@ -70,9 +70,9 @@ export const server: () => Server = () =>
     createServer({
         logging: true,
         routes() {
-            this.get('/find', findUser200);
+            this.get('/find', findUser500);
             this.get('/translations/:language', translations200);
-            this.get('/retrieveUsers', init200Array);
+            this.get('/retrieveUsers', userListEmpty);
             this.post('/insert', createCustomer204, {timing: 5000});
             this.get('https://api.chucknorris.io/jokes/random', chuckNorris200);
         },
