@@ -20,7 +20,7 @@ const translationsResponse = {
     }
 }
 
-const initResponse = {
+const userResponse = {
     name: 'Sergio',
     surname: 'Botti'
 };
@@ -56,7 +56,7 @@ const initResponseArray = {
 };
 
 
-const findUser200 = (): Response => new Response(200, {}, initResponse);
+const findUser200 = (): Response => new Response(200, {}, userResponse);
 const findUser500 = (): Response => new Response(500, {}, {});
 const translations200 = (): Response => new Response(200, {}, translationsResponse);
 const chuckNorris200 = (): Response => new Response(200, {}, chuckNorrisResponse);
