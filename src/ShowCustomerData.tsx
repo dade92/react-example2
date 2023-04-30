@@ -9,6 +9,7 @@ import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useRestClient } from "./RestClientConfiguration";
 import { useTranslations } from "./TranslationsConfiguration";
+import { UserPanel } from "./UserPanel";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -33,25 +34,8 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const { translationRepository } = useTranslations();
     const [text, setText] = useState<string>('');
     const [checked, setChecked] = useState(false);
-    const [remoteUser, setRemoteUser] = useState<RemoteUser>();
-    const [loadError, setLoadError] = useState<boolean>(false);
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
-    const restClient = useRestClient();
-
-    const fetchData = async () => {
-        restClient.get<RemoteUser>('/find?name=Davide')
-        .then((response)=> {
-            setRemoteUser(response);
-        })
-        .catch((e)=> {
-            setLoadError(true);
-        });
-    };
-
-    useEffect(() => {
-        fetchData()
-    }, []);
 
     const submit = (text: string, checked: boolean) => {
         setValidInput(true);
@@ -66,17 +50,16 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     return (
         <Stack spacing={1} sx={{width: 600}} data-testid={'stack'}>
             <Title data-testid="title">AppFlow</Title>
-            <div>
-                {remoteUser == undefined ?
-                    <LoaderUsers error={loadError}/> :
-                    <Typography variant="body1" data-testid={'username'} gutterBottom>{translationRepository(HI_KEY)} {remoteUser?.name} {remoteUser?.surname}</Typography>}
-            </div>
+
+            <UserPanel /> 
 
             <TextField id="filled-basic" data-testid={'text'} label={translationRepository('appflow.customerData.alias')} variant="outlined"
                        onChange={(e) => setText(e.target.value)}/>
             <FormControlLabel
                 control={<Checkbox data-testid={'checkbox'} checked={checked}
-                                   onChange={(e) => setChecked(e.target.checked)}/>} label={translationRepository('appflow.customerData.t_and_c')}/>
+                                   onChange={(e) => setChecked(e.target.checked)}/>} 
+                                   label={translationRepository('appflow.customerData.t_and_c')}/>
+
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
                     onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
 
@@ -100,7 +83,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                         Data inserted correctly!
                     </Alert>
                 </Snackbar>
-
             }
         </Stack>
     )
