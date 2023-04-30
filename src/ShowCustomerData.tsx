@@ -23,6 +23,16 @@ const UploadContainer = styled.div`
   justify-content: center;
 `;
 
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @media only screen and (min-width: 768px) {
+        width: 50%;
+    }
+    gap: 16px;
+`
+
 interface Props {
     onSubmit: (text: string, checked: boolean) => void;
 }
@@ -48,9 +58,9 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     }
 
     return (
-        <Stack spacing={1} sx={{width: 600}} data-testid={'stack'}>
+        <Wrapper>
             <Title data-testid="title">AppFlow</Title>
-
+            
             <UserPanel /> 
 
             <TextField id="filled-basic" data-testid={'text'} label={translationRepository('appflow.customerData.alias')} variant="outlined"
@@ -84,7 +94,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                     </Alert>
                 </Snackbar>
             }
-        </Stack>
+        </Wrapper>
     )
-
 }

@@ -8,6 +8,7 @@ import {ThankYouPage} from "./ThankYouPage";
 import {ErrorPage} from "./ErrorPage";
 import {CustomLoader} from "./CustomLoader";
 import { useRestClient } from "./RestClientConfiguration";
+import { Title } from "@mui/icons-material";
 
 export const AppFlow: React.FC = () => {
     const restClient = useRestClient();
