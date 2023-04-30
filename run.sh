@@ -1,5 +1,9 @@
 cd deploy
 
+echo "Pulling the latest images..."
+docker compose pull frontend
+docker compose pull backend
+
 echo "Starting database..."
 docker compose up -d mongo
 
