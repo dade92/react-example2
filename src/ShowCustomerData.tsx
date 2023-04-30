@@ -58,7 +58,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper data-testid='wrapper'>
             <Title data-testid="title">AppFlow</Title>
             
             <UserPanel /> 
