@@ -11,8 +11,10 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {ConfirmationModal} from "./ConfirmationModal";
 import { useRestClient } from "./RestClientConfiguration";
 import { useTranslations } from "./TranslationsConfiguration";
+import { StackContainer } from "./StackContainer";
+import { Actions } from "./Actions";
 
-enum Action {
+export enum Action {
     INBOX = "INBOX",
     DRAFTS = "DRAFTS"
 }
@@ -67,7 +69,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
 
     return (
         <>
-            <Stack spacing={1} sx={{width: 600}}>
+            <StackContainer>
                 {
                     users.length > 0 ? users.map((user, index) => {
                         return <ListItem
@@ -85,22 +87,9 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
                     }) : <LoaderUsers data-testid={'loader'} error={loaderError}/>
                 }
                 <Divider>{translationRepository('appflow.customerData.actions')}</Divider>
-                <ListItem disablePadding data-testid={'inbox-item'}>
-                    <ListItemButton onClick={() => handleClick(Action.INBOX)}>
-                        <ListItemIcon>
-                            <InboxIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Inbox"/>
-                    </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding data-testid={'drafts-item'}>
-                    <ListItemButton onClick={() => handleClick(Action.DRAFTS)}>
-                        <ListItemIcon>
-                            <DraftsIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Drafts"/>
-                    </ListItemButton>
-                </ListItem>
+
+                <Actions handleClick={(action: Action) => handleClick(action)}/>
+                
                 <Divider/>
                 <ButtonContainer>
                     <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo}
@@ -109,7 +98,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
                         onSubmit()
                     }}>{translationRepository('appflow.customerData.submit')}</Button>
                 </ButtonContainer>
-            </Stack>
+            </StackContainer>
             {
                 isModalOpen && <ConfirmationModal isOpen={isModalOpen} onClose={onModalClose} onConfirm={onModalConfirm}/>
             }

@@ -6,6 +6,7 @@ import {PhotoCamera} from "@mui/icons-material";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { useTranslations } from "./TranslationsConfiguration";
 import { UserPanel } from "./UserPanel";
+import { StackContainer } from "./StackContainer";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -18,16 +19,6 @@ const UploadContainer = styled.div`
   flex-direction: row;
   justify-content: center;
 `;
-
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    @media only screen and (min-width: 768px) {
-        width: 50%;
-    }
-    gap: 16px;
-`
 
 interface Props {
     onSubmit: (text: string, checked: boolean) => void;
@@ -54,7 +45,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     }
 
     return (
-        <Wrapper data-testid='wrapper'>
+        <StackContainer data-testid='wrapper'>
             <Title data-testid="title">AppFlow</Title>
             
             <UserPanel /> 
@@ -90,6 +81,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
                     </Alert>
                 </Snackbar>
             }
-        </Wrapper>
+        </StackContainer>
     )
 }
