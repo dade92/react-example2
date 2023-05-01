@@ -2,8 +2,6 @@ import {Button, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, Lis
 import React, {useCallback, useEffect, useState} from "react";
 import {RemoteUser} from "./Data";
 import CommentIcon from '@mui/icons-material/Comment';
-import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
 import {RemoteUserResponse} from "./RemoteUserResponseAdapter";
 import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
@@ -89,7 +87,7 @@ export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModal
                 <Divider>{translationRepository('appflow.customerData.actions')}</Divider>
 
                 <Actions handleClick={(action: Action) => handleClick(action)}/>
-                
+
                 <Divider/>
                 <ButtonContainer>
                     <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo}
