@@ -1,13 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {useUserConfiguration} from "./CustomerConfiguration";
 import {Alert, AlertTitle, Button, Checkbox, FormControlLabel, Snackbar, TextField, Typography} from "@mui/material";
 import {PhotoCamera} from "@mui/icons-material";
-import {RemoteUser} from "./Data";
-import Stack from '@mui/material/Stack';
-import {LoaderUsers} from "./LoaderUsers";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { useRestClient } from "./RestClientConfiguration";
 import { useTranslations } from "./TranslationsConfiguration";
 import { UserPanel } from "./UserPanel";
 
