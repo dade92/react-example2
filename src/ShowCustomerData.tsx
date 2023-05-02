@@ -24,8 +24,6 @@ interface Props {
     onSubmit: (text: string, checked: boolean) => void;
 }
 
-const HI_KEY = 'appflow.customerData.hi';
-
 export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
     const {name, surname} = useUserConfiguration();
     const { translationRepository } = useTranslations();
