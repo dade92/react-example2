@@ -2,7 +2,7 @@ import { Snackbar } from "@mui/material";
 import { useState } from "react";
 import SockJsClient from 'react-stomp';
 
-interface TextMessage {
+export interface TextMessage {
     message: string;
 }
 
