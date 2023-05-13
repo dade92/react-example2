@@ -1,6 +1,5 @@
 import { Snackbar } from "@mui/material";
 import { useState } from "react";
-import SockJsClient from 'react-stomp';
 
 export interface TextMessage {
     message: string;
@@ -27,13 +26,13 @@ export const NotificationManager: React.FC = () => {
 
     return (
         <>
-        <SockJsClient
+        {/* <SockJsClient
             url={SOCKET_URL}
             topics={['/topic/message']}
             onConnect={onConnected}
             onDisconnect={console.log("Disconnected!")}
             onMessage={(msg: TextMessage) => onMessageReceived(msg)}
-            debug={false} />
+            debug={false} /> */}
 
         {message !== null && <Snackbar
             open={message !== null}
