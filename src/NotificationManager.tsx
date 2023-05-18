@@ -7,7 +7,7 @@ export interface TextMessage {
 
 const SOCKET_URL = '/ws-message';
 
-export const NotificationManager: React.FC = () => {
+export const OldNotificationManager: React.FC = () => {
     const [message, setMessage] = useState<string| null>(null);
 
     let onConnected = () => {
