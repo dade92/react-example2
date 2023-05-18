@@ -1,4 +1,4 @@
-import React, {ReactNode, useState} from 'react';
+import React from 'react';
 import {AppFlow} from './AppFlow';
 import "./App.css";
 import RestClientConfiguration from "./RestClientConfiguration";
@@ -11,11 +11,11 @@ const App: React.FC = () => {
         <div className='AppFlow'>
             <WebSocketConfigurationProvider>
                 <ConditionalSubscriberComponent />
-                    <RestClientConfiguration>
-                        <TranslationsConfiguration>
-                            <AppFlow/>
-                        </TranslationsConfiguration>
-                    </RestClientConfiguration>
+                <RestClientConfiguration>
+                    <TranslationsConfiguration>
+                        <AppFlow/>
+                    </TranslationsConfiguration>
+                </RestClientConfiguration>
             </WebSocketConfigurationProvider>
         </div>
     );
