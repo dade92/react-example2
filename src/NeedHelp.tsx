@@ -3,7 +3,7 @@ import {Button} from "@mui/material";
 import {useStompClient} from "react-stomp-hooks";
 
 export const NeedHelp: React.FC = () => {
-    const stompClient = useStompClient();
+    const stompClient = process.env.REACT_APP_STAGE !== 'local' ? useStompClient() : null
 
     const callNeedHelp = () => {
         stompClient?.publish({

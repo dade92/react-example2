@@ -7,7 +7,6 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {useTranslations} from "./TranslationsConfiguration";
 import {UserPanel} from "./UserPanel";
 import {StackContainer} from "./StackContainer";
-import {NeedHelp} from "./NeedHelp";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -49,7 +48,6 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit, username, consent})
         <StackContainer data-testid='wrapper'>
             <Title data-testid="title">AppFlow</Title>
 
-            <NeedHelp/>
             <UserPanel/>
 
             <TextField defaultValue={text} id="filled-basic" data-testid={'text'}
