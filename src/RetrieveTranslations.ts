@@ -10,9 +10,7 @@ export const useRetrieveTranslations = (fetch: () => Promise<RemoteTranslations>
 
 
     useEffect(()=> {
-        const response = fetch();
-
-        response.then((r) =>{
+        fetch().then((r) =>{
             setData(r.translations);
         }).catch(()=> {
             console.log('Error fetching translations');

@@ -3,17 +3,16 @@ import {createCustomer} from "./CreateCustomer";
 import {UserConfiguration} from "./CustomerConfiguration";
 import {initialState, reducer, Status} from "./Reducer";
 import {ShowCustomerData} from "./ShowCustomerData";
-import {ShowCustomerDataList} from "./ShowCustomerDataList";
+import {ShowCustomers} from "./ShowCustomers";
 import {ThankYouPage} from "./ThankYouPage";
 import {ErrorPage} from "./ErrorPage";
 import {CustomLoader} from "./CustomLoader";
-import { useRestClient } from "./RestClientConfiguration";
-import { Title } from "@mui/icons-material";
+import {useRestClient} from "./RestClientConfiguration";
 
 export const AppFlow: React.FC = () => {
     const restClient = useRestClient();
     const [state, dispatch] = useReducer(reducer, initialState);
-    const [username, setUsername] = useState<string>('');
+    const [username, setUsername] = useState<string>("");
 
     const onCreateCustomerSuccess = (customerName: string) => {
         dispatch({
@@ -31,30 +30,37 @@ export const AppFlow: React.FC = () => {
     return (
         <>
             {state.status == Status.SHOW_CUSTOMER_DATA && <UserConfiguration>
-                <ShowCustomerData onSubmit={(name: string, checked: boolean) => {
-                    console.log(name + checked);
-                    setUsername(name);
-                    dispatch({
-                        type: 'SHOW_CUSTOMER_DATA_LIST',
-                        customerName: name,
-                        isModalOpen: false
-                    });
-                }}/>
+                <ShowCustomerData consent={state.consent} username={state.username}
+                                  onSubmit={(name: string, checked: boolean) => {
+                                      setUsername(name);
+                                      dispatch({
+                                          type: 'SHOW_CUSTOMERS',
+                                          customerName: name,
+                                          isModalOpen: false,
+                                          consent: checked,
+                                      });
+                                  }}/>
             </UserConfiguration>
             }
-            {state.status == Status.SHOW_CUSTOMER_DATA_LIST &&
-                <ShowCustomerDataList
+            {state.status == Status.SHOW_CUSTOMERS &&
+                <ShowCustomers
                     onUndo={() => {
-                        dispatch({type: 'SHOW_CUSTOMER_DATA'})
+                        dispatch({type: 'SHOW_CUSTOMER_DATA', username: username, consent: true})
                     }}
                     onSubmit={() => {
-                        dispatch({type: 'SHOW_CUSTOMER_DATA_LIST', customerName: username, isModalOpen: true});
+                        dispatch({
+                            type: 'SHOW_CUSTOMERS',
+                            customerName: username,
+                            isModalOpen: true,
+                            consent: state.consent
+                        });
                     }}
                     isModalOpen={state.isModalOpen}
                     onModalClose={() => dispatch({
-                        type: 'SHOW_CUSTOMER_DATA_LIST',
+                        type: 'SHOW_CUSTOMERS',
                         customerName: username,
-                        isModalOpen: false
+                        isModalOpen: false,
+                        consent: state.consent,
                     })}
                     onModalConfirm={() => {
                         createCustomer(restClient, username, onCreateCustomerSuccess, onCreateCustomerFailure);
@@ -65,11 +71,13 @@ export const AppFlow: React.FC = () => {
             {state.status == Status.LOADING && <CustomLoader/>}
             {state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={state.customerName} onRestart={() => {
                 dispatch({
-                    type: 'SHOW_CUSTOMER_DATA'
+                    type: 'SHOW_CUSTOMER_DATA',
+                    username: '',
+                    consent: false,
                 })
             }}/>}
             {state.status == Status.ERROR && <ErrorPage onTryAgain={() => {
-                dispatch({type: 'SHOW_CUSTOMER_DATA'})
+                dispatch({type: 'SHOW_CUSTOMER_DATA', username: '', consent: false})
             }}/>}
         </>
     );
