@@ -16,6 +16,7 @@ type ShowCustomersState = {
     status: Status.SHOW_CUSTOMERS;
     customerName: string;
     isModalOpen: boolean;
+    consent: boolean;
 }
 
 type LoadingState = {
@@ -37,6 +38,7 @@ type ShowCustomersAction = {
     type: 'SHOW_CUSTOMERS';
     customerName: string;
     isModalOpen: boolean;
+    consent: boolean;
 }
 
 type ShowCustomerDataAction = {
@@ -72,7 +74,8 @@ export const reducer = (state: State, action: Action): State => {
             return {
                 status: Status.SHOW_CUSTOMERS,
                 customerName: action.customerName,
-                isModalOpen: action.isModalOpen
+                isModalOpen: action.isModalOpen,
+                consent: action.consent,
             }
         case 'SHOW_CUSTOMER_DATA':
             return {

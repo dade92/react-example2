@@ -30,15 +30,16 @@ export const AppFlow: React.FC = () => {
     return (
         <>
             {state.status == Status.SHOW_CUSTOMER_DATA && <UserConfiguration>
-                <ShowCustomerData consent={state.consent} username={state.username} onSubmit={(name: string, checked: boolean) => {
-                    console.log(name + checked);
-                    setUsername(name);
-                    dispatch({
-                        type: 'SHOW_CUSTOMERS',
-                        customerName: name,
-                        isModalOpen: false
-                    });
-                }}/>
+                <ShowCustomerData consent={state.consent} username={state.username}
+                                  onSubmit={(name: string, checked: boolean) => {
+                                      setUsername(name);
+                                      dispatch({
+                                          type: 'SHOW_CUSTOMERS',
+                                          customerName: name,
+                                          isModalOpen: false,
+                                          consent: checked,
+                                      });
+                                  }}/>
             </UserConfiguration>
             }
             {state.status == Status.SHOW_CUSTOMERS &&
@@ -47,13 +48,19 @@ export const AppFlow: React.FC = () => {
                         dispatch({type: 'SHOW_CUSTOMER_DATA', username: username, consent: true})
                     }}
                     onSubmit={() => {
-                        dispatch({type: 'SHOW_CUSTOMERS', customerName: username, isModalOpen: true});
+                        dispatch({
+                            type: 'SHOW_CUSTOMERS',
+                            customerName: username,
+                            isModalOpen: true,
+                            consent: state.consent
+                        });
                     }}
                     isModalOpen={state.isModalOpen}
                     onModalClose={() => dispatch({
                         type: 'SHOW_CUSTOMERS',
                         customerName: username,
-                        isModalOpen: false
+                        isModalOpen: false,
+                        consent: state.consent,
                     })}
                     onModalConfirm={() => {
                         createCustomer(restClient, username, onCreateCustomerSuccess, onCreateCustomerFailure);
