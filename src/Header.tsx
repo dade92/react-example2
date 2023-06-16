@@ -8,7 +8,8 @@ const HeaderWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     align-self: normal;
-    background-color: red;
+    background-color: white;
+    border: 2px;
 `;
 
 export const Header: React.FC = () => {
