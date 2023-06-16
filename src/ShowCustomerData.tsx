@@ -22,12 +22,13 @@ const UploadContainer = styled.div`
 
 interface Props {
     onSubmit: (text: string, checked: boolean) => void;
+    username: string;
 }
 
-export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
+export const ShowCustomerData: React.FC<Props> = ({onSubmit, username}) => {
     const {name, surname} = useUserConfiguration();
     const { translationRepository } = useTranslations();
-    const [text, setText] = useState<string>('');
+    const [text, setText] = useState<string>(username);
     const [checked, setChecked] = useState(false);
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
@@ -48,7 +49,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit}) => {
             
             <UserPanel /> 
 
-            <TextField id="filled-basic" data-testid={'text'} label={translationRepository('appflow.customerData.alias')} variant="outlined"
+            <TextField defaultValue={text} id="filled-basic" data-testid={'text'} label={translationRepository('appflow.customerData.alias')} variant="outlined"
                        onChange={(e) => setText(e.target.value)}/>
             <FormControlLabel
                 control={<Checkbox data-testid={'checkbox'} checked={checked}

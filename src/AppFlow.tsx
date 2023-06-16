@@ -12,7 +12,7 @@ import {useRestClient} from "./RestClientConfiguration";
 export const AppFlow: React.FC = () => {
     const restClient = useRestClient();
     const [state, dispatch] = useReducer(reducer, initialState);
-    const [username, setUsername] = useState<string>('');
+    const [username, setUsername] = useState<string>("");
 
     const onCreateCustomerSuccess = (customerName: string) => {
         dispatch({
@@ -30,7 +30,7 @@ export const AppFlow: React.FC = () => {
     return (
         <>
             {state.status == Status.SHOW_CUSTOMER_DATA && <UserConfiguration>
-                <ShowCustomerData onSubmit={(name: string, checked: boolean) => {
+                <ShowCustomerData username={state.username} onSubmit={(name: string, checked: boolean) => {
                     console.log(name + checked);
                     setUsername(name);
                     dispatch({
@@ -44,7 +44,7 @@ export const AppFlow: React.FC = () => {
             {state.status == Status.SHOW_CUSTOMERS &&
                 <ShowCustomers
                     onUndo={() => {
-                        dispatch({type: 'SHOW_CUSTOMER_DATA'})
+                        dispatch({type: 'SHOW_CUSTOMER_DATA', username: username})
                     }}
                     onSubmit={() => {
                         dispatch({type: 'SHOW_CUSTOMERS', customerName: username, isModalOpen: true});
@@ -64,11 +64,12 @@ export const AppFlow: React.FC = () => {
             {state.status == Status.LOADING && <CustomLoader/>}
             {state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={state.customerName} onRestart={() => {
                 dispatch({
-                    type: 'SHOW_CUSTOMER_DATA'
+                    type: 'SHOW_CUSTOMER_DATA',
+                    username: ''
                 })
             }}/>}
             {state.status == Status.ERROR && <ErrorPage onTryAgain={() => {
-                dispatch({type: 'SHOW_CUSTOMER_DATA'})
+                dispatch({type: 'SHOW_CUSTOMER_DATA', username: ''})
             }}/>}
         </>
     );
