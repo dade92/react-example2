@@ -1,11 +1,11 @@
-import { Alert, Snackbar } from "@mui/material";
-import React, { useState } from "react";
-import { useSubscription } from "react-stomp-hooks";
-import { TextMessage } from "./NotificationManager";
+import {Alert, Snackbar} from "@mui/material";
+import React, {useState} from "react";
+import {useSubscription} from "react-stomp-hooks";
+import {TextMessage} from "./NotificationManager";
 
 
 export const ConditionalSubscriberComponent: React.FC = () => (
-    process.env.REACT_APP_STAGE !== 'local' ? <SubscriberComponent /> : null
+    process.env.REACT_APP_STAGE !== 'local' ? <SubscriberComponent/> : null
 )
 
 const SubscriberComponent: React.FC = () => {
@@ -15,20 +15,20 @@ const SubscriberComponent: React.FC = () => {
         "/topic/message",
         (message) => setLastMessage((JSON.parse(message.body) as TextMessage).message)
     );
-  
+
     const handleClose = () => {
         setLastMessage(null);
     }
 
     return (
         <>
-        {lastMessage !== null && 
-            <Snackbar open={lastMessage !== null} autoHideDuration={2000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                {lastMessage}
-                </Alert>
-            </Snackbar>
-        }
+            {lastMessage !== null &&
+                <Snackbar open={lastMessage !== null} autoHideDuration={2000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{width: '100%'}}>
+                        {lastMessage}
+                    </Alert>
+                </Snackbar>
+            }
         </>
 
     );
