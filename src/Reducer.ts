@@ -9,6 +9,7 @@ export enum Status {
 type ShowCustomerDataState = {
     status: Status.SHOW_CUSTOMER_DATA;
     username: string;
+    consent: boolean;
 }
 
 type ShowCustomersState = {
@@ -41,6 +42,7 @@ type ShowCustomersAction = {
 type ShowCustomerDataAction = {
     type: 'SHOW_CUSTOMER_DATA',
     username: string,
+    consent: boolean,
 }
 
 type LoadingAction = {
@@ -60,7 +62,8 @@ type Action = ShowCustomerDataAction | ShowCustomersAction | LoadingAction | Tha
 
 export const initialState: State = {
     status: Status.SHOW_CUSTOMER_DATA,
-    username: ''
+    username: '',
+    consent: false,
 };
 
 export const reducer = (state: State, action: Action): State => {
@@ -74,7 +77,8 @@ export const reducer = (state: State, action: Action): State => {
         case 'SHOW_CUSTOMER_DATA':
             return {
                 status: Status.SHOW_CUSTOMER_DATA,
-                username: action.username
+                username: action.username,
+                consent: action.consent
             }
         case 'LOADING':
             return {

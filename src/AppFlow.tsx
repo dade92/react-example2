@@ -30,7 +30,7 @@ export const AppFlow: React.FC = () => {
     return (
         <>
             {state.status == Status.SHOW_CUSTOMER_DATA && <UserConfiguration>
-                <ShowCustomerData username={state.username} onSubmit={(name: string, checked: boolean) => {
+                <ShowCustomerData consent={state.consent} username={state.username} onSubmit={(name: string, checked: boolean) => {
                     console.log(name + checked);
                     setUsername(name);
                     dispatch({
@@ -44,7 +44,7 @@ export const AppFlow: React.FC = () => {
             {state.status == Status.SHOW_CUSTOMERS &&
                 <ShowCustomers
                     onUndo={() => {
-                        dispatch({type: 'SHOW_CUSTOMER_DATA', username: username})
+                        dispatch({type: 'SHOW_CUSTOMER_DATA', username: username, consent: true})
                     }}
                     onSubmit={() => {
                         dispatch({type: 'SHOW_CUSTOMERS', customerName: username, isModalOpen: true});
@@ -65,11 +65,12 @@ export const AppFlow: React.FC = () => {
             {state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={state.customerName} onRestart={() => {
                 dispatch({
                     type: 'SHOW_CUSTOMER_DATA',
-                    username: ''
+                    username: '',
+                    consent: false,
                 })
             }}/>}
             {state.status == Status.ERROR && <ErrorPage onTryAgain={() => {
-                dispatch({type: 'SHOW_CUSTOMER_DATA', username: ''})
+                dispatch({type: 'SHOW_CUSTOMER_DATA', username: '', consent: false})
             }}/>}
         </>
     );

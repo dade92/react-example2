@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { StompSessionProvider } from "react-stomp-hooks";
 
 export const WebSocketConfigurationProvider: React.FC<{children: ReactNode}> = ({children}) => (

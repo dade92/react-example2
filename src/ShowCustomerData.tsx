@@ -23,13 +23,14 @@ const UploadContainer = styled.div`
 interface Props {
     onSubmit: (text: string, checked: boolean) => void;
     username: string;
+    consent: boolean;
 }
 
-export const ShowCustomerData: React.FC<Props> = ({onSubmit, username}) => {
+export const ShowCustomerData: React.FC<Props> = ({onSubmit, username, consent}) => {
     const {name, surname} = useUserConfiguration();
     const { translationRepository } = useTranslations();
     const [text, setText] = useState<string>(username);
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(consent);
     const [validInput, setValidInput] = useState(true);
     const [success, setSuccess] = useState(false);
 

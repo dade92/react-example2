@@ -17,7 +17,7 @@ describe('ShowCustomerData', () => {
     })
 
     it('renders correctly, with button disabled and proper downloaded text', async () => {
-        render(<ShowCustomerData username={'test'} onSubmit={jest.fn}/>);
+        render(<ShowCustomerData username={'test'} consent={false} onSubmit={jest.fn}/>);
 
         expect(screen.getByTestId('title')).toHaveTextContent("AppFlow");
         await waitFor(() => expect(screen.getByTestId('username')).toHaveTextContent("Hi Sergio Botti"));
@@ -28,7 +28,7 @@ describe('ShowCustomerData', () => {
     it('Calls callback after click', () => {
         const callback = jest.fn()
 
-        render(<ShowCustomerData username={''} onSubmit={callback}/>);
+        render(<ShowCustomerData username={''} consent={false} onSubmit={callback}/>);
 
         fireEvent.click(screen.getByTestId('checkbox'));
         fireEvent.change(screen.getByTestId('text').querySelector('input')!, {target: {value: 'test'}});
@@ -43,7 +43,7 @@ describe('ShowCustomerData', () => {
     it('Show error message if text is less than 3 chars', () => {
         const callback = jest.fn()
 
-        render(<ShowCustomerData username={''} onSubmit={callback}/>);
+        render(<ShowCustomerData username={''} consent={false} onSubmit={callback}/>);
 
         fireEvent.click(screen.getByTestId('checkbox'));
         fireEvent.change(screen.getByTestId('text').querySelector('input')!, {target: {value: 'te'}});
