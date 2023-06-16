@@ -1,7 +1,7 @@
 import {ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material"
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
-import {Action} from "./ShowCustomerDataList";
+import {Action} from "./ShowCustomers";
 
 interface Props {
     handleClick: (action: Action) => void;

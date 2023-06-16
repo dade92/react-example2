@@ -1,6 +1,6 @@
 export enum Status {
     SHOW_CUSTOMER_DATA,
-    SHOW_CUSTOMER_DATA_LIST,
+    SHOW_CUSTOMERS,
     LOADING,
     THANK_YOU_PAGE,
     ERROR
@@ -10,8 +10,8 @@ type ShowCustomerDataState = {
     status: Status.SHOW_CUSTOMER_DATA;
 }
 
-type ShowCustomerDataListState = {
-    status: Status.SHOW_CUSTOMER_DATA_LIST;
+type ShowCustomersState = {
+    status: Status.SHOW_CUSTOMERS;
     customerName: string;
     isModalOpen: boolean;
 }
@@ -29,10 +29,10 @@ type ErrorState = {
     status: Status.ERROR
 }
 
-type State = ShowCustomerDataState | ShowCustomerDataListState | LoadingState | ThankYouPageState | ErrorState;
+type State = ShowCustomerDataState | ShowCustomersState | LoadingState | ThankYouPageState | ErrorState;
 
-type ShowCustomerDataListAction = {
-    type: 'SHOW_CUSTOMER_DATA_LIST';
+type ShowCustomersAction = {
+    type: 'SHOW_CUSTOMERS';
     customerName: string;
     isModalOpen: boolean;
 }
@@ -54,7 +54,7 @@ type ErrorAction = {
     type: 'ERROR'
 }
 
-type Action = ShowCustomerDataAction | ShowCustomerDataListAction | LoadingAction | ThankYouPageAction | ErrorAction;
+type Action = ShowCustomerDataAction | ShowCustomersAction | LoadingAction | ThankYouPageAction | ErrorAction;
 
 export const initialState: State = {
     status: Status.SHOW_CUSTOMER_DATA
@@ -62,9 +62,9 @@ export const initialState: State = {
 
 export const reducer = (state: State, action: Action): State => {
     switch (action.type) {
-        case 'SHOW_CUSTOMER_DATA_LIST':
+        case 'SHOW_CUSTOMERS':
             return {
-                status: Status.SHOW_CUSTOMER_DATA_LIST,
+                status: Status.SHOW_CUSTOMERS,
                 customerName: action.customerName,
                 isModalOpen: action.isModalOpen
             }

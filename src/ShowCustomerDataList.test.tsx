@@ -1,7 +1,7 @@
 import {fireEvent, screen, waitFor} from "@testing-library/react"
 import {createServer, Server} from "miragejs";
 import {init500Array, server} from "./server";
-import {ShowCustomerDataList} from "./ShowCustomerDataList"
+import {ShowCustomers} from "./ShowCustomers"
 import { render } from "./TestUtils";
 
 describe('ShowCustomerDataList', () => {
@@ -17,7 +17,7 @@ describe('ShowCustomerDataList', () => {
     })
 
     it('renders correctly', async () => {
-        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
+        render(<ShowCustomers onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
 
         expect(screen.getByTestId('inbox-item')).toBeDefined();
         expect(screen.getByTestId('drafts-item')).toBeDefined();
@@ -28,7 +28,7 @@ describe('ShowCustomerDataList', () => {
 
     it('calls the callback modal when confirmed', () => {
         let onSubmit = jest.fn();
-        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={onSubmit} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
+        render(<ShowCustomers onUndo={jest.fn} onSubmit={onSubmit} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
 
         fireEvent.click(screen.getByTestId('submit-button'));
 
@@ -36,7 +36,7 @@ describe('ShowCustomerDataList', () => {
     })
 
     it('displays the modal if needed', () => {
-        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={true}/>);
+        render(<ShowCustomers onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={true}/>);
 
         expect(screen.getByTestId('confirm-dialog')).toBeVisible();
     })
@@ -49,7 +49,7 @@ describe('ShowCustomerDataList', () => {
                 this.get('/retrieveUsers', init500Array);
             },
         });
-        render(<ShowCustomerDataList onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>);
+        render(<ShowCustomers onUndo={jest.fn} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>);
 
         expect(screen.getByTestId('inbox-item')).toBeVisible();
         expect(screen.getByTestId('loader')).toBeVisible();
@@ -59,7 +59,7 @@ describe('ShowCustomerDataList', () => {
     it('calls onUndo when undo button is clicked', () => {
         const callback = jest.fn();
 
-        render(<ShowCustomerDataList onUndo={callback} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
+        render(<ShowCustomers onUndo={callback} onSubmit={jest.fn} onModalClose={jest.fn} onModalConfirm={jest.fn} isModalOpen={false}/>)
 
         fireEvent.click(screen.getByTestId('undo-button'));
 

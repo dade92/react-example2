@@ -32,7 +32,7 @@ const ButtonContainer = styled.div`
     justify-content: center;
 `;
 
-export const ShowCustomerDataList: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm, onModalClose, isModalOpen}) => {
+export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm, onModalClose, isModalOpen}) => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
     const restClient = useRestClient();

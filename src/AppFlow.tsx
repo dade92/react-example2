@@ -3,7 +3,7 @@ import {createCustomer} from "./CreateCustomer";
 import {UserConfiguration} from "./CustomerConfiguration";
 import {initialState, reducer, Status} from "./Reducer";
 import {ShowCustomerData} from "./ShowCustomerData";
-import {ShowCustomerDataList} from "./ShowCustomerDataList";
+import {ShowCustomers} from "./ShowCustomers";
 import {ThankYouPage} from "./ThankYouPage";
 import {ErrorPage} from "./ErrorPage";
 import {CustomLoader} from "./CustomLoader";
@@ -34,24 +34,24 @@ export const AppFlow: React.FC = () => {
                     console.log(name + checked);
                     setUsername(name);
                     dispatch({
-                        type: 'SHOW_CUSTOMER_DATA_LIST',
+                        type: 'SHOW_CUSTOMERS',
                         customerName: name,
                         isModalOpen: false
                     });
                 }}/>
             </UserConfiguration>
             }
-            {state.status == Status.SHOW_CUSTOMER_DATA_LIST &&
-                <ShowCustomerDataList
+            {state.status == Status.SHOW_CUSTOMERS &&
+                <ShowCustomers
                     onUndo={() => {
                         dispatch({type: 'SHOW_CUSTOMER_DATA'})
                     }}
                     onSubmit={() => {
-                        dispatch({type: 'SHOW_CUSTOMER_DATA_LIST', customerName: username, isModalOpen: true});
+                        dispatch({type: 'SHOW_CUSTOMERS', customerName: username, isModalOpen: true});
                     }}
                     isModalOpen={state.isModalOpen}
                     onModalClose={() => dispatch({
-                        type: 'SHOW_CUSTOMER_DATA_LIST',
+                        type: 'SHOW_CUSTOMERS',
                         customerName: username,
                         isModalOpen: false
                     })}
