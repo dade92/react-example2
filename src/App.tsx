@@ -9,7 +9,6 @@ import {Layout} from "./Layout";
 
 const App: React.FC = () => {
     return (
-        <div className='AppFlow'>
             <WebSocketConfigurationProvider>
                 <ConditionalSubscriberComponent/>
                 <RestClientConfiguration>
@@ -20,7 +19,7 @@ const App: React.FC = () => {
                     </TranslationsConfiguration>
                 </RestClientConfiguration>
             </WebSocketConfigurationProvider>
-        </div>
+
     );
 }
 

@@ -8,6 +8,15 @@ import {ThankYouPage} from "./ThankYouPage";
 import {ErrorPage} from "./ErrorPage";
 import {CustomLoader} from "./CustomLoader";
 import {useRestClient} from "./RestClientConfiguration";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+    display: flex;
+    padding: 16px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+`;
 
 export const AppFlow: React.FC = () => {
     const restClient = useRestClient();
@@ -28,7 +37,7 @@ export const AppFlow: React.FC = () => {
     };
 
     return (
-        <>
+        <Wrapper>
             {state.status == Status.SHOW_CUSTOMER_DATA && <UserConfiguration>
                 <ShowCustomerData consent={state.consent} username={state.username}
                                   onSubmit={(name: string, checked: boolean) => {
@@ -79,6 +88,6 @@ export const AppFlow: React.FC = () => {
             {state.status == Status.ERROR && <ErrorPage onTryAgain={() => {
                 dispatch({type: 'SHOW_CUSTOMER_DATA', username: '', consent: false})
             }}/>}
-        </>
+        </Wrapper>
     );
 };

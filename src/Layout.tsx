@@ -8,6 +8,7 @@ const LayoutWrapper = styled.div`
     width: 100%;
     justify-content: center;
     align-items: center;
+    gap: 24px;
 `;
 
 export const Layout: React.FC = ({children}) => {
