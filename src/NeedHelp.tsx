@@ -3,11 +3,11 @@ import {Button} from "@mui/material";
 import {useStompClient} from "react-stomp-hooks";
 
 export const NeedHelp: React.FC = () => {
-    const stompClient = process.env.REACT_APP_STAGE !== 'local' ? useStompClient() : null
+    const stompClient = useStompClient();
 
     const callNeedHelp = () => {
         stompClient?.publish({
-            destination: `/app/sendMessage`,
+            destination: `/app/needHelp`,
             body: JSON.stringify({'message': 'Hello from frontend!'})
         })
     }
