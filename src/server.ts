@@ -64,6 +64,7 @@ const init200Array = (): Response => new Response(200, {}, initResponseArray);
 const userListEmpty = (): Response => new Response(200, {}, {users:[]});
 export const init500Array = (): Response => new Response(500, {}, {});
 const createCustomer204 = (): Response => new Response(204);
+const wsMessage = (): Response => new Response(200);
 const createCustomer400 = (): Response => new Response(400, {}, {});
 
 export const server: () => Server = () =>
@@ -74,6 +75,7 @@ export const server: () => Server = () =>
             this.get('/translations/:language', translations200);
             this.get('/retrieveUsers', init200Array);
             this.post('/insert', createCustomer204, {timing: 5000});
+            this.post('/ws-message/:id/:id2/xhr', wsMessage);
             this.get('https://api.chucknorris.io/jokes/random', chuckNorris200);
         },
     });

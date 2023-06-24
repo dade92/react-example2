@@ -1,20 +1,31 @@
-import React from "react";
-import {Button} from "@mui/material";
+import React, { useState } from "react";
+import {Alert, Button, Snackbar} from "@mui/material";
 import {useStompClient} from "react-stomp-hooks";
 
 export const NeedHelp: React.FC = () => {
     const stompClient = useStompClient();
+    const [called, setCalled] = useState<boolean>(false);
 
     const callNeedHelp = () => {
         stompClient?.publish({
             destination: `/app/needHelp`,
             body: JSON.stringify({'message': 'Hello from frontend!'})
         })
+        setCalled(true);
     }
 
     return (
-        <Button color="secondary" onClick={callNeedHelp}>
-            Need help?
-        </Button>
+        <>
+            <Button color="secondary" onClick={callNeedHelp}>
+                Need help?
+            </Button>
+            {
+                called && <Snackbar open={called} autoHideDuration={2000} onClose={() => setCalled(false)}>
+                <Alert  severity="success" sx={{width: '100%'}}>
+                    Need help called
+                </Alert>
+            </Snackbar>
+            }
+        </>
     )
 }

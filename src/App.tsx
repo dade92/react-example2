@@ -3,14 +3,14 @@ import {AppFlow} from './AppFlow';
 import "./App.css";
 import RestClientConfiguration from "./RestClientConfiguration";
 import {TranslationsConfiguration} from './TranslationsConfiguration';
-import {ConditionalSubscriberComponent} from './SubscriberComponent';
+import {SubscriberComponent} from './SubscriberComponent';
 import {WebSocketConfigurationProvider} from './WebSocketConfigurationProvider';
 import {Layout} from "./Layout";
 
 const App: React.FC = () => {
     return (
             <WebSocketConfigurationProvider>
-                <ConditionalSubscriberComponent/>
+                <SubscriberComponent/>
                 <RestClientConfiguration>
                     <TranslationsConfiguration>
                         <Layout>
