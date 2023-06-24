@@ -8,13 +8,19 @@ const HeaderWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     align-self: normal;
-    background-color: white;
+    background-color: #F5F5F5;
     border: 2px;
+`;
+
+const StyledSpan = styled.span`
+    color: black;
+    font-weight:bold;
+    margin-left: 8px;
 `;
 
 export const Header: React.FC = () => {
     return <HeaderWrapper>
-        <span>AppFlow</span>
+        <StyledSpan>AppFlow</StyledSpan>
         <NeedHelp/>
     </HeaderWrapper>
 }
