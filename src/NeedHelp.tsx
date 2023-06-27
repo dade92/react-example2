@@ -7,11 +7,13 @@ export const NeedHelp: React.FC = () => {
     const [called, setCalled] = useState<boolean>(false);
 
     const callNeedHelp = () => {
-        stompClient?.publish({
-            destination: `/app/needHelp`,
-            body: JSON.stringify({'message': 'Hello from frontend!'})
-        })
-        setCalled(true);
+        if(stompClient?.connected) {
+            stompClient?.publish({
+                destination: `/app/needHelp`,
+                body: JSON.stringify({'message': 'Hello from frontend!'})
+            })
+            setCalled(true);
+        }
     }
 
     return (
