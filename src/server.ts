@@ -3,6 +3,9 @@ import {createServer, Response, Server} from 'miragejs';
 const translationsResponse = {
     translations: {
         'appflow.customerData.hi': 'Hi',
+        'appflow.needHelp.called': 'Need help called!',
+        'appflow.needHelp.title': 'Need help?',
+        'appflow.customerData.warning': 'Warning',
         'appflow.customerData.t_and_c': 'Accept t&c',
         'appflow.customerData.alias': 'Your alias',
         'appflow.customerData.actions': 'Actions',
@@ -64,6 +67,7 @@ const init200Array = (): Response => new Response(200, {}, initResponseArray);
 const userListEmpty = (): Response => new Response(200, {}, {users:[]});
 export const init500Array = (): Response => new Response(500, {}, {});
 const createCustomer204 = (): Response => new Response(204);
+const wsMessage = (): Response => new Response(200);
 const createCustomer400 = (): Response => new Response(400, {}, {});
 
 export const server: () => Server = () =>
@@ -74,6 +78,5 @@ export const server: () => Server = () =>
             this.get('/translations/:language', translations200);
             this.get('/retrieveUsers', init200Array);
             this.post('/insert', createCustomer204, {timing: 5000});
-            this.get('https://api.chucknorris.io/jokes/random', chuckNorris200);
         },
     });
