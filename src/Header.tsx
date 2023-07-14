@@ -19,9 +19,9 @@ const StyledSpan = styled.span`
     margin-left: 8px;
 `;
 
-export const Header: React.FC = () => {
-    return <HeaderWrapper>
+// isLocalEnv() needed to avoid calling the stomp client init on local dev
+export const Header: React.FC = () =>
+    <HeaderWrapper>
         <StyledSpan>AppFlow</StyledSpan>
-        {isLocalEnv() ? null :  <NeedHelp/>}
+        {isLocalEnv() ? null : <NeedHelp/>}
     </HeaderWrapper>
-}
