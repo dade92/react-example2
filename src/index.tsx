@@ -6,8 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import {server} from './server';
 import {CssBaseline, ThemeProvider} from '@mui/material';
 import {darkTheme} from './customTheme';
+import {isLocalEnv} from "./Utils";
 
-if (process.env.REACT_APP_STAGE === 'local') {
+if (isLocalEnv()) {
     server();
 }
 

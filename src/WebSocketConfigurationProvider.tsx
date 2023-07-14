@@ -5,5 +5,4 @@ export const WebSocketConfigurationProvider: React.FC<{children: ReactNode}> = (
         <StompSessionProvider url={"/ws-message"}>
             {children}    
         </StompSessionProvider>
-    
 )

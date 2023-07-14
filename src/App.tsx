@@ -3,12 +3,13 @@ import {AppFlow} from './AppFlow';
 import "./App.css";
 import RestClientConfiguration from "./RestClientConfiguration";
 import {TranslationsConfiguration} from './TranslationsConfiguration';
-import {ConditionalSubscriber} from './SubscriberComponent';
+import {SubscriberComponent} from './SubscriberComponent';
 import {WebSocketConfigurationProvider} from './WebSocketConfigurationProvider';
 import {Layout} from "./Layout";
+import {isLocalEnv} from "./Utils";
 
-const App: React.FC = () => {
-    return process.env.REACT_APP_STAGE === 'local' ? (
+const App: React.FC = () =>
+    isLocalEnv() ? (
         <RestClientConfiguration>
             <TranslationsConfiguration>
                 <Layout>
@@ -19,7 +20,7 @@ const App: React.FC = () => {
 
     ) : (
         <WebSocketConfigurationProvider>
-            <ConditionalSubscriber/>
+            <SubscriberComponent/>
             <RestClientConfiguration>
                 <TranslationsConfiguration>
                     <Layout>
@@ -28,7 +29,6 @@ const App: React.FC = () => {
                 </TranslationsConfiguration>
             </RestClientConfiguration>
         </WebSocketConfigurationProvider>
-    );
-}
+    )
 
 export default App;

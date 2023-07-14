@@ -3,10 +3,6 @@ import React, {useState} from "react";
 import {useSubscription} from "react-stomp-hooks";
 import {TextMessage} from "./NotificationManager";
 
-
-export const ConditionalSubscriber: React.FC = () =>
-    process.env.REACT_APP_STAGE === 'local' ? null : <SubscriberComponent/>
-
 export const SubscriberComponent: React.FC = () => {
     const [lastMessage, setLastMessage] = useState<string | null>(null);
 
