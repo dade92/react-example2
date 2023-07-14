@@ -3,6 +3,8 @@ import {createServer, Response, Server} from 'miragejs';
 const translationsResponse = {
     translations: {
         'appflow.customerData.hi': 'Hi',
+        'appflow.needHelp.called': 'Need help called!',
+        'appflow.needHelp.title': 'Need help?',
         'appflow.customerData.t_and_c': 'Accept t&c',
         'appflow.customerData.alias': 'Your alias',
         'appflow.customerData.actions': 'Actions',
