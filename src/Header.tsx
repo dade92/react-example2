@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {NeedHelp} from "./NeedHelp";
+import {isLocalEnv} from "./Utils";
 
 const HeaderWrapper = styled.div`
     display: flex;
@@ -21,6 +22,6 @@ const StyledSpan = styled.span`
 export const Header: React.FC = () => {
     return <HeaderWrapper>
         <StyledSpan>AppFlow</StyledSpan>
-        {process.env.REACT_APP_STAGE === 'local' ? null :  <NeedHelp/>}
+        {isLocalEnv() ? null :  <NeedHelp/>}
     </HeaderWrapper>
 }
