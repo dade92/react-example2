@@ -21,6 +21,6 @@ const StyledSpan = styled.span`
 export const Header: React.FC = () => {
     return <HeaderWrapper>
         <StyledSpan>AppFlow</StyledSpan>
-        <NeedHelp/>
+        {process.env.REACT_APP_STAGE === 'local' ? null :  <NeedHelp/>}
     </HeaderWrapper>
 }
