@@ -75,7 +75,5 @@ export const server: () => Server = () =>
             this.get('/translations/:language', translations200);
             this.get('/retrieveUsers', init200Array);
             this.post('/insert', createCustomer204, {timing: 5000});
-            this.post('/ws-message/:id/:id2/xhr', wsMessage);
-            this.get('https://api.chucknorris.io/jokes/random', chuckNorris200);
         },
     });
