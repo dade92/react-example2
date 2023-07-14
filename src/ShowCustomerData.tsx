@@ -59,7 +59,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit, username, consent})
                 label={translationRepository('appflow.customerData.t_and_c')}/>
 
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
-                    onClick={() => submit(text, checked)} disabled={!checked}>Next</Button>
+                    onClick={() => submit(text, checked)} disabled={!checked}>{translationRepository('appflow.customerData.next')}</Button>
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
@@ -70,7 +70,7 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit, username, consent})
             {
                 !validInput &&
                 <Alert severity="warning" data-testid={'alert'}>
-                    <AlertTitle>Warning</AlertTitle>
+                    <AlertTitle>{translationRepository('appflow.customerData.warning')}</AlertTitle>
                     {translationRepository('appflow.customerData.alertmessage')}
                 </Alert>
             }
