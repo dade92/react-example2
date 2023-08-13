@@ -11,6 +11,7 @@ import { useRestClient } from "./RestClientConfiguration";
 import { useTranslations } from "./TranslationsConfiguration";
 import { StackContainer } from "./StackContainer";
 import { Actions } from "./Actions";
+import { MyCarousel } from "./Carousel";
 
 export enum Action {
     INBOX = "INBOX",
@@ -89,6 +90,8 @@ export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm
                 <Actions handleClick={(action: Action) => handleClick(action)}/>
 
                 <Divider/>
+
+                <MyCarousel/>
                 <ButtonContainer>
                     <Button variant="outlined" color="secondary" data-testid={'undo-button'} onClick={onUndo}
                             startIcon={<ArrowBackIcon/>}>{translationRepository('appflow.customerData.undo')}</Button>
