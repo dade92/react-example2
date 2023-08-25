@@ -4,7 +4,7 @@ if (process.env.REACT_APP_STAGE === 'production') {
     host = 'http://localhost/api'
 }
 
-export class RestClient {
+class RestClient {
 
     host: string;
 
