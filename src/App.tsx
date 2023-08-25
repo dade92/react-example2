@@ -1,6 +1,5 @@
 import React from 'react';
 import {AppFlow} from './AppFlow';
-import "./App.css";
 import RestClientConfiguration from "./RestClientConfiguration";
 import {TranslationsConfiguration} from './TranslationsConfiguration';
 import {SubscriberComponent} from './SubscriberComponent';

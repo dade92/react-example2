@@ -6,6 +6,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {useTranslations} from "./TranslationsConfiguration";
 import {UserPanel} from "./UserPanel";
 import {StackContainer} from "./StackContainer";
+import {useCustomerDataStore} from "./stores/CustomerDataStore";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -26,21 +27,8 @@ interface Props {
 }
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit, username, consent}) => {
+    const {states, effects} = useCustomerDataStore(username, consent, onSubmit);
     const {translationRepository} = useTranslations();
-    const [text, setText] = useState<string>(username);
-    const [checked, setChecked] = useState(consent);
-    const [validInput, setValidInput] = useState(true);
-    const [success, setSuccess] = useState(false);
-
-    const submit = (text: string, checked: boolean) => {
-        setValidInput(true);
-        if (text.length >= 0 && text.length < 3) {
-            setValidInput(false);
-        } else {
-            setSuccess(true);
-            onSubmit(text, checked);
-        }
-    }
 
     return (
         <StackContainer data-testid='wrapper'>
@@ -48,16 +36,16 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit, username, consent})
 
             <UserPanel/>
 
-            <TextField defaultValue={text} id="filled-basic" data-testid={'text'}
+            <TextField defaultValue={states.text} id="filled-basic" data-testid={'text'}
                        label={translationRepository('appflow.customerData.alias')} variant="outlined"
-                       onChange={(e) => setText(e.target.value)}/>
+                       onChange={(e) => effects.onTextFieldChange(e.target.value)}/>
             <FormControlLabel
-                control={<Checkbox data-testid={'checkbox'} checked={checked}
-                                   onChange={(e) => setChecked(e.target.checked)}/>}
+                control={<Checkbox data-testid={'checkbox'} checked={states.checked}
+                                   onChange={(e) => effects.onCheckboxSelected(e.target.checked)}/>}
                 label={translationRepository('appflow.customerData.t_and_c')}/>
 
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
-                    onClick={() => submit(text, checked)} disabled={!checked}>{translationRepository('appflow.customerData.next')}</Button>
+                    onClick={() => effects.onConfirm()} disabled={!states.checked}>{translationRepository('appflow.customerData.next')}</Button>
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
@@ -66,15 +54,15 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit, username, consent})
                 </Button>
             </UploadContainer>
             {
-                !validInput &&
+                !states.validInput &&
                 <Alert severity="warning" data-testid={'alert'}>
                     <AlertTitle>{translationRepository('appflow.customerData.warning')}</AlertTitle>
                     {translationRepository('appflow.customerData.alertmessage')}
                 </Alert>
             }
             {
-                <Snackbar open={success} autoHideDuration={2000} data-testid={'snackbar'}
-                          onClose={() => setSuccess(false)}>
+                <Snackbar open={states.success} autoHideDuration={2000} data-testid={'snackbar'}
+                          onClose={() => effects.setSuccess(false)}>
                     <Alert severity="success" sx={{width: '100%'}}>
                         Data inserted correctly!
                     </Alert>
