@@ -1,12 +1,17 @@
 import { RestClient } from "./RestClient";
 
+
 interface CreateCustomerResponse {
     code: string;
 }
 
-export const createCustomer = async (restClient: RestClient, name: string, onSuccess: (customerName: string) => void, onFailure: () => void) => {
-    try {
-        const response = await restClient.post(
+export type CreateCustomerService = (
+    restClient: RestClient,
+    name: string,
+) => Promise<CreateCustomerResponse>;
+
+export const createCustomerRestService: CreateCustomerService = async (restClient: RestClient, name: string) => {
+        return restClient.post(
             '/insert',
             {
                 name,
@@ -23,11 +28,4 @@ export const createCustomer = async (restClient: RestClient, name: string, onSuc
                 }
             }
         )
-        console.log('result is: ', response);
-
-        onSuccess(name);
-    } catch (e: any) {
-        console.log('Response is not OK: ' + e);
-        onFailure();
-    }
 };

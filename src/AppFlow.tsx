@@ -1,5 +1,5 @@
 import React, {useReducer, useState} from "react";
-import {createCustomer} from "./CreateCustomer";
+import {createCustomerRestService} from "./CreateCustomerRestService";
 import {UserConfiguration} from "./CustomerConfiguration";
 import {initialState, reducer, Status} from "./Reducer";
 import {ShowCustomerData} from "./ShowCustomerData";
@@ -9,6 +9,7 @@ import {ErrorPage} from "./ErrorPage";
 import {CustomLoader} from "./CustomLoader";
 import {useRestClient} from "./RestClientConfiguration";
 import styled from "styled-components";
+import {useAppFlowStore} from "./stores/AppFlowStore";
 
 const Wrapper = styled.div`
     display: flex;
@@ -19,75 +20,33 @@ const Wrapper = styled.div`
 `;
 
 export const AppFlow: React.FC = () => {
-    const restClient = useRestClient();
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const [username, setUsername] = useState<string>("");
-
-    const onCreateCustomerSuccess = (customerName: string) => {
-        dispatch({
-            type: 'THANK_YOU_PAGE',
-            customerName: customerName
-        });
-    };
-
-    const onCreateCustomerFailure = () => {
-        dispatch({
-            type: 'ERROR'
-        });
-    };
+    const {states, effects} = useAppFlowStore();
 
     return (
         <Wrapper>
-            {state.status == Status.SHOW_CUSTOMER_DATA && <UserConfiguration>
-                <ShowCustomerData consent={state.consent} username={state.username}
+            {states.state.status == Status.SHOW_CUSTOMER_DATA && <UserConfiguration>
+                <ShowCustomerData consent={states.state.consent} username={states.state.username}
                                   onSubmit={(name: string, checked: boolean) => {
-                                      setUsername(name);
-                                      dispatch({
-                                          type: 'SHOW_CUSTOMERS',
-                                          customerName: name,
-                                          isModalOpen: false,
-                                          consent: checked,
-                                      });
+                                      effects.showCustomerData(name, checked);
                                   }}/>
             </UserConfiguration>
             }
-            {state.status == Status.SHOW_CUSTOMERS &&
+            {states.state.status == Status.SHOW_CUSTOMERS &&
                 <ShowCustomers
                     onUndo={() => {
-                        dispatch({type: 'SHOW_CUSTOMER_DATA', username: username, consent: true})
+                        effects.undoShowCustomers();
                     }}
                     onSubmit={() => {
-                        dispatch({
-                            type: 'SHOW_CUSTOMERS',
-                            customerName: username,
-                            isModalOpen: true,
-                            consent: state.consent
-                        });
+                        effects.showCustomers();
                     }}
-                    isModalOpen={state.isModalOpen}
-                    onModalClose={() => dispatch({
-                        type: 'SHOW_CUSTOMERS',
-                        customerName: username,
-                        isModalOpen: false,
-                        consent: state.consent,
-                    })}
-                    onModalConfirm={() => {
-                        createCustomer(restClient, username, onCreateCustomerSuccess, onCreateCustomerFailure);
-                        dispatch({type: 'LOADING'})
-                    }}
+                    isModalOpen={states.state.isModalOpen}
+                    onModalClose={effects.onModalClose}
+                    onModalConfirm={effects.createCustomerEffect}
                 />
             }
-            {state.status == Status.LOADING && <CustomLoader/>}
-            {state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={state.customerName} onRestart={() => {
-                dispatch({
-                    type: 'SHOW_CUSTOMER_DATA',
-                    username: '',
-                    consent: false,
-                })
-            }}/>}
-            {state.status == Status.ERROR && <ErrorPage onTryAgain={() => {
-                dispatch({type: 'SHOW_CUSTOMER_DATA', username: '', consent: false})
-            }}/>}
+            {states.state.status == Status.LOADING && <CustomLoader/>}
+            {states.state.status == Status.THANK_YOU_PAGE && <ThankYouPage customerName={states.state.customerName} onRestart={effects.onThankyouRestart}/>}
+            {states.state.status == Status.ERROR && <ErrorPage onTryAgain={effects.onTryAgain}/>}
         </Wrapper>
     );
 };
