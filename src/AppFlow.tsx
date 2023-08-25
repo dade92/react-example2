@@ -21,6 +21,7 @@ export const AppFlow: React.FC = () => {
 
     return (
         <Wrapper>
+            {states.state.status == Status.LOADING && <CustomLoader/>}
             {states.state.status == Status.SHOW_CUSTOMER_DATA &&
                 <ShowCustomerData
                     consent={states.state.consent} username={states.state.username}
@@ -41,7 +42,6 @@ export const AppFlow: React.FC = () => {
                     onModalConfirm={effects.onModalConfirm}
                 />
             }
-            {states.state.status == Status.LOADING && <CustomLoader/>}
             {states.state.status == Status.THANK_YOU_PAGE &&
                 <ThankYouPage customerName={states.state.customerName} onRestart={effects.onThankyouRestart}/>
             }
