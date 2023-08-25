@@ -1,17 +1,15 @@
-import {Button, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack} from "@mui/material";
-import React, {useCallback, useEffect, useState} from "react";
-import {RemoteUser} from "./Data";
+import {Button, Divider, IconButton, ListItem, ListItemText} from "@mui/material";
+import React, {useEffect} from "react";
 import CommentIcon from '@mui/icons-material/Comment';
-import {RemoteUserResponse} from "./RemoteUserResponseAdapter";
 import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {ConfirmationModal} from "./ConfirmationModal";
-import { useRestClient } from "./RestClientConfiguration";
-import { useTranslations } from "./TranslationsConfiguration";
-import { StackContainer } from "./StackContainer";
-import { Actions } from "./Actions";
-import { MyCarousel } from "./Carousel";
+import {useTranslations} from "./TranslationsConfiguration";
+import {StackContainer} from "./StackContainer";
+import {Actions} from "./Actions";
+import {MyCarousel} from "./Carousel";
+import {useShowCustomersStore} from "./stores/ShowCustomersStore";
 
 export enum Action {
     INBOX = "INBOX",
@@ -34,29 +32,12 @@ const ButtonContainer = styled.div`
 `;
 
 export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm, onModalClose, isModalOpen}) => {
-    const [users, setUsers] = useState<RemoteUser[]>([]);
-    const [loaderError, setLoaderError] = useState<boolean>(false);
-    const restClient = useRestClient();
+    const {states, effects} = useShowCustomersStore();
     const { translationRepository } = useTranslations();
 
-    const fetchData = useCallback(() => {
-        restClient.get<RemoteUserResponse>('/retrieveUsers')
-                            .then(r => {
-                                    setUsers(r.users);
-                                    if(r.users.length === 0) {
-                                        setLoaderError(true);
-                                    }
-                                })
-                            .catch(error => {
-                                console.log('error in loading users');
-                                setLoaderError(true);
-                            })
-
-    }, []);
-
     useEffect(() => {
-        fetchData()
-    }, [fetchData])
+        effects.fetchData();
+    }, [])
 
     const handleComment = (userName: string) => {
         console.log(userName);
@@ -70,7 +51,7 @@ export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm
         <>
             <StackContainer>
                 {
-                    users.length > 0 ? users.map((user, index) => {
+                    states.users.length > 0 ? states.users.map((user, index) => {
                         return <ListItem
                             key={user.name}
                             data-testid={'user-item-' + `${index}`}
@@ -83,7 +64,7 @@ export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm
                                 {user.name} - {user.surname}
                             </ListItemText>
                         </ListItem>
-                    }) : <LoaderUsers data-testid={'loader'} error={loaderError}/>
+                    }) : <LoaderUsers data-testid={'loader'} error={states.loaderError}/>
                 }
                 <Divider>{translationRepository('appflow.customerData.actions')}</Divider>
 
