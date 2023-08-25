@@ -1,6 +1,5 @@
 import {useReducer, useState} from "react";
 import {initialState, reducer, State} from "../utils/Reducer";
-import {useRestClient} from "../RestClientConfiguration";
 import {createCustomerRestService} from "../services/CreateCustomerService";
 
 export interface AppFlowStore {
@@ -22,7 +21,6 @@ export interface AppFlowStore {
 
 export const useAppFlowStore = (): AppFlowStore => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const restClient = useRestClient();
     const [username, setUsername] = useState<string>("");
 
     const onCreateCustomerSuccess = (customerName: string) => {
