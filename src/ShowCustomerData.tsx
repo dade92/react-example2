@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {useUserConfiguration} from "./CustomerConfiguration";
 import {Alert, AlertTitle, Button, Checkbox, FormControlLabel, Snackbar, TextField} from "@mui/material";
 import {PhotoCamera} from "@mui/icons-material";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -27,7 +26,6 @@ interface Props {
 }
 
 export const ShowCustomerData: React.FC<Props> = ({onSubmit, username, consent}) => {
-    const {name, surname} = useUserConfiguration();
     const {translationRepository} = useTranslations();
     const [text, setText] = useState<string>(username);
     const [checked, setChecked] = useState(consent);

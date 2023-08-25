@@ -1,5 +1,4 @@
 import React from "react";
-import {UserConfiguration} from "./CustomerConfiguration";
 import {Status} from "./Reducer";
 import {ShowCustomerData} from "./ShowCustomerData";
 import {ShowCustomers} from "./ShowCustomers";
@@ -22,13 +21,12 @@ export const AppFlow: React.FC = () => {
 
     return (
         <Wrapper>
-            {states.state.status == Status.SHOW_CUSTOMER_DATA && <UserConfiguration>
+            {states.state.status == Status.SHOW_CUSTOMER_DATA &&
                 <ShowCustomerData
                     consent={states.state.consent} username={states.state.username}
                     onSubmit={(name: string, checked: boolean) => {
                         effects.showCustomerData(name, checked);
                     }}/>
-            </UserConfiguration>
             }
             {states.state.status == Status.SHOW_CUSTOMERS &&
                 <ShowCustomers

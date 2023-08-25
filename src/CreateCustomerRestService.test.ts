@@ -1,7 +1,6 @@
 jest.mock('./RestClient');
 import {staticRestClient} from "./RestClient";
 
-
 import {createCustomerRestService} from "./CreateCustomerRestService";
 
 describe('CreateCustomerRestService', () => {
