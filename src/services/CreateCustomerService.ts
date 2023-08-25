@@ -1,6 +1,5 @@
 import {staticRestClient} from "../RestClient";
 
-
 interface CreateCustomerResponse {
     code: string;
 }
