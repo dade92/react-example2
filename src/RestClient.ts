@@ -1,3 +1,9 @@
+let host = '';
+
+if (process.env.REACT_APP_STAGE === 'production') {
+    host = 'http://localhost/api'
+}
+
 export class RestClient {
 
     host: string;
@@ -36,5 +42,7 @@ export class RestClient {
         });
     }
 }
+
+export const staticRestClient = new RestClient(host);
 
 export default RestClient;

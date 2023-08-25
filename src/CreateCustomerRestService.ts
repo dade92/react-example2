@@ -1,4 +1,4 @@
-import {RestClient} from "./RestClient";
+import {RestClient, staticRestClient} from "./RestClient";
 
 
 interface CreateCustomerResponse {
@@ -6,12 +6,11 @@ interface CreateCustomerResponse {
 }
 
 export type CreateCustomerService = (
-    restClient: RestClient,
     name: string,
 ) => Promise<CreateCustomerResponse>;
 
-export const createCustomerRestService: CreateCustomerService = async (restClient: RestClient, name: string) =>
-    restClient.post(
+export const createCustomerRestService: CreateCustomerService = async (name: string) =>
+    staticRestClient.post(
         '/insert',
         {
             name,

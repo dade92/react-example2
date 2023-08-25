@@ -39,7 +39,7 @@ export const useAppFlowStore = (): AppFlowStore => {
     };
 
     const createCustomerEffect = () => {
-        createCustomerRestService(restClient, username)
+        createCustomerRestService(username)
             .then((response) => {
                 onCreateCustomerSuccess(response.code)
             })
