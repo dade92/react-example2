@@ -16,4 +16,18 @@ describe('CreateCustomerRestService', () => {
             "/insert",
             {"age": 30, "favouriteDestinations": {"destinations": [{"city": "Milan"}, {"city": "Erba"}]}, "name": "ciccio pasticcio"})
     })
+
+    it('fail', async () => {
+        const error = new Error('failure');
+        mockedRestClient.post.mockReturnValue(Promise.reject(error));
+
+        try {
+            await createCustomerRestService('ciccio pasticcio');
+        } catch (e) {
+            expect(e).toEqual(error)
+            expect(mockedRestClient.post).toHaveBeenCalledWith(
+                "/insert",
+                {"age": 30, "favouriteDestinations": {"destinations": [{"city": "Milan"}, {"city": "Erba"}]}, "name": "ciccio pasticcio"})
+        }
+    })
 })
