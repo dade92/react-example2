@@ -1,13 +1,11 @@
-import React, {useReducer, useState} from "react";
-import {createCustomerRestService} from "./CreateCustomerRestService";
+import React from "react";
 import {UserConfiguration} from "./CustomerConfiguration";
-import {initialState, reducer, Status} from "./Reducer";
+import {Status} from "./Reducer";
 import {ShowCustomerData} from "./ShowCustomerData";
 import {ShowCustomers} from "./ShowCustomers";
 import {ThankYouPage} from "./ThankYouPage";
 import {ErrorPage} from "./ErrorPage";
 import {CustomLoader} from "./CustomLoader";
-import {useRestClient} from "./RestClientConfiguration";
 import styled from "styled-components";
 import {useAppFlowStore} from "./stores/AppFlowStore";
 
