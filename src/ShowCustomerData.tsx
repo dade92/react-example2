@@ -40,8 +40,9 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit, username, consent})
                        label={translationRepository('appflow.customerData.alias')} variant="outlined"
                        onChange={(e) => effects.onTextFieldChange(e.target.value)}/>
             <FormControlLabel
-                control={<Checkbox data-testid={'checkbox'} checked={states.checked}
-                                   onChange={(e) => effects.onCheckboxSelected(e.target.checked)}/>}
+                control={<Checkbox data-testid={'checkbox'}
+                           checked={states.checked}
+                           onChange={(e) => effects.onCheckboxSelected(e.target.checked)}/>}
                 label={translationRepository('appflow.customerData.t_and_c')}/>
 
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
