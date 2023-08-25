@@ -5,6 +5,7 @@ import {Typography} from "@mui/material";
 import {useTranslations} from "./TranslationsConfiguration";
 import styled from "styled-components";
 import {retrieveSingleCustomerRestService} from "./services/RetrieveCustomersService";
+import {useUserPanelStore} from "./stores/UserPanelStore";
 
 const HI_KEY = 'appflow.customerData.hi';
 
@@ -15,30 +16,16 @@ const Wrapper = styled.div`
 `;
 
 export const UserPanel: React.FC = () => {
+    const {states} = useUserPanelStore();
     const { translationRepository } = useTranslations();
-    const [remoteUser, setRemoteUser] = useState<RemoteUser>();
-    const [loadError, setLoadError] = useState<boolean>(false);
-    
-    const fetchData = async () => {
-        retrieveSingleCustomerRestService('Davide')
-            .then((response)=> {
-                setRemoteUser(response);
-            })
-            .catch((e)=> {
-                setLoadError(true);
-            });
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     
     return (
         <Wrapper>
-            {remoteUser == undefined ?
-                <LoaderUsers error={loadError}/> :
-                <Typography variant="body1" data-testid={'username'} gutterBottom>{translationRepository(HI_KEY)} {remoteUser?.name} {remoteUser?.surname}</Typography>}
+            {states.remoteUser == undefined ?
+                <LoaderUsers error={states.loadError}/> :
+                <Typography variant="body1" data-testid={'username'} gutterBottom>
+                    {translationRepository(HI_KEY)} {states.remoteUser.name} {states.remoteUser.surname}
+                </Typography>}
         </Wrapper>
     )
 }
