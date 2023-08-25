@@ -1,7 +1,7 @@
 import {retrieveCustomersRestService} from "./RetrieveCustomersService";
 import {staticRestClient} from "../utils/RestClient";
 
-jest.mock('../RestClient');
+jest.mock('../utils/RestClient');
 
 describe('RetrieveCustomersRestService', () => {
     const mockedRestClient = jest.mocked(staticRestClient);

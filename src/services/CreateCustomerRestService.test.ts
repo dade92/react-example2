@@ -1,4 +1,4 @@
-jest.mock('../RestClient');
+jest.mock('../utils/RestClient');
 import {staticRestClient} from "../utils/RestClient";
 
 import {createCustomerRestService} from "./CreateCustomerService";
