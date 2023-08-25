@@ -44,5 +44,3 @@ class RestClient {
 }
 
 export const staticRestClient = new RestClient(host);
-
-export default RestClient;
