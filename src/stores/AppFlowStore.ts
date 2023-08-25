@@ -1,7 +1,7 @@
 import {useReducer, useState} from "react";
 import {initialState, reducer, State} from "../Reducer";
 import {useRestClient} from "../RestClientConfiguration";
-import {createCustomerRestService} from "../CreateCustomerRestService";
+import {createCustomerRestService} from "../services/CreateCustomerRestService";
 
 export interface AppFlowStore {
     states: {
