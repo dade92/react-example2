@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { RemoteUser } from "./Data";
-import { useRestClient } from "./RestClientConfiguration";
-import { LoaderUsers } from "./LoaderUsers";
-import { Typography } from "@mui/material";
-import { useTranslations } from "./TranslationsConfiguration";
+import {useEffect, useState} from "react";
+import {RemoteUser} from "./Data";
+import {LoaderUsers} from "./LoaderUsers";
+import {Typography} from "@mui/material";
+import {useTranslations} from "./TranslationsConfiguration";
 import styled from "styled-components";
+import {retrieveSingleCustomerRestService} from "./services/RetrieveCustomersService";
 
 const HI_KEY = 'appflow.customerData.hi';
 
@@ -15,19 +15,18 @@ const Wrapper = styled.div`
 `;
 
 export const UserPanel: React.FC = () => {
-    const restClient = useRestClient();
     const { translationRepository } = useTranslations();
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
     const [loadError, setLoadError] = useState<boolean>(false);
     
     const fetchData = async () => {
-        restClient.get<RemoteUser>('/find?name=Davide')
-        .then((response)=> {
-            setRemoteUser(response);
-        })
-        .catch((e)=> {
-            setLoadError(true);
-        });
+        retrieveSingleCustomerRestService('Davide')
+            .then((response)=> {
+                setRemoteUser(response);
+            })
+            .catch((e)=> {
+                setLoadError(true);
+            });
     };
 
     useEffect(() => {
