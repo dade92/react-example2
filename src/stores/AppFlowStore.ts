@@ -9,7 +9,7 @@ export interface AppFlowStore {
         state: State
     }
     effects: {
-        createCustomerEffect: () => void;
+        onModalConfirm: () => void;
         setUsername: (name: string) => void;
         showCustomerData: (name: string, checked: boolean) => void;
         undoShowCustomers: () => void;
@@ -101,7 +101,7 @@ export const useAppFlowStore = (): AppFlowStore => {
             state
         },
         effects: {
-            createCustomerEffect,
+            onModalConfirm: createCustomerEffect,
             setUsername,
             showCustomerData,
             undoShowCustomers,
