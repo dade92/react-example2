@@ -1,9 +1,7 @@
 import {RemoteUser} from "../Data";
-import {useState} from "react";
-import {useRestClient} from "../RestClientConfiguration";
-import {RemoteUserResponse} from "../RemoteUserResponseAdapter";
-import {staticRestClient} from "../RestClient";
+import {useEffect, useState} from "react";
 import {retrieveCustomersRestService} from "../services/RetrieveCustomersService";
+import {Action} from "../ShowCustomers";
 
 export interface ShowCustomerStore {
     states: {
@@ -12,6 +10,8 @@ export interface ShowCustomerStore {
     },
     effects: {
         fetchData: () => void;
+        handleClick: (action: Action) => void;
+        handleComment: (userName: string) => void;
     }
 }
 
@@ -33,13 +33,28 @@ export const useShowCustomersStore = (): ShowCustomerStore => {
             })
     }
 
+    useEffect(() => {
+        fetchData();
+    }, [])
+
+    const handleComment = (userName: string) => {
+        console.log(userName);
+    }
+
+    const handleClick = (action: Action) => {
+        console.log(action);
+    }
+
+
     return {
         states: {
             users: users,
             loaderError: loaderError
         },
         effects: {
-            fetchData
+            fetchData,
+            handleClick,
+            handleComment
         }
     }
 

@@ -35,18 +35,6 @@ export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm
     const {states, effects} = useShowCustomersStore();
     const { translationRepository } = useTranslations();
 
-    useEffect(() => {
-        effects.fetchData();
-    }, [])
-
-    const handleComment = (userName: string) => {
-        console.log(userName);
-    }
-
-    const handleClick = (action: Action) => {
-        console.log(action);
-    }
-
     return (
         <>
             <StackContainer>
@@ -56,7 +44,7 @@ export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm
                             key={user.name}
                             data-testid={'user-item-' + `${index}`}
                             secondaryAction={
-                                <IconButton aria-label="comment" onClick={() => handleComment(user.name)}>
+                                <IconButton aria-label="comment" onClick={() => effects.handleComment(user.name)}>
                                     <CommentIcon/>
                                 </IconButton>}
                         >
@@ -68,7 +56,7 @@ export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm
                 }
                 <Divider>{translationRepository('appflow.customerData.actions')}</Divider>
 
-                <Actions handleClick={(action: Action) => handleClick(action)}/>
+                <Actions handleClick={(action: Action) => effects.handleClick(action)}/>
 
                 <Divider/>
 
