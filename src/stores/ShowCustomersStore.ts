@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useRestClient} from "../RestClientConfiguration";
 import {RemoteUserResponse} from "../RemoteUserResponseAdapter";
 import {staticRestClient} from "../RestClient";
+import {retrieveCustomersRestService} from "../services/RetrieveCustomersService";
 
 export interface ShowCustomerStore {
     states: {
@@ -19,7 +20,7 @@ export const useShowCustomersStore = (): ShowCustomerStore => {
     const [loaderError, setLoaderError] = useState<boolean>(false);
 
     const fetchData = () => {
-        staticRestClient.get<RemoteUserResponse>('/retrieveUsers')
+        retrieveCustomersRestService()
             .then(r => {
                 setUsers(r.users);
                 if(r.users.length === 0) {
