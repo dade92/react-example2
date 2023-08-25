@@ -1,5 +1,5 @@
 import {useReducer, useState} from "react";
-import {initialState, reducer, State} from "../Reducer";
+import {initialState, reducer, State} from "../utils/Reducer";
 import {useRestClient} from "../RestClientConfiguration";
 import {createCustomerRestService} from "../services/CreateCustomerService";
 

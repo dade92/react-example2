@@ -1,5 +1,5 @@
 import {RemoteTranslations} from "../RetrieveTranslations";
-import {staticRestClient} from "../RestClient";
+import {staticRestClient} from "../utils/RestClient";
 
 export type TranslationService = () => Promise<RemoteTranslations>;
 

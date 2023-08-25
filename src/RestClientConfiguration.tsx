@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import RestClient from './RestClient'
+import RestClient from './utils/RestClient'
 
 let host = '';
 

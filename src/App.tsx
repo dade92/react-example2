@@ -5,7 +5,7 @@ import {TranslationsConfiguration} from './TranslationsConfiguration';
 import {SubscriberComponent} from './SubscriberComponent';
 import {WebSocketConfigurationProvider} from './WebSocketConfigurationProvider';
 import {Layout} from "./Layout";
-import {isLocalEnv} from "./Utils";
+import {isLocalEnv} from "./utils/Utils";
 
 const App: React.FC = () =>
     isLocalEnv() ? (

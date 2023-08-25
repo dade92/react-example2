@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {server} from './server';
 import {CssBaseline, ThemeProvider} from '@mui/material';
 import {darkTheme} from './customTheme';
-import {isLocalEnv} from "./Utils";
+import {isLocalEnv} from "./utils/Utils";
 
 if (isLocalEnv()) {
     server();

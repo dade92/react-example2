@@ -1,5 +1,5 @@
 import {RemoteUserResponse} from "../RemoteUserResponseAdapter";
-import {staticRestClient} from "../RestClient";
+import {staticRestClient} from "../utils/RestClient";
 import {RemoteUser} from "../Data";
 
 export type RetrieveCustomersService = () => Promise<RemoteUserResponse>;

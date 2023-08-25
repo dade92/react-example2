@@ -1,4 +1,4 @@
-import {staticRestClient} from "../RestClient";
+import {staticRestClient} from "../utils/RestClient";
 
 interface CreateCustomerResponse {
     code: string;

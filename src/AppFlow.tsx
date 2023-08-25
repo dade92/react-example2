@@ -1,5 +1,5 @@
 import React from "react";
-import {Status} from "./Reducer";
+import {Status} from "./utils/Reducer";
 import {ShowCustomerData} from "./ShowCustomerData";
 import {ShowCustomers} from "./ShowCustomers";
 import {ThankYouPage} from "./ThankYouPage";

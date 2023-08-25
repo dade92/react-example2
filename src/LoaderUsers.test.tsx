@@ -2,7 +2,7 @@ import { screen} from "@testing-library/react"
 import {LoaderUsers} from "./LoaderUsers"
 import { Server } from "miragejs";
 import { server } from "./server";
-import { render } from "./TestUtils";
+import { render } from "./utils/TestUtils";
 
 describe('LoaderUsers', () => {
 
