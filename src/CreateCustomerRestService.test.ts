@@ -1,10 +1,11 @@
 jest.mock('./RestClient');
-const mockedRestClient = jest.mocked(staticRestClient);
-
-import {createCustomerRestService} from "./CreateCustomerRestService";
 import {staticRestClient} from "./RestClient";
 
+
+import {createCustomerRestService} from "./CreateCustomerRestService";
+
 describe('CreateCustomerRestService', () => {
+    const mockedRestClient = jest.mocked(staticRestClient);
 
     it('happy path', async () => {
         const expectedResponse = {code: 'abc'};
