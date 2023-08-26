@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { CustomLoader } from "./CustomLoader";
-import styled from "styled-components";
 import { CenterWrapper } from "./CenterWrapper";
 import { useTranslations } from "./TranslationsConfiguration";
 
