@@ -26,7 +26,7 @@ export const AppFlow: React.FC = () => {
                 <ShowCustomerData
                     consent={states.state.consent} username={states.state.username}
                     onSubmit={(name: string, checked: boolean) => {
-                        effects.showCustomerData(name, checked);
+                        effects.onshowCustomerData(name, checked);
                     }}/>
             }
             {states.state.status == Status.SHOW_CUSTOMERS &&
@@ -35,7 +35,7 @@ export const AppFlow: React.FC = () => {
                         effects.undoShowCustomers();
                     }}
                     onSubmit={() => {
-                        effects.showCustomers();
+                        effects.onshowCustomersSubmit();
                     }}
                     isModalOpen={states.state.isModalOpen}
                     onModalClose={effects.onModalClose}

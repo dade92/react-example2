@@ -4,7 +4,7 @@ import {init500Array, server} from "./server";
 import {ShowCustomers} from "./ShowCustomers"
 import { render } from "./utils/TestUtils";
 
-describe('ShowCustomerDataList', () => {
+describe('ShowCustomers', () => {
 
     let mockServer: Server;
 

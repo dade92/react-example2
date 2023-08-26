@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-export interface CustomerDataStore {
+interface CustomerDataStore {
     states: {
         text: string,
         checked: boolean,

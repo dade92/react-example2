@@ -2,7 +2,7 @@ import {useReducer, useState} from "react";
 import {initialState, reducer, State} from "../utils/Reducer";
 import {createCustomerRestService} from "../services/CreateCustomerService";
 
-export interface AppFlowStore {
+interface AppFlowStore {
     states: {
         username: string;
         state: State
@@ -10,9 +10,9 @@ export interface AppFlowStore {
     effects: {
         onModalConfirm: () => void;
         setUsername: (name: string) => void;
-        showCustomerData: (name: string, checked: boolean) => void;
+        onshowCustomerData: (name: string, checked: boolean) => void;
         undoShowCustomers: () => void;
-        showCustomers: () => void;
+        onshowCustomersSubmit: () => void;
         onModalClose: () => void;
         onThankyouRestart: () => void;
         onTryAgain: () => void;
@@ -37,6 +37,9 @@ export const useAppFlowStore = (): AppFlowStore => {
     };
 
     const createCustomer = () => {
+        dispatch({
+            type: 'LOADING'
+        });
         createCustomerRestService(username)
             .then((response) => {
                 onCreateCustomerSuccess(response.code);
@@ -46,7 +49,7 @@ export const useAppFlowStore = (): AppFlowStore => {
             })
     }
     
-    const showCustomerData = (name: string, checked: boolean) => {
+    const onshowCustomerData = (name: string, checked: boolean) => {
         setUsername(name);
         dispatch({
             type: 'SHOW_CUSTOMERS',
@@ -61,7 +64,7 @@ export const useAppFlowStore = (): AppFlowStore => {
     }
 
     //TODO consent here?
-    const showCustomers = () => {
+    const onshowCustomersSubmit = () => {
         dispatch({
             type: 'SHOW_CUSTOMERS',
             customerName: username,
@@ -99,9 +102,9 @@ export const useAppFlowStore = (): AppFlowStore => {
         effects: {
             onModalConfirm: createCustomer,
             setUsername,
-            showCustomerData,
+            onshowCustomerData,
             undoShowCustomers,
-            showCustomers,
+            onshowCustomersSubmit,
             onModalClose,
             onThankyouRestart,
             onTryAgain

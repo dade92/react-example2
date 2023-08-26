@@ -78,6 +78,6 @@ export const server: () => Server = () =>
             this.get('/find', findUser200);
             this.get('/translations/:language', translations200);
             this.get('/retrieveUsers', init200Array);
-            this.post('/insert', createCustomer204, {timing: 5000});
+            this.post('/insert', createCustomer204, {timing: 3000});
         },
     });

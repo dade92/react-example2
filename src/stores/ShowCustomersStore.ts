@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {retrieveCustomersRestService} from "../services/RetrieveCustomersService";
 import {Action} from "../ShowCustomers";
 
-export interface ShowCustomerStore {
+interface ShowCustomerStore {
     states: {
         users: RemoteUser[];
         loaderError: boolean;
@@ -39,7 +39,6 @@ export const useShowCustomersStore = (): ShowCustomerStore => {
     const handleClick = (action: Action) => {
         console.log(action);
     }
-
 
     return {
         states: {
