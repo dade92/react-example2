@@ -9,7 +9,6 @@ export interface ShowCustomerStore {
         loaderError: boolean;
     },
     effects: {
-        fetchData: () => void;
         handleClick: (action: Action) => void;
         handleComment: (userName: string) => void;
     }
@@ -19,7 +18,7 @@ export const useShowCustomersStore = (): ShowCustomerStore => {
     const [users, setUsers] = useState<RemoteUser[]>([]);
     const [loaderError, setLoaderError] = useState<boolean>(false);
 
-    const fetchData = () => {
+    useEffect(() => {
         retrieveCustomersRestService()
             .then(r => {
                 setUsers(r.users);
@@ -31,10 +30,6 @@ export const useShowCustomersStore = (): ShowCustomerStore => {
                 console.log('error in loading users');
                 setLoaderError(true);
             })
-    }
-
-    useEffect(() => {
-        fetchData();
     }, [])
 
     const handleComment = (userName: string) => {
@@ -52,7 +47,6 @@ export const useShowCustomersStore = (): ShowCustomerStore => {
             loaderError: loaderError
         },
         effects: {
-            fetchData,
             handleClick,
             handleComment
         }
