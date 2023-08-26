@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {NeedHelp} from "./NeedHelp";
-import {isLocalEnv} from "./Utils";
+import {isLocalEnv} from "./utils/Utils";
 
 const HeaderWrapper = styled.div`
     display: flex;

@@ -2,9 +2,9 @@ import {fireEvent, screen, waitFor} from "@testing-library/react"
 import {createServer, Server} from "miragejs";
 import {init500Array, server} from "./server";
 import {ShowCustomers} from "./ShowCustomers"
-import { render } from "./TestUtils";
+import { render } from "./utils/TestUtils";
 
-describe('ShowCustomerDataList', () => {
+describe('ShowCustomers', () => {
 
     let mockServer: Server;
 

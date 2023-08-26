@@ -17,7 +17,7 @@
     "@types/react-dom": "^17.0.15",
     "@types/ws": "^8.5.4",
     "jest-preview": "^0.1.7",
-    "miragejs": "^0.1.43",
+    "miragejs": "^0.1.47",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-material-ui-carousel": "^3.4.2",
@@ -32,8 +32,7 @@
     "start": "REACT_APP_STAGE=local react-scripts start",
     "start:local": "REACT_APP_STAGE=qa react-scripts start",
     "build": "REACT_APP_STAGE=production react-scripts build",
-    "test": "jest --passWithNoTests --silent",
-    "test-coverage": "jest --passWithNoTests --silent --coverage",
+    "test": "jest --passWithNoTests --silent --coverage",
     "eject": "react-scripts eject",
     "jest-preview": "jest-preview"
   },

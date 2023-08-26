@@ -1,6 +1,6 @@
 import {fireEvent, screen} from '@testing-library/react'
 import {ThankYouPage} from './ThankYouPage'
-import { render } from './TestUtils';
+import { render } from './utils/TestUtils';
 import { Server } from 'miragejs';
 import { server } from './server';
 

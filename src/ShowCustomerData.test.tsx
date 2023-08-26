@@ -2,7 +2,7 @@ import {cleanup, fireEvent, screen, waitFor} from '@testing-library/react';
 import {ShowCustomerData} from './ShowCustomerData';
 import {Server} from "miragejs";
 import {server} from "./server";
-import { render } from './TestUtils';
+import { render } from './utils/TestUtils';
 
 describe('ShowCustomerData', () => {
     let mockServer: Server;

@@ -1,6 +1,6 @@
 import {fireEvent, screen, waitFor} from "@testing-library/react";
 import {ConfirmationModal} from "./ConfirmationModal";
-import { render } from "./TestUtils";
+import { render } from "./utils/TestUtils";
 import { Server } from "miragejs";
 import { server } from "./server";
 

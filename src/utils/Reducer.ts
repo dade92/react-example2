@@ -32,7 +32,7 @@ type ErrorState = {
     status: Status.ERROR
 }
 
-type State = ShowCustomerDataState | ShowCustomersState | LoadingState | ThankYouPageState | ErrorState;
+export type State = ShowCustomerDataState | ShowCustomersState | LoadingState | ThankYouPageState | ErrorState;
 
 type ShowCustomersAction = {
     type: 'SHOW_CUSTOMERS';

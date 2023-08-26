@@ -20,7 +20,8 @@ const translationsResponse = {
         'appflow.customerData.photo': 'Upload your picture',
         'appflow.customerData.alertmessage': 'Input must be greater than two letters',
         'appflow.customerData.noUser': 'Error while loading user information',
-        'appflow.customerData.next': 'Next'
+        'appflow.customerData.next': 'Next',
+        'appflow.loading.loading_message': 'Please wait while we complete the requested operation'
     }
 }
 
@@ -78,6 +79,6 @@ export const server: () => Server = () =>
             this.get('/find', findUser200);
             this.get('/translations/:language', translations200);
             this.get('/retrieveUsers', init200Array);
-            this.post('/insert', createCustomer204, {timing: 5000});
+            this.post('/insert', createCustomer204, {timing: 3000});
         },
     });
