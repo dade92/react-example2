@@ -36,16 +36,14 @@ export const useAppFlowStore = (): AppFlowStore => {
         });
     };
 
-    const createCustomerEffect = () => {
+    const createCustomer = () => {
         createCustomerRestService(username)
             .then((response) => {
-                onCreateCustomerSuccess(response.code)
+                onCreateCustomerSuccess(response.code);
             })
-            .catch(
-                () => {
-                    onCreateCustomerFailure()
-                }
-            )
+            .catch(() => {
+                onCreateCustomerFailure();
+            })
     }
     
     const showCustomerData = (name: string, checked: boolean) => {
@@ -99,7 +97,7 @@ export const useAppFlowStore = (): AppFlowStore => {
             state
         },
         effects: {
-            onModalConfirm: createCustomerEffect,
+            onModalConfirm: createCustomer,
             setUsername,
             showCustomerData,
             undoShowCustomers,
