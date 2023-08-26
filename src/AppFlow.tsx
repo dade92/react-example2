@@ -7,6 +7,7 @@ import {ErrorPage} from "./ErrorPage";
 import {CustomLoader} from "./CustomLoader";
 import styled from "styled-components";
 import {useAppFlowStore} from "./stores/AppFlowStore";
+import { LoaderPage } from "./LoaderPage";
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ export const AppFlow: React.FC = () => {
 
     return (
         <Wrapper>
-            {states.state.status == Status.LOADING && <CustomLoader/>}
+            {states.state.status == Status.LOADING && <LoaderPage/>}
             {states.state.status == Status.SHOW_CUSTOMER_DATA &&
                 <ShowCustomerData
                     consent={states.state.consent} username={states.state.username}
