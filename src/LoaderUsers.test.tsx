@@ -1,8 +1,8 @@
-import { screen} from "@testing-library/react"
+import {screen} from "@testing-library/react"
 import {LoaderUsers} from "./LoaderUsers"
-import { Server } from "miragejs";
-import { server } from "./server";
-import { render } from "./utils/TestUtils";
+import {Server} from "miragejs";
+import {server} from "./server";
+import {render} from "./utils/TestUtils";
 
 describe('LoaderUsers', () => {
 

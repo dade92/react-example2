@@ -1,5 +1,5 @@
-import { Snackbar } from "@mui/material";
-import { useState } from "react";
+import {Snackbar} from "@mui/material";
+import {useState} from "react";
 
 export interface TextMessage {
     message: string;
@@ -8,7 +8,7 @@ export interface TextMessage {
 const SOCKET_URL = '/ws-message';
 
 export const OldNotificationManager: React.FC = () => {
-    const [message, setMessage] = useState<string| null>(null);
+    const [message, setMessage] = useState<string | null>(null);
 
     let onConnected = () => {
         console.log("Connected!!")
@@ -26,7 +26,7 @@ export const OldNotificationManager: React.FC = () => {
 
     return (
         <>
-        {/* <SockJsClient
+            {/* <SockJsClient
             url={SOCKET_URL}
             topics={['/topic/message']}
             onConnect={onConnected}
@@ -34,12 +34,12 @@ export const OldNotificationManager: React.FC = () => {
             onMessage={(msg: TextMessage) => onMessageReceived(msg)}
             debug={false} /> */}
 
-        {message !== null && <Snackbar
-            open={message !== null}
-            autoHideDuration={2000}
-            message={message}
-            onClose={handleClose}
-          />}
-          </>
+            {message !== null && <Snackbar
+                open={message !== null}
+                autoHideDuration={2000}
+                message={message}
+                onClose={handleClose}
+            />}
+        </>
     );
 }

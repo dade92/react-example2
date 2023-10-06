@@ -1,7 +1,7 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton} from "@mui/material";
 import React, {FC} from "react";
 import CloseIcon from '@mui/icons-material/Close';
-import { useTranslations } from "./TranslationsConfiguration";
+import {useTranslations} from "./TranslationsConfiguration";
 
 interface Props {
     isOpen: boolean;
@@ -10,8 +10,8 @@ interface Props {
 }
 
 export const ConfirmationModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
-    const { translationRepository } = useTranslations();
-    
+    const {translationRepository} = useTranslations();
+
     return (
         <Dialog
             style={{color: 'black'}}
@@ -42,7 +42,8 @@ export const ConfirmationModal: FC<Props> = ({isOpen, onClose, onConfirm}) => {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button data-testid={'close-button'} onClick={onClose}>{translationRepository('appflow.customerData.disagree')}</Button>
+                <Button data-testid={'close-button'}
+                        onClick={onClose}>{translationRepository('appflow.customerData.disagree')}</Button>
                 <Button data-testid={'confirm-button'} onClick={onConfirm} autoFocus>
                     {translationRepository('appflow.customerData.confirm')}
                 </Button>

@@ -4,7 +4,6 @@ import {ShowCustomerData} from "./ShowCustomerData";
 import {ShowCustomers} from "./ShowCustomers";
 import {ThankYouPage} from "./ThankYouPage";
 import {ErrorPage} from "./ErrorPage";
-import {CustomLoader} from "./CustomLoader";
 import styled from "styled-components";
 import {useAppFlowStore} from "./stores/AppFlowStore";
 import { LoaderPage } from "./LoaderPage";

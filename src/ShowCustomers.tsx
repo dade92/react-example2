@@ -1,5 +1,5 @@
 import {Button, Divider, IconButton, ListItem, ListItemText} from "@mui/material";
-import React, {useEffect} from "react";
+import React from "react";
 import CommentIcon from '@mui/icons-material/Comment';
 import {LoaderUsers} from "./LoaderUsers";
 import styled from "styled-components";

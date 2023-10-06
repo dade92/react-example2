@@ -1,8 +1,8 @@
 import {fireEvent, screen, waitFor} from "@testing-library/react";
 import {ConfirmationModal} from "./ConfirmationModal";
-import { render } from "./utils/TestUtils";
-import { Server } from "miragejs";
-import { server } from "./server";
+import {render} from "./utils/TestUtils";
+import {Server} from "miragejs";
+import {server} from "./server";
 
 describe('ConfirmationModal', () => {
     let mockServer: Server;
