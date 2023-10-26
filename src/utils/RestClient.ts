@@ -1,7 +1,7 @@
 let host = '';
 
 if (process.env.REACT_APP_STAGE === 'production') {
-    host = 'http://localhost/api'
+    host = 'http://Davides-MBP/api'
 }
 
 class RestClient {
