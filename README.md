@@ -34,6 +34,10 @@ You can also run a specific test using ` npm run test -- testName.tsx`
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+# CI/CD
+The project has a pipeline attached, configured on github, that starts on every push. Pushes on master also
+trigger docker to build the image
+
 ## Deploy the entire application
 
 You can deploy the entire application by running `./run.sh`.
