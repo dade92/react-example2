@@ -1,9 +1,22 @@
-import {render} from "./utils/TestUtils";
 import {UserPanel} from "./UserPanel";
-import {waitFor} from "@testing-library/react";
+import {cleanup, waitFor} from "@testing-library/react";
 import {screen} from '@testing-library/react';
+import {render} from "./utils/TestUtils";
+import {Server} from "miragejs";
+import {server} from "./server";
 
 describe('UserPanel', () => {
+    let mockServer: Server;
+
+    beforeEach(() => {
+        mockServer = server();
+    })
+
+    afterEach(() => {
+        mockServer.shutdown();
+        cleanup();
+    })
+
     it('Shows the user data when fetch is successful', () => {
         const retrieveSingleCustomerService = jest.fn(() => Promise.resolve({
             name: 'Davide',

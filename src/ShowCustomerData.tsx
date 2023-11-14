@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import {Alert, AlertTitle, Button, Checkbox, FormControlLabel, Snackbar, TextField} from "@mui/material";
 import {PhotoCamera} from "@mui/icons-material";
@@ -7,6 +7,7 @@ import {useTranslations} from "./TranslationsConfiguration";
 import {UserPanel} from "./UserPanel";
 import {StackContainer} from "./StackContainer";
 import {useCustomerDataStore} from "./stores/CustomerDataStore";
+import {retrieveSingleCustomerRestService} from "./services/RetrieveCustomersService";
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -34,19 +35,20 @@ export const ShowCustomerData: React.FC<Props> = ({onSubmit, username, consent})
         <StackContainer data-testid='wrapper'>
             <Title data-testid="title">AppFlow</Title>
 
-            <UserPanel/>
+            <UserPanel retrieveSingleCustomerService={retrieveSingleCustomerRestService}/>
 
             <TextField defaultValue={states.text} id="filled-basic" data-testid={'text'}
                        label={translationRepository('appflow.customerData.alias')} variant="outlined"
                        onChange={(e) => effects.onTextFieldChange(e.target.value)}/>
             <FormControlLabel
                 control={<Checkbox data-testid={'checkbox'}
-                           checked={states.checked}
-                           onChange={(e) => effects.onCheckboxSelected(e.target.checked)}/>}
+                                   checked={states.checked}
+                                   onChange={(e) => effects.onCheckboxSelected(e.target.checked)}/>}
                 label={translationRepository('appflow.customerData.t_and_c')}/>
 
             <Button variant="contained" color="success" endIcon={<NavigateNextIcon/>} data-testid={'submit-button'}
-                    onClick={() => effects.onConfirm()} disabled={!states.checked}>{translationRepository('appflow.customerData.next')}</Button>
+                    onClick={() => effects.onConfirm()}
+                    disabled={!states.checked}>{translationRepository('appflow.customerData.next')}</Button>
 
             <UploadContainer>
                 <Button color="primary" aria-label="upload picture" component="label" endIcon={<PhotoCamera/>}>
