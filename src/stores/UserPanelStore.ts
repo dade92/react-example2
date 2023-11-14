@@ -1,6 +1,6 @@
 import {RemoteUser} from "../Data";
 import {useEffect, useState} from "react";
-import {retrieveSingleCustomerRestService} from "../services/RetrieveCustomersService";
+import {retrieveSingleCustomerRestService, RetrieveSingleCustomerService} from "../services/RetrieveCustomersService";
 
 interface UserPanelStore {
     states: {
@@ -9,12 +9,12 @@ interface UserPanelStore {
     }
 }
 
-export const useUserPanelStore = (): UserPanelStore => {
+export const useUserPanelStore = (retrieveSingleCustomerService: RetrieveSingleCustomerService): UserPanelStore => {
     const [remoteUser, setRemoteUser] = useState<RemoteUser>();
     const [loadError, setLoadError] = useState<boolean>(false);
 
     useEffect(() => {
-        retrieveSingleCustomerRestService('Davide')
+        retrieveSingleCustomerService('Davide')
             .then((response)=> {
                 setRemoteUser(response);
             })
