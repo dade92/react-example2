@@ -42,6 +42,12 @@ trigger docker to build the image
 
 You can deploy the entire application by running `./run.sh`.
 This script just runs one by one the images contained in the docker compose file inside the deploy directory.
-It deploys the frontend, backend, the database, the mongo-express and the reverse Nginx proxy. \
 Then you can access the application at `http://localhost`.\
+At the moment, the BE and the database are deployed on
+raspberry pi, so in order to deploy everything you should:
+- Run on raspberry pi the script `./run.sh` inside the folder `/deploy` of the project spring-example2. This 
+will run the backend and the database of the application.
+- Run inside this folder `./deploy` the script `./run.sh`. This will run the frontend
+and the reverse proxy.
+
 See the other dade92 repositories for the downloaded images.

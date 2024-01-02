@@ -2,24 +2,24 @@ services:
   frontend:
     image: davide92/react-example2
     container_name: frontend
-  backend:
-    image: davide92/spring-example2
-    container_name: backend
-    depends_on:
-      - mongo
-    restart:
-      always
-  mongo:
-    image: mongo
-    container_name: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-    volumes:
-      - ./local-env/database/db:/data/db
-      - ./local-env/database/dev.archive:/Databases/dev.archive
-      - ./local-env/database/production:/Databases/production
+#  backend:
+#    image: davide92/spring-example2
+#    container_name: backend
+#    depends_on:
+#      - mongo
+#    restart:
+#      always
+#  mongo:
+#    image: mongo
+#    container_name: mongo
+#    restart: always
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: password
+#    volumes:
+#      - ./local-env/database/db:/data/db
+#      - ./local-env/database/dev.archive:/Databases/dev.archive
+#      - ./local-env/database/production:/Databases/production
 #  mongo-express:
 #    image: mongo-express
 #    container_name: mongo-express
@@ -41,7 +41,7 @@ services:
       - "80:80"
     # TODO substitute with a proper /alive endpoint
     healthcheck:
-      test: [ "CMD", "wget", "-qO-", "http://backend:8080/translations/en" ]
+      test: [ "CMD", "wget", "-qO-", "http://raspberrypi:8080/translations/en" ]
       interval: 5s
       timeout: 3s
       retries: 3
