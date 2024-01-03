@@ -16,6 +16,6 @@ sleep 4
 
 docker ps
 
-echo "App seems up and running. You can access at http://localhost"
+echo "App seems up and running.
 
 
