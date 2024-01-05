@@ -71,21 +71,6 @@ const initResponseArray = {
                 profile: 'test3'
             }
         },
-        {
-            name: 'Paola',
-            surname: 'Meroni',
-            data: {
-                profile: 'test3'
-            }
-        },
-        {
-            name: 'Paola',
-            surname: 'Meroni',
-            data: {
-                profile: 'test3'
-            }
-        },
-
     ]
 };
 

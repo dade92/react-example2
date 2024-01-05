@@ -43,7 +43,6 @@ export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm
                         width: '100%',
                         overflow: 'auto',
                         maxHeight: 250,
-                        '& ul': {padding: 0},
                     }}
                 >
                     {
@@ -57,7 +56,7 @@ export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm
                                     </IconButton>}
                             >
                                 <ListItemText>
-                                    {user.name} - {user.surname}
+                                    {user.name}
                                 </ListItemText>
                             </ListItem>
                         }) : <LoaderUsers data-testid={'loader'} error={states.loaderError}/>
