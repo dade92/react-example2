@@ -16,6 +16,6 @@ sleep 4
 
 docker ps
 
-echo "App seems up and running.
+echo "App seems up and running."
 
 
