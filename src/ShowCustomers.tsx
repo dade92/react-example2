@@ -1,4 +1,4 @@
-import {Button, Divider, IconButton, ListItem, ListItemText} from "@mui/material";
+import {Button, Divider, IconButton, List, ListItem, ListItemText} from "@mui/material";
 import React from "react";
 import CommentIcon from '@mui/icons-material/Comment';
 import {LoaderUsers} from "./LoaderUsers";
@@ -25,35 +25,44 @@ interface Props {
 }
 
 const ButtonContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
 `;
 
 export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm, onModalClose, isModalOpen}) => {
     const {states, effects} = useShowCustomersStore();
-    const { translationRepository } = useTranslations();
+    const {translationRepository} = useTranslations();
 
     return (
         <>
             <StackContainer>
-                {
-                    states.users.length > 0 ? states.users.map((user, index) => {
-                        return <ListItem
-                            key={user.name}
-                            data-testid={'user-item-' + `${index}`}
-                            secondaryAction={
-                                <IconButton aria-label="comment" onClick={() => effects.handleComment(user.name)}>
-                                    <CommentIcon/>
-                                </IconButton>}
-                        >
-                            <ListItemText>
-                                {user.name} - {user.surname}
-                            </ListItemText>
-                        </ListItem>
-                    }) : <LoaderUsers data-testid={'loader'} error={states.loaderError}/>
-                }
+                <List
+                    sx={{
+                        width: '100%',
+                        overflow: 'auto',
+                        maxHeight: 250,
+                        '& ul': {padding: 0},
+                    }}
+                >
+                    {
+                        states.users.length > 0 ? states.users.map((user, index) => {
+                            return <ListItem
+                                key={user.name}
+                                data-testid={'user-item-' + `${index}`}
+                                secondaryAction={
+                                    <IconButton aria-label="comment" onClick={() => effects.handleComment(user.name)}>
+                                        <CommentIcon/>
+                                    </IconButton>}
+                            >
+                                <ListItemText>
+                                    {user.name} - {user.surname}
+                                </ListItemText>
+                            </ListItem>
+                        }) : <LoaderUsers data-testid={'loader'} error={states.loaderError}/>
+                    }
+                </List>
                 <Divider>{translationRepository('appflow.customerData.actions')}</Divider>
 
                 <Actions handleClick={(action: Action) => effects.handleClick(action)}/>
@@ -70,7 +79,8 @@ export const ShowCustomers: React.FC<Props> = ({onUndo, onSubmit, onModalConfirm
                 </ButtonContainer>
             </StackContainer>
             {
-                isModalOpen && <ConfirmationModal isOpen={isModalOpen} onClose={onModalClose} onConfirm={onModalConfirm}/>
+                isModalOpen &&
+                <ConfirmationModal isOpen={isModalOpen} onClose={onModalClose} onConfirm={onModalConfirm}/>
             }
         </>
     );
