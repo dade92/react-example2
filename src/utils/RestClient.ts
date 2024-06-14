@@ -1,7 +1,7 @@
 let host = '';
 
 if (process.env.REACT_APP_STAGE === 'production') {
-    host = 'http://Davides-MBP/api'
+    host = 'http://my-alb-2132731674.eu-central-1.elb.amazonaws.com/api'
 }
 
 class RestClient {
