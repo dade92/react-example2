@@ -21,6 +21,7 @@ describe('ConfirmationModal', () => {
 
         render(<ConfirmationModal isOpen={true} onConfirm={onConfirm} onClose={onClose}/>)
 
+        expect(screen.getByTestId('title')).toBeInTheDocument();
         waitFor(() => expect(screen.getByTestId('title')).toHaveTextContent('Are you sure???'));
         waitFor(() => expect(screen.getByTestId('content')).toHaveTextContent('By clicking on confirm you confirm the operation'));
 
